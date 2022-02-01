@@ -1,5 +1,6 @@
 ﻿using GreenTeam.Data;
 using GreenTeam.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenTeam.Services
 {
@@ -10,12 +11,21 @@ namespace GreenTeam.Services
         public GardenService(ApplicationDbContext context)
         {
             this.context = context;
-         
+
         }
 
-        public Garden FindById(int Id)
+        public async Task<List<Garden>> FindAll()
         {
-            throw new NotImplementedException();
+            List<Garden> gardens = await context.Garden.ToListAsync();
+            return gardens;
+        }
+
+        public async Task<Garden> FindById(int id)
+        {
+            Garden garden = await context.Garden.FirstOrDefaultAsync(m => m.Id == id);
+
+            return garden;
         }
     }
 }
+

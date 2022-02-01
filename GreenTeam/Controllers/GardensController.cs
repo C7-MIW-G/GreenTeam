@@ -14,19 +14,20 @@ namespace GreenTeam.Controllers
 {
     public class GardensController : Controller
     {
-        private readonly ApplicationDbContext _context;
+                                                                
         private readonly IGardenService gardenService;
+        private readonly ApplicationDbContext _context; //<- to service layer
 
-        public GardensController(ApplicationDbContext context, IGardenService gardenService)
+        public GardensController(IGardenService gardenService, ApplicationDbContext context) //ApplicationDB.. to service layer
         {
-            _context = context;
+            _context = context; //to service layer
             this.gardenService = gardenService;
         }
 
         // GET: Gardens
         public async Task<IActionResult> Index()
         {
-            var gardens = await _context.Garden.ToListAsync();
+            List<Garden> gardens = await gardenService.FindAll();
             return View(gardens);
         }
 
@@ -38,9 +39,9 @@ namespace GreenTeam.Controllers
                 return NotFound();
             }
 
-            var garden = await _context.Garden
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (garden == null)
+            Garden garden = await gardenService.FindById((int)id);
+
+           if (garden == null)
             {
                 return NotFound();
             }

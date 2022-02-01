@@ -4,6 +4,7 @@ namespace GreenTeam.Services
 {
     public interface IGardenService
     {
-        Garden FindById(int Id);
+        Task<Garden> FindById(int Id);
+        Task<List<Garden>> FindAll();
     }
 }
