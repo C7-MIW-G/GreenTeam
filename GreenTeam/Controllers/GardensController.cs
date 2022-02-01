@@ -8,22 +8,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GreenTeam.Data;
 using GreenTeam.Models;
+using GreenTeam.Services;
 
 namespace GreenTeam.Controllers
 {
     public class GardensController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IGardenService gardenService;
 
-        public GardensController(ApplicationDbContext context)
+        public GardensController(ApplicationDbContext context, IGardenService gardenService)
         {
             _context = context;
+            this.gardenService = gardenService;
         }
 
         // GET: Gardens
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Garden.ToListAsync());
+            var gardens = await _context.Garden.ToListAsync();
+            return View(gardens);
         }
 
         // GET: Gardens/Details/5
