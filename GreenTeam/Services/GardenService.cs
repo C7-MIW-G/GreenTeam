@@ -22,8 +22,18 @@ namespace GreenTeam.Services
 
         public async Task<Garden> FindById(int id)
         {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             Garden garden = await context.Garden.FirstOrDefaultAsync(m => m.Id == id);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8603 // Possible null reference return.
+            return garden;
+#pragma warning restore CS8603 // Possible null reference return.
+        }
 
+        public async Task<Garden> AddGarden(Garden garden)
+        {
+            context.Add(garden);
+            await context.SaveChangesAsync();
             return garden;
         }
     }

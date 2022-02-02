@@ -6,5 +6,6 @@ namespace GreenTeam.Services
     {
         Task<Garden> FindById(int Id);
         Task<List<Garden>> FindAll();
+        Task<Garden> AddGarden(Garden garden);
     }
 }

@@ -39,14 +39,14 @@ namespace GreenTeam.Controllers
                 return NotFound();
             }
 
-            Garden garden = await gardenService.FindById((int)id);
+            Garden returnedGarden = await gardenService.FindById((int)id);
 
-           if (garden == null)
+           if (returnedGarden == null)
             {
                 return NotFound();
             }
 
-            return View(garden);
+            return View(returnedGarden);
         }
 
         // GET: Gardens/Create
@@ -58,14 +58,14 @@ namespace GreenTeam.Controllers
         // POST: Gardens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Location")] Garden garden)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(garden);
-                await _context.SaveChangesAsync();
+                Garden returnedGarden = await gardenService.AddGarden(garden);
                 return RedirectToAction(nameof(Index));
             }
             return View(garden);
