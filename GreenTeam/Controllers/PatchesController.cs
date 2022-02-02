@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,23 +8,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GreenTeam.Data;
 using GreenTeam.Models;
+using GreenTeam.Services;
 
 namespace GreenTeam.Controllers
 {
     public class PatchesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+                                                                
+        private readonly IPatchService patchService;
+        private readonly IGardenService gardenService;
 
-        public PatchesController(ApplicationDbContext context)
+        public PatchesController(IPatchService patchService, IGardenService gardenService)
         {
-            _context = context;
+            this.patchService = patchService;
+            this.gardenService = gardenService;
         }
 
         // GET: Patches
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Patch.Include(p => p.Garden);
-            return View(await applicationDbContext.ToListAsync());
+            List<Patch> patches = await patchService.FindAll();
+            return View(patches);
         }
 
         // GET: Patches/Details/5
@@ -34,38 +39,35 @@ namespace GreenTeam.Controllers
                 return NotFound();
             }
 
-            var patch = await _context.Patch
-                .Include(p => p.Garden)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (patch == null)
+            Patch returnedPatch = await patchService.FindById((int)id);
+
+           if (returnedPatch == null)
             {
                 return NotFound();
             }
 
-            return View(patch);
+            return View(returnedPatch);
         }
 
         // GET: Patches/Create
         public IActionResult Create()
         {
-            ViewData["GardenId"] = new SelectList(_context.Garden, "Id", "Id");
             return View();
         }
 
         // POST: Patches/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PatchName,Crop,GardenId")] Patch patch)
+        public async Task<IActionResult> Create([Bind("Id,Crop,GardenId")] Patch patch)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(patch);
-                await _context.SaveChangesAsync();
+                Patch returnedPatch = await patchService.AddPatch(patch);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GardenId"] = new SelectList(_context.Garden, "Id", "Id", patch.GardenId);
             return View(patch);
         }
 
@@ -76,14 +78,12 @@ namespace GreenTeam.Controllers
             {
                 return NotFound();
             }
-
-            var patch = await _context.Patch.FindAsync(id);
-            if (patch == null)
+            Patch returnedPatch = await patchService.FindById((int)id);
+            if (returnedPatch == null)
             {
                 return NotFound();
             }
-            ViewData["GardenId"] = new SelectList(_context.Garden, "Id", "Id", patch.GardenId);
-            return View(patch);
+            return View(returnedPatch);
         }
 
         // POST: Patches/Edit/5
@@ -91,7 +91,7 @@ namespace GreenTeam.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PatchName,Crop,GardenId")] Patch patch)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Crop,GardenId")] Patch patch)
         {
             if (id != patch.Id)
             {
@@ -102,8 +102,7 @@ namespace GreenTeam.Controllers
             {
                 try
                 {
-                    _context.Update(patch);
-                    await _context.SaveChangesAsync();
+                    Patch returnedPatch = await patchService.EditPatch(patch);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,7 +117,8 @@ namespace GreenTeam.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GardenId"] = new SelectList(_context.Garden, "Id", "Id", patch.GardenId);
+            ViewData["GardenId"] = new SelectList(gardenService.FindById "Id", patch.Id);
+                //gardenService.FindAll, "Id", "Id", patch.GardenId);
             return View(patch);
         }
 
@@ -130,9 +130,8 @@ namespace GreenTeam.Controllers
                 return NotFound();
             }
 
-            var patch = await _context.Patch
-                .Include(p => p.Garden)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Patch patch = await patchService.FindById((int) id);
+ 
             if (patch == null)
             {
                 return NotFound();
@@ -146,15 +145,14 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var patch = await _context.Patch.FindAsync(id);
-            _context.Patch.Remove(patch);
-            await _context.SaveChangesAsync();
+            
+            await patchService.DeletePatch(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool PatchExists(int id)
         {
-            return _context.Patch.Any(e => e.Id == id);
+           return patchService.FindById(id) != null;
         }
     }
 }

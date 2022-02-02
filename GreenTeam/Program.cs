@@ -16,6 +16,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IGardenService, GardenService>();
+builder.Services.AddScoped<IPatchService, PatchService>();
 
 var app = builder.Build();
 

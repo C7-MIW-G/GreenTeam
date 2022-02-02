@@ -1,25 +1,22 @@
 ﻿@model IEnumerable<GreenTeam.Models.Patch>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Patch Overview";
 }
 
-<h1>Index</h1>
+<h1>Patch Overview</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Patch</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PatchName)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Crop)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Garden)
+                @Html.DisplayNameFor(model => model.GardenId)
             </th>
             <th></th>
         </tr>
@@ -28,13 +25,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PatchName)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Crop)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Garden.Id)
+                @Html.DisplayFor(modelItem => item.GardenId)
+            </td>
+            <td>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
