@@ -9,5 +9,7 @@
 
         public Garden Garden { get; set; }
 
+        public int GardenId { get; set; }
+
     }
 }

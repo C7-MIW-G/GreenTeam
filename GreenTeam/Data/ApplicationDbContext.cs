@@ -11,5 +11,6 @@ namespace GreenTeam.Data
         {
         }
         public DbSet<GreenTeam.Models.Garden> Garden { get; set; }
+        public DbSet<GreenTeam.Models.Patch> Patch { get; set; }
     }
 }
