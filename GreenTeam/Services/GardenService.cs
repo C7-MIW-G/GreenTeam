@@ -22,12 +22,8 @@ namespace GreenTeam.Services
 
         public async Task<Garden> FindById(int id)
         {
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             Garden garden = await context.Garden.FindAsync(id);
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning disable CS8603 // Possible null reference return.
             return garden;
-#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public async Task<Garden> AddGarden(Garden garden)
@@ -35,6 +31,17 @@ namespace GreenTeam.Services
             context.Add(garden);
             await context.SaveChangesAsync();
             return garden;
+        }
+
+        public async Task<Garden> DeleteGarden(int id)
+        {
+
+            Garden garden = await FindById(id);
+            context.Garden.Remove(garden);
+            await context.SaveChangesAsync();
+
+            return garden;
+
         }
     }
 }

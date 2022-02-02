@@ -129,8 +129,8 @@ namespace GreenTeam.Controllers
                 return NotFound();
             }
 
-            var garden = await _context.Garden
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Garden garden = await gardenService.FindById((int) id);
+ 
             if (garden == null)
             {
                 return NotFound();
@@ -144,9 +144,8 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var garden = await _context.Garden.FindAsync(id);
-            _context.Garden.Remove(garden);
-            await _context.SaveChangesAsync();
+            
+            await gardenService.DeleteGarden(id);
             return RedirectToAction(nameof(Index));
         }
 
