@@ -151,7 +151,7 @@ namespace GreenTeam.Controllers
 
         private bool GardenExists(int id)
         {
-            return _context.Garden.Any(e => e.Id == id);
+           return gardenService.FindById(id) != null;
         }
     }
 }
