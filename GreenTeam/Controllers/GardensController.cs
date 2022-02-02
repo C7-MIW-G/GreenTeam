@@ -102,8 +102,7 @@ namespace GreenTeam.Controllers
             {
                 try
                 {
-                    _context.Update(garden);
-                    await _context.SaveChangesAsync();
+                    Garden returnedGarden = await gardenService.EditGarden(garden);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -151,7 +150,7 @@ namespace GreenTeam.Controllers
 
         private bool GardenExists(int id)
         {
-            return _context.Garden.Any(e => e.Id == id);
+           return gardenService.FindById(id) != null;
         }
     }
 }
