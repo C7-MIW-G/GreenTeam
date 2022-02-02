@@ -78,13 +78,12 @@ namespace GreenTeam.Controllers
             {
                 return NotFound();
             }
-
-            var garden = await _context.Garden.FindAsync(id);
-            if (garden == null)
+            Garden returnedGarden = await gardenService.FindById((int)id);
+            if (returnedGarden == null)
             {
                 return NotFound();
             }
-            return View(garden);
+            return View(returnedGarden);
         }
 
         // POST: Gardens/Edit/5
