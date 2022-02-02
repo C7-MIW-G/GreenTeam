@@ -33,13 +33,11 @@ namespace GreenTeam.Services
             return garden;
         }
 
-
-       public async Task<Garden> EditGarden(Garden garden)
+        public async Task<Garden> EditGarden(Garden garden)
         {
             context.Update(garden);
             await context.SaveChangesAsync();
             return garden;
-
         }
 
         public async Task<Garden> DeleteGarden(int id)
@@ -50,6 +48,7 @@ namespace GreenTeam.Services
             await context.SaveChangesAsync();
 
             return garden;
+
         }
     }
 }

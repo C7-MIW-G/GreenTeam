@@ -16,11 +16,9 @@ namespace GreenTeam.Controllers
     {
                                                                 
         private readonly IGardenService gardenService;
-        private readonly ApplicationDbContext _context; //<- to service layer
 
-        public GardensController(IGardenService gardenService, ApplicationDbContext context) //ApplicationDB.. to service layer
+        public GardensController(IGardenService gardenService)
         {
-            _context = context; //to service layer
             this.gardenService = gardenService;
         }
 
