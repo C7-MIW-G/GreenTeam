@@ -1,0 +1,35 @@
+﻿@model IEnumerable<GreenTeam.Models.Patch>
+    
+@{
+    ViewData["Title"] = "Patches Overview";
+}
+
+<h1>Patches Overview</h1>
+<p>
+    <a asp-route-id=@Url.ActionContext.RouteData.Values["id"] asp-action="Create">Create New Patch</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Crop)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Crop)
+            </td>
+            <td>
+            </td>
+            <td>
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
