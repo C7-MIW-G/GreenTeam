@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Poppins:wght@400;500;600&display=swap');
+
+*{
+  margin: 0
+  padding: 0
+  box-sizing: border-box;
+  font-family: 'Merriweather', sans-serif;
+}
+
+.navbar ul {
+  display: flex;
+  float: left;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
