@@ -4,6 +4,7 @@ using GreenTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220206143432_ChangedPatchGardenId")]
+    partial class ChangedPatchGardenId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +54,7 @@ namespace GreenTeam.Migrations
                     b.Property<string>("Crop")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GardenId")
+                    b.Property<int?>("GardenId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -266,11 +268,11 @@ namespace GreenTeam.Migrations
 
             modelBuilder.Entity("GreenTeam.Models.Patch", b =>
                 {
-                    b.HasOne("GreenTeam.Models.Garden", null)
+                    b.HasOne("GreenTeam.Models.Garden", "Garden")
                         .WithMany("Patches")
-                        .HasForeignKey("GardenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GardenId");
+
+                    b.Navigation("Garden");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

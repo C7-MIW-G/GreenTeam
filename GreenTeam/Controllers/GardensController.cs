@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GreenTeam.Data;
 using GreenTeam.Models;
+using GreenTeam.ViewModels;
 using GreenTeam.Services;
 
 namespace GreenTeam.Controllers
@@ -16,10 +17,12 @@ namespace GreenTeam.Controllers
     {
                                                                 
         private readonly IGardenService gardenService;
+        private readonly IPatchService patchService;
 
-        public GardensController(IGardenService gardenService)
+        public GardensController(IGardenService gardenService, IPatchService patchService)
         {
             this.gardenService = gardenService;
+            this.patchService = patchService;
         }
 
         // GET: Gardens
@@ -30,21 +33,20 @@ namespace GreenTeam.Controllers
         }
 
         // GET: Gardens/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+
+            Garden returnedGarden = await gardenService.FindById(id);
+            List<Patch> patchList = await patchService.FindByGardenId(id);
+
+            GardenView gardenView = Mapper.createGardenView(returnedGarden, patchList);
+
+           if (gardenView == null)
             {
                 return NotFound();
             }
 
-            Garden returnedGarden = await gardenService.FindById((int)id);
-
-           if (returnedGarden == null)
-            {
-                return NotFound();
-            }
-
-            return View(returnedGarden);
+            return View(gardenView);
         }
 
         // GET: Gardens/Create

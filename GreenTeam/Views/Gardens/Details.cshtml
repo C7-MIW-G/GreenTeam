@@ -1,30 +1,47 @@
-﻿@model GreenTeam.Models.Garden
+﻿@model GreenTeam.ViewModels.GardenView
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Html.DisplayFor(model => model.Garden.Name)</></h1>
 
 <div>
-    <h4>Garden</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Garden.Location):
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Location)
+            @Html.DisplayFor(model => model.Garden.Location)
         </dd>
     </dl>
+    <hr />
+        <table>
+                @{int index = 1;}
+                @foreach(var item in Model.Patches){
+                <tbody>
+                     <tr>
+                    <td>
+                       <span>@index</span>
+                        @{index++;}.&nbsp&nbsp
+                    </td>
+                    <td>
+                      @Html.DisplayFor(modelItem => item.Crop)
+                    </td>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+                    <td>
+                        <a asp-controller="Patches" asp-action="Edit" asp-route-id="@item.Id">Edit</a> | 
+                        <a asp-controller="Patches" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+                }
+        </table>
 </div>
+<hr />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.Garden.Id">Add Patch</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.Garden.Id">Edit Garden</a> |
     <a asp-action="Index">Back to List</a>
 </div>
