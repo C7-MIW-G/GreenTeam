@@ -6,7 +6,7 @@ namespace GreenTeam.Services
 {
     public class GardenService : IGardenService
     {
-        private ApplicationDbContext context;
+        readonly ApplicationDbContext context;
 
         public GardenService(ApplicationDbContext context)
         {

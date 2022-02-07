@@ -4,6 +4,7 @@ using GreenTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220203192722_PatchesAdded")]
+    partial class PatchesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,11 +271,13 @@ namespace GreenTeam.Migrations
 
             modelBuilder.Entity("GreenTeam.Models.Patch", b =>
                 {
-                    b.HasOne("GreenTeam.Models.Garden", null)
-                        .WithMany("Patches")
+                    b.HasOne("GreenTeam.Models.Garden", "Garden")
+                        .WithMany()
                         .HasForeignKey("GardenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Garden");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -325,11 +329,6 @@ namespace GreenTeam.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("GreenTeam.Models.Garden", b =>
-                {
-                    b.Navigation("Patches");
                 });
 #pragma warning restore 612, 618
         }

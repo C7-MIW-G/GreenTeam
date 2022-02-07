@@ -17,6 +17,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IGardenService, GardenService>();
 
+builder.Services.AddScoped<IPatchService, PatchService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

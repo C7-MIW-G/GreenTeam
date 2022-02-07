@@ -8,18 +8,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GreenTeam.Data;
 using GreenTeam.Models;
+using GreenTeam.ViewModels;
 using GreenTeam.Services;
+using GreenTeam.ViewModelMapper;
 
 namespace GreenTeam.Controllers
 {
     public class GardensController : Controller
     {
-                                                                
-        private readonly IGardenService gardenService;
 
-        public GardensController(IGardenService gardenService)
+        private readonly IGardenService gardenService;
+        private readonly IPatchService patchService;
+
+        public GardensController(IGardenService gardenService, IPatchService patchService)
         {
             this.gardenService = gardenService;
+            this.patchService = patchService;
         }
 
         // GET: Gardens
@@ -30,21 +34,20 @@ namespace GreenTeam.Controllers
         }
 
         // GET: Gardens/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+
+            Garden returnedGarden = await gardenService.FindById(id);
+            List<Patch> patchList = await patchService.FindByGardenId(id);
+
+            GardenViewModel gardenView = Mapper.CreateGardenViewModel(returnedGarden, patchList);
+
+            if (gardenView == null)
             {
                 return NotFound();
             }
 
-            Garden returnedGarden = await gardenService.FindById((int)id);
-
-           if (returnedGarden == null)
-            {
-                return NotFound();
-            }
-
-            return View(returnedGarden);
+            return View(gardenView);
         }
 
         // GET: Gardens/Create
@@ -56,7 +59,7 @@ namespace GreenTeam.Controllers
         // POST: Gardens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Location")] Garden garden)
@@ -126,8 +129,8 @@ namespace GreenTeam.Controllers
                 return NotFound();
             }
 
-            Garden garden = await gardenService.FindById((int) id);
- 
+            Garden garden = await gardenService.FindById((int)id);
+
             if (garden == null)
             {
                 return NotFound();
@@ -141,14 +144,14 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            
+
             await gardenService.DeleteGarden(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool GardenExists(int id)
         {
-           return gardenService.FindById(id) != null;
+            return gardenService.FindById(id) != null;
         }
     }
 }
