@@ -49,11 +49,18 @@ namespace GreenTeam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("GardenId")
+                    b.Property<int>("GardenId")
                         .HasColumnType("int");
 
                     b.Property<string>("IdentityUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsManager")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMember")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -61,7 +68,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("GardenUsers");
+                    b.ToTable("GardenUser");
                 });
 
             modelBuilder.Entity("GreenTeam.Models.Patch", b =>
@@ -291,11 +298,15 @@ namespace GreenTeam.Migrations
                 {
                     b.HasOne("GreenTeam.Models.Garden", "Garden")
                         .WithMany("GardenUsers")
-                        .HasForeignKey("GardenId");
+                        .HasForeignKey("GardenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("IdentityUserId");
+                        .HasForeignKey("IdentityUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Garden");
 

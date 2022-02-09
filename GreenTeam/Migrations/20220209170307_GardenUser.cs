@@ -9,44 +9,48 @@ namespace GreenTeam.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "GardenUsers",
+                name: "GardenUser",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    GardenId = table.Column<int>(type: "int", nullable: true)
+                    IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GardenId = table.Column<int>(type: "int", nullable: false),
+                    IsManager = table.Column<bool>(type: "bit", nullable: false),
+                    IsMember = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GardenUsers", x => x.Id);
+                    table.PrimaryKey("PK_GardenUser", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GardenUsers_AspNetUsers_IdentityUserId",
+                        name: "FK_GardenUser_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GardenUsers_Garden_GardenId",
+                        name: "FK_GardenUser_Garden_GardenId",
                         column: x => x.GardenId,
                         principalTable: "Garden",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_GardenUsers_GardenId",
-                table: "GardenUsers",
+                name: "IX_GardenUser_GardenId",
+                table: "GardenUser",
                 column: "GardenId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GardenUsers_IdentityUserId",
-                table: "GardenUsers",
+                name: "IX_GardenUser_IdentityUserId",
+                table: "GardenUser",
                 column: "IdentityUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GardenUsers");
+                name: "GardenUser");
         }
     }
 }
