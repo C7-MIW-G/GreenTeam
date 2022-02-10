@@ -9,8 +9,27 @@ namespace GreenTeam.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
+
         }
-        public DbSet<GreenTeam.Models.Garden> Garden { get; set; }
-        public DbSet<GreenTeam.Models.Patch> Patch { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<GardenUsers>()
+
+                .HasKey(c => new { c.GardenId, c.UserId })
+                .HasName("PrimaryKey_GardenUserId");
+        }
+
+
+        public DbSet<Garden> Garden { get; set; }
+        public DbSet<Patch> Patch { get; set; }
+        public DbSet<GardenUsers> GardenUser { get; set;}
+
+
+        
+
+
     }
 }
