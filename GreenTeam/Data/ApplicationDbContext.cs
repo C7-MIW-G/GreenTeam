@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using GreenTeam.Models;
 
+
 namespace GreenTeam.Data
 {
     public class ApplicationDbContext : IdentityDbContext
-    {
+    { 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
