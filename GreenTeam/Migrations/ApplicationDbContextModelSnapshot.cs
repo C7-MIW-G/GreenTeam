@@ -41,7 +41,7 @@ namespace GreenTeam.Migrations
                     b.ToTable("Garden");
                 });
 
-            modelBuilder.Entity("GreenTeam.Models.GardenUsers", b =>
+            modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
                 {
                     b.Property<int>("GardenId")
                         .HasColumnType("int");
@@ -73,6 +73,7 @@ namespace GreenTeam.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PatchName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -284,7 +285,7 @@ namespace GreenTeam.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GreenTeam.Models.GardenUsers", b =>
+            modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
                 {
                     b.HasOne("GreenTeam.Models.Garden", "Garden")
                         .WithMany("GardenUsers")

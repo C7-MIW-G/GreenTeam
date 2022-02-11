@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220211092711_PatchNameAdded")]
+    [Migration("20220211110252_PatchNameAdded")]
     partial class PatchNameAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace GreenTeam.Migrations
                     b.ToTable("Garden");
                 });
 
-            modelBuilder.Entity("GreenTeam.Models.GardenUsers", b =>
+            modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
                 {
                     b.Property<int>("GardenId")
                         .HasColumnType("int");
@@ -75,6 +75,7 @@ namespace GreenTeam.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PatchName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -286,7 +287,7 @@ namespace GreenTeam.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GreenTeam.Models.GardenUsers", b =>
+            modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
                 {
                     b.HasOne("GreenTeam.Models.Garden", "Garden")
                         .WithMany("GardenUsers")

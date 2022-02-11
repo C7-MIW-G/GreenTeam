@@ -12,7 +12,8 @@ namespace GreenTeam.Migrations
                 name: "PatchName",
                 table: "Patch",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
