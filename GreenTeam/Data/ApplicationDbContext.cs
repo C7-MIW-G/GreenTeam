@@ -17,7 +17,7 @@ namespace GreenTeam.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<GardenUsers>()
+            modelBuilder.Entity<GardenUser>()
 
                 .HasKey(c => new { c.GardenId, c.UserId })
                 .HasName("PrimaryKey_GardenUserId");
@@ -26,7 +26,7 @@ namespace GreenTeam.Data
 
         public DbSet<Garden> Garden { get; set; }
         public DbSet<Patch> Patch { get; set; }
-        public DbSet<GardenUsers> GardenUser { get; set;}
+        public DbSet<GardenUser> GardenUser { get; set;}
 
 
         
