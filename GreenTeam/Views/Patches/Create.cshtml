@@ -1,10 +1,10 @@
 ﻿@model GreenTeam.Models.Patch
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Patch";
 }
 
-<h1>Create</h1>
+<h1>Create Patch</h1>
 
 <h4>Patch</h4>
 <hr />
@@ -15,9 +15,14 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="GardenId" value=@Url.ActionContext.RouteData.Values["id"] />
             <div class="form-group">
-                <label asp-for="Crop" class="control-label"></label>
+                <label asp-for="Crop" class="control-label">Crop Name:</label>
                 <input asp-for="Crop" class="form-control" />
                 <span asp-validation-for="Crop" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="PatchName" class="control-label">Patch Name:</label>
+                <input asp-for="PatchName" class="form-control" />
+                <span asp-validation-for="PatchName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

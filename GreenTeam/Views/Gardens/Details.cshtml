@@ -13,19 +13,21 @@
 </p>
 
 <table class="table">
-   @foreach(var item in Model.Patches)
-    {
-    <thead>
+
+     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(modelItem => item.Crop)
-            </th>
-            
+            <th>Patch Name:</th>
+            <th>Crop Name:</th>  
         </tr>
     </thead>
+   @foreach(var item in Model.Patches)
+    {
     <tbody>
     
         <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.PatchName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Crop)
             </td>

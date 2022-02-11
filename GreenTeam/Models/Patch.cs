@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public string Crop { get; set; }
         public int GardenId { get; set; }
+        public string PatchName { get; set; }
     }
 }

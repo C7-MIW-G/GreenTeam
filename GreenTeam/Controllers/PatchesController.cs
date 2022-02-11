@@ -28,7 +28,7 @@ namespace GreenTeam.Controllers
         //POST: Patches/Create/[gardenid]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Crop,GardenId")] Patch patch)
+        public async Task<IActionResult> Create([Bind("Id, Crop, PatchName, GardenId")] Patch patch)
         {
             if (!ModelState.IsValid)
             {
@@ -50,7 +50,7 @@ namespace GreenTeam.Controllers
         //POST: Patches/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Crop, GardenId")] Patch patch)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Crop, PatchName, GardenId")] Patch patch)
         {
             if (id != patch.Id)
             {

@@ -1,23 +1,28 @@
 ﻿@model GreenTeam.Models.Patch
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Patch";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>Patch</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4"> 
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="GardenId" />
             <div class="form-group">
-                <label asp-for="Crop" class="control-label"></label>
+                <label asp-for="Crop" class="control-label">Crop Name:</label>
                 <input asp-for="Crop" class="form-control" />
                 <span asp-validation-for="Crop" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PatchName" class="control-label">Patch Name:</label>
+                <input asp-for="PatchName" class="form-control" />
+                <span asp-validation-for="PatchName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
