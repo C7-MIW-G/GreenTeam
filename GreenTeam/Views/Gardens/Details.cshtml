@@ -5,6 +5,8 @@
 }
 
 <h1>@Html.DisplayFor(model => model.Garden.Name)</></h1>
+<h4>@Html.DisplayFor(model => model.Garden.Location)</></h4>
+
 
 <p>
     <a asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.Garden.Id">Add Patch</a> |
