@@ -10,6 +10,7 @@ using GreenTeam.Data;
 using GreenTeam.Models;
 using GreenTeam.ViewModels;
 using GreenTeam.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GreenTeam.Controllers
 {
@@ -49,6 +50,7 @@ namespace GreenTeam.Controllers
             return View(gardenView);
         }
 
+        [Authorize]
         // GET: Gardens/Create
         public IActionResult Create()
         {
