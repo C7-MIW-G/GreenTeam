@@ -17,6 +17,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IGardenService, GardenService>();
 builder.Services.AddScoped<IPatchService, PatchService>();
+builder.Services.AddScoped<IUserService, UserService >();
 
 var app = builder.Build();
 

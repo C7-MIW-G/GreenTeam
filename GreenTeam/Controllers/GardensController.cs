@@ -19,11 +19,13 @@ namespace GreenTeam.Controllers
                                                                 
         private readonly IGardenService gardenService;
         private readonly IPatchService patchService;
+        private readonly IUserService userService;
 
-        public GardensController(IGardenService gardenService, IPatchService patchService)
+        public GardensController(IGardenService gardenService, IPatchService patchService, IUserService userService)
         {
             this.gardenService = gardenService;
             this.patchService = patchService;
+            this.userService = userService;
         }
 
         // GET: Gardens
@@ -39,8 +41,9 @@ namespace GreenTeam.Controllers
 
             Garden returnedGarden = await gardenService.FindById(id);
             List<Patch> patchList = await patchService.FindByGardenId(id);
+            List<GardenUser> memberList = await userService.FindByGardenId(id);
 
-            GardenView gardenView = Mapper.createGardenView(returnedGarden, patchList);
+            GardenView gardenView = Mapper.createGardenView(returnedGarden, patchList, memberList);
 
            if (gardenView == null)
             {

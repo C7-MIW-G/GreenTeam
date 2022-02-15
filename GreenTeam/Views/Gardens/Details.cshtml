@@ -47,4 +47,23 @@
     
     </tbody>
     }
+    <thead class="MemberTable">
+        <tr>
+            <th>Members:</th>
+        </tr>
+    </thead>
+      @foreach(var item in Model.GardenUsers)
+    {
+    <tbody>
+    
+        <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+             <td>
+            </td>
+       </tr>
+           
+    </tbody>
+    }
     </table>
