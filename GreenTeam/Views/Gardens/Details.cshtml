@@ -25,16 +25,18 @@
     <tbody>
     
         <tr>
-             <td>
+             <td><a asp-controller="Patches" asp-action="Edit" asp-route-id="@item.Id">
                 @Html.DisplayFor(modelItem => item.PatchName)
+                </a>
             </td>
             <td>
+               <a asp-controller="Patches" asp-action="Edit" asp-route-id="@item.Id">
                 @Html.DisplayFor(modelItem => item.Crop)
+                </a>
             </td>
              <td>
             </td>
             <td>
-                <a asp-controller="Patches" asp-action="Edit" asp-route-id="@item.Id">Edit</a> | 
                 <a asp-controller="Patches" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
 
