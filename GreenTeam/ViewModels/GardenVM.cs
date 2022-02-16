@@ -9,11 +9,7 @@ namespace GreenTeam.ViewModels
         public string Name { get; set; }
         public string Location { get; set; }
 
-        public ICollection<PatchVM> Patches { get; set; }
-        //public List<AppUserVM> Users { get; set; }
-
-        //public list of patch viewmodels
-        //public list of appUser Viewmodels
-
+        public List<PatchVM> Patches { get; set; }
+        public List<AppUserVM> Users { get; set; }
     }
 }
