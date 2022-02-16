@@ -1,16 +1,16 @@
-﻿@model GreenTeam.ViewModels.GardenView
+﻿@model GreenTeam.ViewModels.GardenVM
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.Garden.Name)</></h1>
-<h4>@Html.DisplayFor(model => model.Garden.Location)</></h4>
+<h1>@Html.DisplayFor(model => model.Name)</></h1>
+<h4>@Html.DisplayFor(model => model.Location)</></h4>
 
 
 <p>
-    <a asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.Garden.Id">Add Patch</a> |
-    <a asp-action="Edit" asp-route-id="@Model?.Garden.Id">Edit Garden</a> |
+    <a asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.Id">Add Patch</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit Garden</a> |
     <a asp-action="Index">Back to List</a>
 </p>
 
@@ -43,18 +43,18 @@
             <th>Members:</th>
         </tr>
     </thead>
-      @foreach(var item in Model.GardenUsers)
+      @*@foreach(var item in Model.Users)
     {
     <tbody>
     
         <tr>
              <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.UserName)
             </td>
              <td>
             </td>
        </tr>
            
     </tbody>
-    }
+    }*@
     </table>
