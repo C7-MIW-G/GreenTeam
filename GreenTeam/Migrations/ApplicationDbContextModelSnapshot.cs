@@ -106,7 +106,7 @@ namespace GreenTeam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Garden");
+                    b.ToTable("Garden", (string)null);
                 });
 
             modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
@@ -150,7 +150,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("GardenId");
 
-                    b.ToTable("Patch");
+                    b.ToTable("Patch", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

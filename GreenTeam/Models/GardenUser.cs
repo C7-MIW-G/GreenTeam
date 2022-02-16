@@ -4,6 +4,7 @@ namespace GreenTeam.Models
 {
     public class GardenUser
     {   
+
         public string UserId { get; set; }
         public AppUser User { get; set; }
         
