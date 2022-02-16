@@ -43,9 +43,7 @@ namespace GreenTeam.Controllers
             List<Patch> patchList = await patchService.FindByGardenId(id);
             List<GardenUser> memberList = await userService.FindByGardenId(id);
 
-            Mapper mapper = new Mapper();
-
-            GardenVM gardenView = mapper.ToVM(returnedGarden);
+            GardenView gardenView = Mapper.createGardenView(returnedGarden, patchList, memberList);
 
            if (gardenView == null)
             {

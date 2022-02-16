@@ -1,27 +1,19 @@
-﻿using GreenTeam.ViewModels;
+﻿using Microsoft.AspNetCore.Mvc;
+using GreenTeam.ViewModels;
 using GreenTeam.Models;
 
 namespace GreenTeam.Services
 {
-    public class Mapper
+    public static class Mapper
     {
-        
-        public GardenVM ToVM(Garden gardenModel)
+        public static GardenView createGardenView(Garden garden, List<Patch> patches, List<GardenUser> memberList)
         {
+            GardenView gardenView = new GardenView();
+            gardenView.Garden = garden;
+            gardenView.Patches = patches;
+            gardenView.GardenUsers = memberList;
 
-
-            GardenVM vm = new GardenVM()
-
-            {
-                Id = gardenModel.Id,
-                Name = gardenModel.Name,
-                Location = gardenModel.Location,
-               // List <Patch> Patches = Patches1.Cast<Garden>.ToList()
-
-        };
-
-            return vm;
-
+            return gardenView;
         }
-    }    
+    }
 }
