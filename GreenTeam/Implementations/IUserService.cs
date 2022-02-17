@@ -1,6 +1,6 @@
 ﻿using GreenTeam.Models;
 
-namespace GreenTeam.Services
+namespace GreenTeam.Implementations
 {
     public interface IUserService
     {
