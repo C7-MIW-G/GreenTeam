@@ -1,7 +1,6 @@
 ﻿using GreenTeam.ViewModels;
 using GreenTeam.Models;
 
-
 namespace GreenTeam.Services
 {
     public class Mapper
@@ -9,7 +8,9 @@ namespace GreenTeam.Services
 
         public GardenVM ToVM(Garden gardenModel)
         {
-            List<PatchVM> patchVMs = new List<PatchVM>();
+            List<PatchVM> patchVMs = new List<PatchVM>();                     
+            List<AppUserVM> appUserVMs = new List<AppUserVM>();
+
             if (gardenModel.Patches != null)
             {
                 foreach (Patch patch in gardenModel.Patches)
@@ -18,22 +19,13 @@ namespace GreenTeam.Services
                 }
             }
 
-
-
-            List<AppUserVM> appUserVMs = new List<AppUserVM>();
-            /*foreach (GardenUser user in gardenModel.GardenUsers)
-            {
-                appUserVMs.Add(ToVM(user));
-            }*/
-
-
+            
             GardenVM vm = new GardenVM()
             {
                 Id = gardenModel.Id,
                 Name = gardenModel.Name,
                 Location = gardenModel.Location,
                 Patches = patchVMs,
-                //Users = appUserVMs
             };
 
             return vm;
