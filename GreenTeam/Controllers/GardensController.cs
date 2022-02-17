@@ -39,11 +39,11 @@ namespace GreenTeam.Controllers
         public async Task<IActionResult> Details(int id)
         {
 
-            Garden returnedGarden = await gardenService.FindById(id);
-            
+            Garden garden = await gardenService.FindById(id);
+
             Mapper mapper = new Mapper();
 
-            GardenVM gardenView = mapper.ToVM(returnedGarden);
+            GardenVM gardenView = mapper.ToVM(garden);
 
            if (gardenView == null)
             {

@@ -1,5 +1,6 @@
 ﻿using GreenTeam.Data;
 using GreenTeam.Models;
+using GreenTeam.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreenTeam.Services
@@ -22,7 +23,13 @@ namespace GreenTeam.Services
 
         public async Task<Garden> FindById(int id)
         {
-            Garden garden = await context.Garden.FindAsync(id);
+            var query = context.Garden
+                .Where(garden => garden.Id == id)
+                .Include(garden => garden.Patches);         
+
+
+            Garden garden = await query.FirstOrDefaultAsync();
+
             return garden;
         }
 
