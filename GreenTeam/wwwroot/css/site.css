@@ -37,6 +37,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     color: #ffffff !important;
+    text-shadow: 2px 0 0 #2f2f2f;
 }
 
 a {
@@ -51,7 +52,6 @@ a:hover{
 
 h1 {
     padding: 0.3rem !important;
-    text-shadow: 2px 0 0 #2f2f2f;
 }
 
 .btn-create {
@@ -77,13 +77,11 @@ main {
 .text-center p {
     font-size: calc(1rem + 0.7vw);
     font-weight: 400;
-    text-shadow: 2px 0 0 #2f2f2f;
 }
 
 th {
-    color: #082c01;
+    color: #D9A404;
     font-size: 2rem;
-    text-shadow: 2px 0 0 #08704068;
 }
 
 tr {
@@ -105,5 +103,9 @@ tr {
     white-space: nowrap;
     line-height: 60px;
     color: #ffffff !important;
-    text-shadow: 2px 0 0 #2f2f2f;
+}
+
+.form-label {
+    color: #000;
+    text-shadow: none;
 }
