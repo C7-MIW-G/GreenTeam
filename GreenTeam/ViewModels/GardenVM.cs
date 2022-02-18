@@ -1,6 +1,4 @@
-﻿using GreenTeam.Models;
-
-namespace GreenTeam.ViewModels
+﻿namespace GreenTeam.ViewModels
 {
         public class GardenVM
     {

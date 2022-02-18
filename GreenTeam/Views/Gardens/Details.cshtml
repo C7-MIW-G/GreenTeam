@@ -41,9 +41,10 @@
     <thead class="MemberTable">
         <tr>
             <th>Members:</th>
+            <th>Function:</th>
         </tr>
     </thead>
-      @*@foreach(var item in Model.Users)
+      @foreach(var item in Model.Users)
     {
     <tbody>
     
@@ -52,9 +53,17 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
              <td>
-            </td>
+                    @if (item.IsGardenManager)
+                    {
+                       <a>Manager</a>
+                    }
+                    @if (!item.IsGardenManager)
+                    {
+                        <a>Member</a>
+                    }
+                </td>
        </tr>
            
     </tbody>
-    }*@
+    }
     </table>

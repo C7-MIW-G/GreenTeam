@@ -26,10 +26,12 @@ namespace GreenTeam.Services
         {
             var query = context.Garden
                 .Where(garden => garden.Id == id)
-                .Include(garden => garden.Patches);         
-
-
+                .Include(garden => garden.Patches)
+                .Include(au => au.GardenUsers)
+                .ThenInclude(th => th.User);
+            
             Garden garden = await query.FirstOrDefaultAsync();
+
 
             return garden;
         }
@@ -58,6 +60,17 @@ namespace GreenTeam.Services
             return garden;
 
         }
+
+        public async Task<GardenVM> GetVMById(int id)
+        {
+            Garden garden = await FindById(id);
+            Mapper mapper = new Mapper();
+            GardenVM gardenVM = mapper.ToVM(garden);
+
+            return gardenVM;
+        }
+
+        
     }
 }
 

@@ -1,15 +1,8 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GreenTeam.Data;
 using GreenTeam.Models;
 using GreenTeam.ViewModels;
-using GreenTeam.Services;
 using Microsoft.AspNetCore.Authorization;
 using GreenTeam.Implementations;
 
@@ -19,14 +12,10 @@ namespace GreenTeam.Controllers
     {
                                                                 
         private readonly IGardenService gardenService;
-        private readonly IPatchService patchService;
-        private readonly IUserService userService;
-
-        public GardensController(IGardenService gardenService, IPatchService patchService, IUserService userService)
+        
+        public GardensController(IGardenService gardenService)
         {
             this.gardenService = gardenService;
-            this.patchService = patchService;
-            this.userService = userService;
         }
 
         // GET: Gardens
@@ -39,12 +28,7 @@ namespace GreenTeam.Controllers
         // GET: Gardens/Details/5
         public async Task<IActionResult> Details(int id)
         {
-
-            Garden garden = await gardenService.FindById(id);
-
-            Mapper mapper = new Mapper();
-
-            GardenVM gardenView = mapper.ToVM(garden);
+           GardenVM gardenView = await gardenService.GetVMById(id);
 
            if (gardenView == null)
             {
@@ -54,8 +38,8 @@ namespace GreenTeam.Controllers
             return View(gardenView);
         }
 
-        [Authorize]
         // GET: Gardens/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -64,7 +48,6 @@ namespace GreenTeam.Controllers
         // POST: Gardens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Location")] Garden garden)
@@ -74,6 +57,7 @@ namespace GreenTeam.Controllers
                 Garden returnedGarden = await gardenService.AddGarden(garden);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(garden);
         }
 

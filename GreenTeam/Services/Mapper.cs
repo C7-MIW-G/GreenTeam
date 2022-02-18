@@ -19,13 +19,25 @@ namespace GreenTeam.Services
                 }
             }
 
-            
+            List<GardenUser> gardenUsers = gardenModel.GardenUsers.ToList();
+
+            if (gardenUsers != null)
+            {
+                for (int userIndex = 0; userIndex < gardenUsers.Count; userIndex++)
+                {
+                    appUserVMs.Add(ToVM(gardenUsers[userIndex].User));
+                    appUserVMs[userIndex].IsGardenManager = gardenUsers[userIndex].IsGardenManager;
+
+                }                
+            }
+                       
             GardenVM vm = new GardenVM()
             {
                 Id = gardenModel.Id,
                 Name = gardenModel.Name,
                 Location = gardenModel.Location,
                 Patches = patchVMs,
+                Users = appUserVMs
             };
 
             return vm;
@@ -44,15 +56,16 @@ namespace GreenTeam.Services
             return vm;
         }
 
-        public AppUserVM ToVM(GardenUser gardenUserModel)
+        public AppUserVM ToVM(AppUser appUser)
         {
 
             AppUserVM vm = new AppUserVM()
             {
-                //UserName = gardenUserModel.FullName,
-                //UserEmail = gardenUserModel.Email
+                UserEmail = appUser.Email,
+                UserName = appUser.FullName,
+               
+        
             };
-
 
             return vm;
         }

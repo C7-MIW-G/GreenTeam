@@ -18,6 +18,7 @@ namespace GreenTeam.Services
         {
             List<GardenUser> allGardenUsers = await context.GardenUser.ToListAsync();
             List<GardenUser> memberList = new List<GardenUser>();
+
             foreach (var gardenUser in allGardenUsers)
             {
                 if (gardenUser.GardenId == id)
@@ -26,8 +27,6 @@ namespace GreenTeam.Services
                 }
             }
             return memberList;
-        }
-    }
-
-    
+        }        
+    }    
 }
