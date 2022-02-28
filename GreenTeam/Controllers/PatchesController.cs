@@ -3,16 +3,19 @@ using GreenTeam.Models;
 using GreenTeam.Services;
 using Microsoft.EntityFrameworkCore;
 using GreenTeam.Implementations;
+using System.Security.Claims;
 
 namespace GreenTeam.Controllers
 {
     public class PatchesController : Controller { 
 
         private readonly IPatchService patchService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
     
-        public PatchesController(IPatchService PatchService)
+        public PatchesController(IPatchService PatchService, IHttpContextAccessor httpContextAccessor)
         {
             this.patchService = PatchService;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Index()
@@ -21,9 +24,13 @@ namespace GreenTeam.Controllers
         }
 
         //Get: Patches/Create
-        public IActionResult Create()
+        public IActionResult Create(int gardenId)
         {
+            
+
+            // if userId.IsGardenManager == true {
             return View();
+            // else UnAuthorizedException
         }
 
         //POST: Patches/Create/[gardenid]
@@ -33,11 +40,15 @@ namespace GreenTeam.Controllers
         {
             if (!ModelState.IsValid)
             {
-                Patch returnedPatch = await patchService.AddPatch(patch);
-                return RedirectToAction("Details", "Gardens", new { id = patch.GardenId });
+                string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                int gardenId = patch.GardenId;
 
+                if(await patchService.IsManager(userId, gardenId)){
+                    Patch returnedPatch = await patchService.AddPatch(patch);
+                    return RedirectToAction("Details", "Gardens", new { id = patch.GardenId });
+                } 
             }
-            return View(patch);
+            return NotFound("No Permission to create a patch, you are not a Garden Manager in this garden!");
         }
 
         //GET: Patches/Edit/6
