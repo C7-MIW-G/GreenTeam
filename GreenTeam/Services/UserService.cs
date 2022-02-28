@@ -1,6 +1,8 @@
 ﻿using GreenTeam.Data;
 using GreenTeam.Implementations;
 using GreenTeam.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreenTeam.Services
@@ -28,5 +30,23 @@ namespace GreenTeam.Services
             }
             return memberList;
         }        
+        public async void StoreFullName(AppUser user, string name)
+        {
+            user.FullName = name;
+
+            context.Users.Attach(user);
+            context.Entry(user).Property(x => x.FullName).IsModified = true;
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<string> GetFullName(AppUser user)
+        {
+            var query = context.Users
+                .Where(u => u.UserName == user.UserName);
+
+            AppUser returnedUser = await query.FirstOrDefaultAsync();
+
+            return returnedUser.FullName;
+        }
     }    
 }

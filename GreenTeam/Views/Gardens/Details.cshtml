@@ -4,14 +4,14 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.Name)</></h1>
+<h1>@Html.DisplayFor(model => model.Name)</></h1> 
 <h4>@Html.DisplayFor(model => model.Location)</></h4>
 
 
 <p>
-    <a asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.Id">Add Patch</a> |
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit Garden</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.Id">Add Patch</a>
+    <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.Id">Edit Garden</a>
+    <a class="btn btn-action"asp-action="Index">Back to List</a>
 </p>
 
 <table class="table">
@@ -55,11 +55,11 @@
              <td>
                     @if (item.IsGardenManager)
                     {
-                       <a>Manager</a>
+                       <p>Manager</p>
                     }
                     @if (!item.IsGardenManager)
                     {
-                        <a>Member</a>
+                        <p>Member</p>
                     }
                 </td>
        </tr>

@@ -17,17 +17,16 @@ html {
 
 /*Navbar background color*/
 .bg-white {
-    background: linear-gradient(135deg, #08704068, #bbefa3) !important;
+    background: linear-gradient(270deg, #087040d4, #038C4C) !important;
 }
 
 .navbar-brand {
     color: #ffffff !important;
-    text-shadow: 1.5px 0 0 #000 !important;
 }
 
 /*Navbar border*/
 .border-bottom {
-    border-bottom: 2px solid #08704068 !important;
+    border-bottom: 2px solid #087040d4 !important;
 }
 
 body {
@@ -37,32 +36,34 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     color: #ffffff;
-    text-shadow: 2px 0 0 #2f2f2f;
 }
 
 a {
     text-decoration: none;
     color: #ffffff;
-    text-shadow: 1.5px 0 0 #00330a !important;
 }
 
 a:hover{
-    color: #ff6a00 !important;
+    color: #ffffff6e !important;
 }
 
 h1 {
-    padding: 0.3rem !important;
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+    padding-left: 0.3rem !important;
 }
 
-.btn-create {
-    padding: 0.5rem !important;
+h4 {
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+    padding-left: 0.3rem !important;
 }
 
 main {
     margin: 150px 0px 10px 0px;
     box-sizing: border-box;
     padding: 10px !important;
-    background: linear-gradient(135deg, #08704068, #bbefa3);
+    background: linear-gradient(270deg, #087040d4, #038C4C);
     padding: 20px 0px 20px 0px;
     border-radius: 5px;
 }
@@ -82,9 +83,12 @@ main {
 th {
     color: #D9A404;
     font-size: 2rem;
+    font-style:oblique
 }
 
 tr {
+    text-decoration: none;
+    color: #ffffff;
     border-style: hidden !important;
 }
 
@@ -109,3 +113,19 @@ tr {
     color: #000;
     text-shadow: none;
 }
+
+.btn-cta {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    padding: 1.375rem 1.75rem;
+}
+
+.btn-action {
+    color: #fff;
+    background-color: #87b2f1;
+    padding: 0.5rem;
+
+}
+
+

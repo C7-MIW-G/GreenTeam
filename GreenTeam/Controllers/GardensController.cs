@@ -12,10 +12,13 @@ namespace GreenTeam.Controllers
     {
                                                                 
         private readonly IGardenService gardenService;
-        
-        public GardensController(IGardenService gardenService)
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+
+        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor)
         {
             this.gardenService = gardenService;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Gardens
