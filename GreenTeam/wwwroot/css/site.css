@@ -17,7 +17,7 @@ html {
 
 /*Navbar background color*/
 .bg-white {
-    background: linear-gradient(135deg, #08704068, #bbefa3) !important;
+    background: linear-gradient(135deg, #087040d4, #bbefa3) !important;
 }
 
 .navbar-brand {
@@ -27,7 +27,7 @@ html {
 
 /*Navbar border*/
 .border-bottom {
-    border-bottom: 2px solid #08704068 !important;
+    border-bottom: 2px solid #087040d4 !important;
 }
 
 body {
@@ -47,7 +47,7 @@ a {
 }
 
 a:hover{
-    color: #ff6a00 !important;
+    color: #ff6a0 !important;
 }
 
 h1 {
@@ -62,7 +62,7 @@ main {
     margin: 150px 0px 10px 0px;
     box-sizing: border-box;
     padding: 10px !important;
-    background: linear-gradient(135deg, #08704068, #bbefa3);
+    background: linear-gradient(135deg, #087040d4, #bbefa3);
     padding: 20px 0px 20px 0px;
     border-radius: 5px;
 }
