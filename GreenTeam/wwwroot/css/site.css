@@ -113,7 +113,7 @@ tr {
     color: #000;
     text-shadow: none;
 }
-
+/*Homepage red call to action*/
 .btn-cta {
     color: #fff;
     background-color: #dc3545;
@@ -121,11 +121,44 @@ tr {
     padding: 1.375rem 1.75rem;
 }
 
+
+/*Blue-ish button*/
 .btn-action {
     color: #fff;
     background-color: #87b2f1;
     padding: 0.5rem;
-
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
 }
 
+/*All related to Identity pages e.g. register / login */
+.btn-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.btn-link:hover {
+     color: #ffffff6e !important;
+}
+
+.form-label-custom {
+    color: #fff;
+    text-shadow: none;
+}
+
+.identity-body {
+    color: #ffffff;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #87b2f1;
+}
+
+.form-control {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
 
