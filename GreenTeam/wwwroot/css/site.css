@@ -44,7 +44,7 @@ a {
 }
 
 a:hover{
-    color: #ff6a0 !important;
+    color: #ffffff6e !important;
 }
 
 h1 {
@@ -53,8 +53,10 @@ h1 {
     padding-left: 0.3rem !important;
 }
 
-.btn-create {
-    padding: 0.5rem !important;
+h4 {
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+    padding-left: 0.3rem !important;
 }
 
 main {
@@ -81,9 +83,12 @@ main {
 th {
     color: #D9A404;
     font-size: 2rem;
+    font-style:oblique
 }
 
 tr {
+    text-decoration: none;
+    color: #ffffff;
     border-style: hidden !important;
 }
 
@@ -115,3 +120,12 @@ tr {
     border-color: #dc3545;
     padding: 1.375rem 1.75rem;
 }
+
+.btn-action {
+    color: #fff;
+    background-color: #87b2f1;
+    padding: 0.5rem;
+
+}
+
+
