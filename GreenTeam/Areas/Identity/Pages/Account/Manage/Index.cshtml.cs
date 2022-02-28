@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using GreenTeam.Implementations;
 using GreenTeam.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,16 @@ namespace GreenTeam.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IUserService userService;
 
         public IndexModel(
             UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager)
+            SignInManager<AppUser> signInManager,
+            IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.userService = userService;
         }
 
         /// <summary>
@@ -59,18 +63,22 @@ namespace GreenTeam.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public string FullName { get; set;}
         }
 
         private async Task LoadAsync(AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            string fullName = await userService.GetFullName(user);
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FullName = fullName
             };
         }
 
@@ -110,6 +118,17 @@ namespace GreenTeam.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            string fullName = await userService.GetFullName(user);
+            if (Input.FullName != fullName)
+            {
+                userService.StoreFullName(user, Input.FullName);
+              
+            }
+
+            
+
+
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
