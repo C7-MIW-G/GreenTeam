@@ -64,6 +64,7 @@ namespace GreenTeam.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 
+            [Display(Name = "Full Name")]
             public string FullName { get; set;}
         }
 

@@ -19,6 +19,8 @@ namespace GreenTeam.Services
         public async Task<List<Garden>> FindAll()
         {
             List<Garden> gardens = await context.Garden.ToListAsync();
+
+            
             return gardens;
         }
 

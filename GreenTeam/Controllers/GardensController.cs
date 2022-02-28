@@ -12,10 +12,13 @@ namespace GreenTeam.Controllers
     {
                                                                 
         private readonly IGardenService gardenService;
-        
-        public GardensController(IGardenService gardenService)
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+
+        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor)
         {
             this.gardenService = gardenService;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Gardens
@@ -28,8 +31,6 @@ namespace GreenTeam.Controllers
         // GET: Gardens/Details/5
         public async Task<IActionResult> Details(int id)
         {
-           var user = HttpContext.User.Identity.Name;
-
            GardenVM gardenView = await gardenService.GetVMById(id);
 
            if (gardenView == null)
