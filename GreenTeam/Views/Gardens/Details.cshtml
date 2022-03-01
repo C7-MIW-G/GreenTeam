@@ -1,16 +1,19 @@
-﻿@model GreenTeam.ViewModels.GardenVM
+﻿@model GreenTeam.ViewModels.GardenOverviewVM
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.Name)</></h1> 
-<h4>@Html.DisplayFor(model => model.Location)</></h4>
+<h1>@Html.DisplayFor(model => model.GardenVM.Name)</></h1> 
+<h4>@Html.DisplayFor(model => model.GardenVM.Location)</></h4>
 
 
 <p>
-    <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.Id">Add Patch</a>
-    <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.Id">Edit Garden</a>
+    @if(Model.IsGardenManager)
+    {
+         <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id">Add Patch</a>
+    }
+    <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">Edit Garden</a>
     <a class="btn btn-action"asp-action="Index">Back to List</a>
 </p>
 
@@ -22,7 +25,7 @@
             <th>Crop Name:</th>  
         </tr>
     </thead>
-   @foreach(var item in Model.Patches)
+   @foreach(var item in Model.GardenVM.Patches)
     {
     <tbody>
         <tr>
@@ -44,7 +47,7 @@
             <th>Function:</th>
         </tr>
     </thead>
-      @foreach(var item in Model.Users)
+      @foreach(var item in Model.GardenVM.Users)
     {
     <tbody>
     

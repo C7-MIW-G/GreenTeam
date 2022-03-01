@@ -24,13 +24,9 @@ namespace GreenTeam.Controllers
         }
 
         //Get: Patches/Create
-        public IActionResult Create(int gardenId)
-        {
-            
-
-            // if userId.IsGardenManager == true {
-            return View();
-            // else UnAuthorizedException
+        public IActionResult Create()
+        {            
+            return View();   
         }
 
         //POST: Patches/Create/[gardenid]
