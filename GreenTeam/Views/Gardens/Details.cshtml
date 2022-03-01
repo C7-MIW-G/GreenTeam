@@ -12,8 +12,8 @@
     @if(Model.IsGardenManager)
     {
          <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id">Add Patch</a>
+         <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">Edit Garden</a>
     }
-    <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">Edit Garden</a>
     <a class="btn btn-action"asp-action="Index">Back to List</a>
 </p>
 
