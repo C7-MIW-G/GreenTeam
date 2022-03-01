@@ -5,12 +5,13 @@ using GreenTeam.Models;
 using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using GreenTeam.Implementations;
+using System.Security.Claims;
 
 namespace GreenTeam.Controllers
 {
     public class GardensController : Controller
     {
-                                                                
+
         private readonly IGardenService gardenService;
         private readonly IHttpContextAccessor httpContextAccessor;
 
@@ -31,14 +32,16 @@ namespace GreenTeam.Controllers
         // GET: Gardens/Details/5
         public async Task<IActionResult> Details(int id)
         {
-           GardenVM gardenView = await gardenService.GetVMById(id);
+            GardenVM gardenView = await gardenService.GetVMById(id);
+            string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            GardenOverviewVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
 
-           if (gardenView == null)
+            if (gardenOverviewVM == null)
             {
                 return NotFound();
             }
 
-            return View(gardenView);
+            return View(gardenOverviewVM);
         }
 
         // GET: Gardens/Create
@@ -121,8 +124,8 @@ namespace GreenTeam.Controllers
                 return NotFound();
             }
 
-            Garden garden = await gardenService.FindById((int) id);
- 
+            Garden garden = await gardenService.FindById((int)id);
+
             if (garden == null)
             {
                 return NotFound();
@@ -136,14 +139,14 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            
+
             await gardenService.DeleteGarden(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool GardenExists(int id)
         {
-           return gardenService.FindById(id) != null;
+            return gardenService.FindById(id) != null;
         }
     }
 }
