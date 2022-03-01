@@ -30,13 +30,14 @@ namespace GreenTeam.Services
             }
             return memberList;
         }        
-        public async void StoreFullName(AppUser user, string name)
+        public async Task<AppUser> StoreFullName(AppUser user, string name)
         {
             user.FullName = name;
 
             context.Users.Attach(user);
             context.Entry(user).Property(x => x.FullName).IsModified = true;
             await context.SaveChangesAsync();
+            return user;
         }
 
         public async Task<string> GetFullName(AppUser user)

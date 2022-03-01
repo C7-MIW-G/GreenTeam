@@ -6,7 +6,7 @@ namespace GreenTeam.Implementations
     public interface IUserService
     {
         Task<List<GardenUser>> FindByGardenId(int id);
-        void StoreFullName(AppUser user, string name);
+        Task<AppUser> StoreFullName(AppUser user, string name);
         Task<string> GetFullName(AppUser user);
     }            
 }

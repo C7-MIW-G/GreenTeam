@@ -123,7 +123,7 @@ namespace GreenTeam.Areas.Identity.Pages.Account.Manage
             string fullName = await userService.GetFullName(user);
             if (Input.FullName != fullName)
             {
-                userService.StoreFullName(user, Input.FullName);
+                await userService.StoreFullName(user, Input.FullName);
               
             }
 
