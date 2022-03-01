@@ -32,13 +32,15 @@ namespace GreenTeam.Controllers
         }
 
         // GET: Gardens/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             GardenVM gardenView = await gardenService.GetVMById(id);
             string userId = "";
 
-            
-            
+            userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+
             GardenOverviewVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
 
             if (gardenOverviewVM == null)
