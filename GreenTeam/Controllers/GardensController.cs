@@ -25,8 +25,8 @@ namespace GreenTeam.Controllers
         // GET: Gardens
         public async Task<IActionResult> Index()
         {
-            List<Garden> gardens = await gardenService.FindAll();
-            return View(gardens);
+            List<GardenVM> gardenVMs = await gardenService.GetAllGardenVMs();
+            return View(gardenVMs);
         }
 
         // GET: Gardens/Details/5

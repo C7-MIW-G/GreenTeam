@@ -19,16 +19,16 @@ namespace GreenTeam.Services
                 }
             }
 
-            List<GardenUser> gardenUsers = gardenModel.GardenUsers.ToList();
-
-            if (gardenUsers != null)
+            if (gardenModel.GardenUsers != null)
             {
+                List<GardenUser> gardenUsers = gardenModel.GardenUsers.ToList();
+
                 for (int userIndex = 0; userIndex < gardenUsers.Count; userIndex++)
                 {
                     appUserVMs.Add(ToVM(gardenUsers[userIndex].User));
                     appUserVMs[userIndex].IsGardenManager = gardenUsers[userIndex].IsGardenManager;
 
-                }                
+                }
             }
                        
             GardenVM vm = new GardenVM()

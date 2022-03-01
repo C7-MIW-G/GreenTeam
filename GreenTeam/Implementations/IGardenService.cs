@@ -13,5 +13,6 @@ namespace GreenTeam.Implementations
 
         Task<GardenVM> GetVMById(int id);
         Task<GardenOverviewVM> GetOverviewVM(int id, string userId);
+        Task<List<GardenVM>> GetAllGardenVMs();
     }
 }
