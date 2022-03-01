@@ -9,10 +9,14 @@ namespace GreenTeam.Services
     public class GardenService : IGardenService
     {
         private ApplicationDbContext context;
+        private Mapper mapper;
+        private readonly IUserService userService;
 
-        public GardenService(ApplicationDbContext context)
+        public GardenService(ApplicationDbContext context, IUserService userService, Mapper mapper)
         {
             this.context = context;
+            this.userService = userService;
+            this.mapper = mapper;
 
         }
 
@@ -22,6 +26,20 @@ namespace GreenTeam.Services
 
             
             return gardens;
+        }
+
+        public async Task<List<GardenVM>> GetAllGardenVMs()
+        {
+            List<Garden> gardens = await FindAll();
+            List<GardenVM> gardenVMs = new List<GardenVM>();
+            
+            foreach(Garden garden in gardens)
+            {
+                gardenVMs.Add(mapper.ToVM(garden));
+                
+            }
+            
+            return gardenVMs;
         }
 
         public async Task<Garden> FindById(int id)
@@ -66,13 +84,26 @@ namespace GreenTeam.Services
         public async Task<GardenVM> GetVMById(int id)
         {
             Garden garden = await FindById(id);
-            Mapper mapper = new Mapper();
             GardenVM gardenVM = mapper.ToVM(garden);
 
             return gardenVM;
         }
 
-        
+        public async Task<GardenOverviewVM> GetOverviewVM(int id, string userId)
+        {
+            GardenVM gardenVM = await GetVMById(id);
+          
+            PatchService patchService = new PatchService(context); //Move to UserService
+            bool isGardenManager = await userService.IsManager(userId, gardenVM.Id);
+
+            GardenOverviewVM gardenOverviewVM = new GardenOverviewVM()
+            {
+                GardenVM = gardenVM,
+                IsGardenManager = isGardenManager
+            };
+
+            return gardenOverviewVM;
+        }
     }
 }
 
