@@ -50,7 +50,23 @@ namespace GreenTeam.Services
             return returnedUser.FullName;
         }
 
-        public async Task<bool> IsManager(string userId, int gardenId) //Move to UserService
+        public async Task<GardenUser> AssignManager(string userId, int gardenId)
+        {
+            GardenUser gardenUser = new GardenUser()
+            {
+                GardenId = gardenId,
+                UserId = userId,
+                IsGardenManager = true
+            };
+            context.GardenUser.Add(gardenUser);
+            
+            await context.SaveChangesAsync();
+
+
+            return gardenUser;
+        }
+
+        public async Task<bool> IsManager(string userId, int gardenId) 
         {
             var query = context.GardenUser
                 .Where(gu => gu.UserId == userId && gu.GardenId == gardenId);

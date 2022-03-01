@@ -14,12 +14,14 @@ namespace GreenTeam.Controllers
 
         private readonly IGardenService gardenService;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IUserService userService;
 
 
-        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor)
+        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor, IUserService userService)
         {
             this.gardenService = gardenService;
             this.httpContextAccessor = httpContextAccessor;
+            this.userService = userService;
         }
 
         // GET: Gardens
@@ -35,10 +37,7 @@ namespace GreenTeam.Controllers
             GardenVM gardenView = await gardenService.GetVMById(id);
             string userId = "";
 
-            var loggedInUserClaim = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-            if (loggedInUserClaim != null) {
-                userId = loggedInUserClaim.Value;
-            }
+            
             
             GardenOverviewVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
 
@@ -60,6 +59,7 @@ namespace GreenTeam.Controllers
         // POST: Gardens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Location")] Garden garden)
@@ -67,6 +67,13 @@ namespace GreenTeam.Controllers
             if (ModelState.IsValid)
             {
                 Garden returnedGarden = await gardenService.AddGarden(garden);
+               
+                string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                await userService.AssignManager(userId, garden.Id);
+                
+               
+
                 return RedirectToAction(nameof(Index));
             }
 
