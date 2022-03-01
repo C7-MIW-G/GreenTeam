@@ -27,6 +27,7 @@ namespace GreenTeam.Data
         public DbSet<Garden> Garden { get; set; }
         public DbSet<Patch> Patch { get; set; }
         public DbSet<GardenUser> GardenUser { get; set;}
+        public DbSet<PatchTask> PatchTask { get; set; }
 
 
         
