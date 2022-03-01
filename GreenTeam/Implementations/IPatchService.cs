@@ -9,6 +9,5 @@ namespace GreenTeam.Implementations
         Task<Patch> FindById(int Id);
         Task<Patch> EditPatch(Patch patch);
         Task<Patch> DeletePatch(int Id);
-        Task<bool> IsManager(string userId, int gardenId);
     }
 }

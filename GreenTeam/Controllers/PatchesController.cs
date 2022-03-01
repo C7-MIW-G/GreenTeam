@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GreenTeam.Models;
-using GreenTeam.Services;
-using Microsoft.EntityFrameworkCore;
 using GreenTeam.Implementations;
 using System.Security.Claims;
 
@@ -10,12 +8,14 @@ namespace GreenTeam.Controllers
     public class PatchesController : Controller { 
 
         private readonly IPatchService patchService;
+        private readonly IUserService userService;
         private readonly IHttpContextAccessor _httpContextAccessor;
     
-        public PatchesController(IPatchService PatchService, IHttpContextAccessor httpContextAccessor)
+        public PatchesController(IPatchService PatchService, IHttpContextAccessor httpContextAccessor, IUserService userService)
         {
             this.patchService = PatchService;
             this._httpContextAccessor = httpContextAccessor;
+            this.userService = userService;
         }
 
         public IActionResult Index()
@@ -38,7 +38,7 @@ namespace GreenTeam.Controllers
             {
                 string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 int gardenId = patch.GardenId;
-                bool isCreateAllowed = await patchService.IsManager(userId, gardenId);
+                bool isCreateAllowed = await userService.IsManager(userId, gardenId);
 
                 if(isCreateAllowed){
                     Patch returnedPatch = await patchService.AddPatch(patch);

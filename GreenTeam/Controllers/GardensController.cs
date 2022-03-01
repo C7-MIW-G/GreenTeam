@@ -33,7 +33,13 @@ namespace GreenTeam.Controllers
         public async Task<IActionResult> Details(int id)
         {
             GardenVM gardenView = await gardenService.GetVMById(id);
-            string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string userId = "";
+
+            var loggedInUserClaim = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (loggedInUserClaim != null) {
+                userId = loggedInUserClaim.Value;
+            }
+            
             GardenOverviewVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
 
             if (gardenOverviewVM == null)
