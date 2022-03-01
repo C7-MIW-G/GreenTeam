@@ -56,19 +56,5 @@ namespace GreenTeam.Services
             await context.SaveChangesAsync();
             return patch;
         }
-
-        public async Task<bool> IsManager(string userId, int gardenId) //Move to UserService
-        {
-            var query = context.GardenUser
-                .Where(gu => gu.UserId == userId && gu.GardenId == gardenId);
-         
-            GardenUser gardenUser = await query.FirstOrDefaultAsync();
-
-            if(gardenUser != null)
-            {
-                return gardenUser.IsGardenManager;
-            }
-            return false;
-        }
     }  
 }

@@ -9,10 +9,12 @@ namespace GreenTeam.Services
     public class GardenService : IGardenService
     {
         private ApplicationDbContext context;
+        private readonly IUserService userService;
 
-        public GardenService(ApplicationDbContext context)
+        public GardenService(ApplicationDbContext context, IUserService userService)
         {
             this.context = context;
+            this.userService = userService;
 
         }
 
@@ -77,7 +79,7 @@ namespace GreenTeam.Services
             GardenVM gardenVM = await GetVMById(id);
           
             PatchService patchService = new PatchService(context); //Move to UserService
-            bool isGardenManager = await patchService.IsManager(userId, gardenVM.Id);
+            bool isGardenManager = await userService.IsManager(userId, gardenVM.Id);
 
             GardenOverviewVM gardenOverviewVM = new GardenOverviewVM()
             {
