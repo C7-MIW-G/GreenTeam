@@ -8,7 +8,7 @@ namespace GreenTeam.Services
     public class PatchService : IPatchService
     {
         public ApplicationDbContext context;
-    
+
         public PatchService(ApplicationDbContext context)
         {
             this.context = context;
@@ -56,5 +56,19 @@ namespace GreenTeam.Services
             await context.SaveChangesAsync();
             return patch;
         }
-    }
+
+        public async Task<bool> IsManager(string userId, int gardenId)
+        {
+            var query = context.GardenUser
+                .Where(gu => gu.UserId == userId && gu.GardenId == gardenId);
+         
+            GardenUser gardenUser = await query.FirstOrDefaultAsync();
+
+            if(gardenUser != null)
+            {
+                return gardenUser.IsGardenManager;
+            }
+            return false;
+        }
+    }  
 }
