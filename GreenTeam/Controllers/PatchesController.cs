@@ -42,13 +42,14 @@ namespace GreenTeam.Controllers
             {
                 string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 int gardenId = patch.GardenId;
+                bool isCreateAllowed = await patchService.IsManager(userId, gardenId);
 
-                if(await patchService.IsManager(userId, gardenId)){
+                if(isCreateAllowed){
                     Patch returnedPatch = await patchService.AddPatch(patch);
                     return RedirectToAction("Details", "Gardens", new { id = patch.GardenId });
                 } 
             }
-            return NotFound("No Permission to create a patch, you are not a Garden Manager in this garden!");
+            return Unauthorized();
         }
 
         //GET: Patches/Edit/6
