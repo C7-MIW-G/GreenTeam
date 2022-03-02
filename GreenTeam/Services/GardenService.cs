@@ -93,7 +93,6 @@ namespace GreenTeam.Services
         {
             GardenVM gardenVM = await GetVMById(id);
           
-            PatchService patchService = new PatchService(context); //Move to UserService
             bool isGardenManager = await userService.IsManager(userId, gardenVM.Id);
 
             GardenOverviewVM gardenOverviewVM = new GardenOverviewVM()
