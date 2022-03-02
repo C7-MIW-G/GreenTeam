@@ -89,13 +89,13 @@ namespace GreenTeam.Services
             return gardenVM;
         }
 
-        public async Task<GardenOverviewVM> GetOverviewVM(int id, string userId)
+        public async Task<GardenDetailsVM> GetOverviewVM(int id, string userId)
         {
             GardenVM gardenVM = await GetVMById(id);
           
             bool isGardenManager = await userService.IsManager(userId, gardenVM.Id);
 
-            GardenOverviewVM gardenOverviewVM = new GardenOverviewVM()
+            GardenDetailsVM gardenOverviewVM = new GardenDetailsVM()
             {
                 GardenVM = gardenVM,
                 IsGardenManager = isGardenManager

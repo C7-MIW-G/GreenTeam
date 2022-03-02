@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220301103355_AddedTaskPatchForeignKeys")]
-    partial class AddedTaskPatchForeignKeys
+    [Migration("20220302152005_AddedPatchTaskViewModel")]
+    partial class AddedPatchTaskViewModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,25 +168,17 @@ namespace GreenTeam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDone")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("PatchId")
+                    b.Property<int>("PatchId")
                         .HasColumnType("int");
 
                     b.Property<string>("TaskDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaskName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("PatchId");
 
@@ -356,15 +348,11 @@ namespace GreenTeam.Migrations
 
             modelBuilder.Entity("GreenTeam.Models.PatchTask", b =>
                 {
-                    b.HasOne("GreenTeam.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("GreenTeam.Models.Patch", "Patch")
-                        .WithMany()
-                        .HasForeignKey("PatchId");
-
-                    b.Navigation("AppUser");
+                        .WithMany("PatchTasks")
+                        .HasForeignKey("PatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Patch");
                 });
@@ -425,6 +413,11 @@ namespace GreenTeam.Migrations
                     b.Navigation("GardenUsers");
 
                     b.Navigation("Patches");
+                });
+
+            modelBuilder.Entity("GreenTeam.Models.Patch", b =>
+                {
+                    b.Navigation("PatchTasks");
                 });
 #pragma warning restore 612, 618
         }

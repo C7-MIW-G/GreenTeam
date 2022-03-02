@@ -2,6 +2,9 @@
 using GreenTeam.Models;
 using GreenTeam.Implementations;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using GreenTeam.ViewModels;
+using GreenTeam.Services;
 
 namespace GreenTeam.Controllers
 {
@@ -22,6 +25,21 @@ namespace GreenTeam.Controllers
         {
             return View();
         }
+
+        // GET: Patches/Details/5
+        public async Task<IActionResult> Details(int id)
+        {
+            PatchVM patchView = await patchService.GetVMById(id);
+
+            if (patchView == null)
+            {
+                return NotFound();
+            }
+
+            return View(patchView);
+        }
+
+
 
         //Get: Patches/Create
         public IActionResult Create()

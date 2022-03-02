@@ -41,7 +41,7 @@ namespace GreenTeam.Controllers
             userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
 
-            GardenOverviewVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
+            GardenDetailsVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
 
             if (gardenOverviewVM == null)
             {
