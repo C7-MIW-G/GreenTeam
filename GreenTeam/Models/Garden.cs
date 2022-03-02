@@ -17,6 +17,11 @@ namespace GreenTeam.Models
         public string Location { get; set; }
 
         public ICollection<Patch> Patches { get; set; }
+
         public ICollection<GardenUser> GardenUsers { get; set; }
+
+        public GardenImage GardenImage { get; set; }
+
+        public int? GardenImageId { get; set; }
     }
 }
