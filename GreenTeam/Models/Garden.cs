@@ -16,9 +16,6 @@ namespace GreenTeam.Models
         [StringLength (35)]
         public string Location { get; set; }
 
-        [Display(Name = "Garden Profile Picture")]
-        public byte[] GardenPhoto { get; set; }
-
         public ICollection<Patch> Patches { get; set; }
         public ICollection<GardenUser> GardenUsers { get; set; }
     }

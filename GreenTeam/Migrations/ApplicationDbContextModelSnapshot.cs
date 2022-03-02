@@ -98,9 +98,6 @@ namespace GreenTeam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<byte[]>("GardenPhoto")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("Location")
                         .HasMaxLength(35)
                         .HasColumnType("nvarchar(35)");
@@ -112,7 +109,7 @@ namespace GreenTeam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Garden");
+                    b.ToTable("Garden", (string)null);
                 });
 
             modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
@@ -131,7 +128,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("GardenUser");
+                    b.ToTable("GardenUser", (string)null);
                 });
 
             modelBuilder.Entity("GreenTeam.Models.Patch", b =>
@@ -158,7 +155,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("GardenId");
 
-                    b.ToTable("Patch");
+                    b.ToTable("Patch", (string)null);
                 });
 
             modelBuilder.Entity("GreenTeam.Models.PatchTask", b =>
@@ -191,7 +188,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("PatchId");
 
-                    b.ToTable("PatchTask");
+                    b.ToTable("PatchTask", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
