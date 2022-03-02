@@ -64,7 +64,7 @@ namespace GreenTeam.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Location")] Garden garden)
+        public async Task<IActionResult> Create([Bind("Id,Name,Location,GardenPhoto")] Garden garden)
         {
             if (ModelState.IsValid)
             {
