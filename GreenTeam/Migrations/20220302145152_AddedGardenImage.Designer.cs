@@ -4,6 +4,7 @@ using GreenTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220302145152_AddedGardenImage")]
+    partial class AddedGardenImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -388,7 +390,7 @@ namespace GreenTeam.Migrations
             modelBuilder.Entity("GreenTeam.Models.PatchTask", b =>
                 {
                     b.HasOne("GreenTeam.Models.Patch", "Patch")
-                        .WithMany("PatchTasks")
+                        .WithMany()
                         .HasForeignKey("PatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -452,11 +454,6 @@ namespace GreenTeam.Migrations
                     b.Navigation("GardenUsers");
 
                     b.Navigation("Patches");
-                });
-
-            modelBuilder.Entity("GreenTeam.Models.Patch", b =>
-                {
-                    b.Navigation("PatchTasks");
                 });
 #pragma warning restore 612, 618
         }
