@@ -20,7 +20,7 @@ namespace GreenTeam.Controllers
         }
 
         //Get: PatchTasks/Create
-        public IActionResult Create(int PatchId)
+        public IActionResult Create()
         {
             return View();
         }
@@ -30,14 +30,14 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id, Patch, PatchId, TaskName, TaskDescription")]PatchTask patchTask)
         {
-            if (ModelState.IsValid)
+        
+            if (!ModelState.IsValid)
             {
                 PatchTask returnedPatchTask = await patchTaskService.AddPatchTask(patchTask);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Patches", new { id = patchTask.PatchId });
             }
             return View(patchTask);
         }
-
         //GET: PatchTasks/Edit/6
         public async Task<IActionResult> Edit(int id)
         {
@@ -59,8 +59,7 @@ namespace GreenTeam.Controllers
             if (ModelState.IsValid)
             {
                 PatchTask returnedPatchTask = await patchTaskService.EditPatchTask(patchTask);
-
-                return RedirectToAction("Details", "PatchTasks", new { id = patchTask.Id });
+                return RedirectToAction("Details", "Patches", new { id = patchTask.PatchId });
             }
             return View(patchTask);
         }
@@ -83,7 +82,7 @@ namespace GreenTeam.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             PatchTask patchTaskToDelete = await patchTaskService.DeletePatchTask(id);
-            return RedirectToAction("Details", "PatchTasks", new { id = patchTaskToDelete.Id });
+            return RedirectToAction("Details", "Patches", new { id = patchTaskToDelete.PatchId });
         }
     }
 }

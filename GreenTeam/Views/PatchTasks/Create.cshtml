@@ -15,12 +15,12 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="PatchId" value=@Url.ActionContext.RouteData.Values["id"] />
              <div class="form-group">
-                <label asp-for="TaskName" class="control-label">Task Name:</label>
+                <label asp-for="TaskName" class="control-label">Task:</label>
                 <input asp-for="TaskName" class="form-control" />
                 <span asp-validation-for="TaskName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TaskDescription" class="control-label">Crop Name:</label>
+                <label asp-for="TaskDescription" class="control-label">Description:</label>
                 <input asp-for="TaskDescription" class="form-control" />
                 <span asp-validation-for="TaskDescription" class="text-danger"></span>
             </div>
