@@ -59,7 +59,8 @@ namespace GreenTeam.Services
                 Id = patchModel.Id,
                 PatchName = patchModel.PatchName,
                 Crop = patchModel.Crop,
-                PatchTasks = patchTaskVMs
+                PatchTasks = patchTaskVMs,
+                GardenId = patchModel.GardenId
             };
 
 

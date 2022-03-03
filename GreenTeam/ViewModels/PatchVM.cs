@@ -6,5 +6,7 @@
         public string PatchName { get; set; }
         public string Crop { get; set; }
         public List<PatchTaskVM> PatchTasks { get; set; }
+        public int GardenId { get; set; }
+
     }
 }
