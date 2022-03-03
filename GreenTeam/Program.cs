@@ -25,7 +25,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IGardenService, GardenService>();
 builder.Services.AddScoped<IPatchService, PatchService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserService, UserService >();
+builder.Services.AddScoped<IPatchTaskService, PatchTaskService > ();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<Mapper>();
 builder.Services.AddScoped<ImageConverter>();

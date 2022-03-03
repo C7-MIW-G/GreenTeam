@@ -39,8 +39,6 @@ namespace GreenTeam.Controllers
             return View(patchView);
         }
 
-
-
         //Get: Patches/Create
         public IActionResult Create()
         {            
