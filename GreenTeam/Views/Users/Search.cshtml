@@ -1,0 +1,20 @@
+﻿@model GreenTeam.ViewModels.SearchUserVM
+
+@{
+    ViewData["Title"] = "Add Members";
+}
+
+<h1>Add Users</h1>
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="GardenId" value=@Url.ActionContext.RouteData.Values["id"]/>
+            <div class="form-floating">
+                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email" class="form-label"></label>
+            </div>       
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-action">Search</button>
+        </form>
+    </div>
+</div>

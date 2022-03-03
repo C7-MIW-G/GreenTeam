@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220302145152_AddedGardenImage")]
-    partial class AddedGardenImage
+    [Migration("20220303083333_MergeGardenImageAndPatchTaskModel")]
+    partial class MergeGardenImageAndPatchTaskModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -390,7 +390,7 @@ namespace GreenTeam.Migrations
             modelBuilder.Entity("GreenTeam.Models.PatchTask", b =>
                 {
                     b.HasOne("GreenTeam.Models.Patch", "Patch")
-                        .WithMany()
+                        .WithMany("PatchTasks")
                         .HasForeignKey("PatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -454,6 +454,11 @@ namespace GreenTeam.Migrations
                     b.Navigation("GardenUsers");
 
                     b.Navigation("Patches");
+                });
+
+            modelBuilder.Entity("GreenTeam.Models.Patch", b =>
+                {
+                    b.Navigation("PatchTasks");
                 });
 #pragma warning restore 612, 618
         }

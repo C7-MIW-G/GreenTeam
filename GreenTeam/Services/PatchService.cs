@@ -2,16 +2,20 @@
 using GreenTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using GreenTeam.Implementations;
+using GreenTeam.ViewModels;
 
 namespace GreenTeam.Services
 {
     public class PatchService : IPatchService
     {
-        public ApplicationDbContext context;
+        readonly ApplicationDbContext context;
+        private Mapper mapper;
 
-        public PatchService(ApplicationDbContext context)
+        public PatchService(ApplicationDbContext context, Mapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
+
         }
 
         public async Task<Patch> AddPatch(Patch patch)
@@ -38,7 +42,12 @@ namespace GreenTeam.Services
 
         public async Task<Patch> FindById(int id)
         {
-            Patch patch = await context.Patch.FindAsync(id);
+            var query = context.Patch
+                .Where(a => a.Id == id)
+                .Include(b => b.PatchTasks);
+
+            Patch patch = await query.FirstOrDefaultAsync();
+
             return patch;
         }
 
@@ -56,5 +65,33 @@ namespace GreenTeam.Services
             await context.SaveChangesAsync();
             return patch;
         }
-    }  
+
+        public async Task<PatchVM> GetVMById(int id)
+        {
+            Patch patch = await FindById(id);
+            PatchVM patchVM = mapper.ToVM(patch);
+
+            return patchVM;
+        }
+
+        public async Task<PatchVM> GetDetailsVM(int id)
+        {
+            PatchVM patchVM = await GetVMById(id);
+
+            return patchVM;
+        }
+
+        public async Task<List<PatchVM>> GetAllPatchVMs()
+        {
+            List<Patch> patches = await context.Patch.ToListAsync();
+            List<PatchVM> patchVMs = new List<PatchVM>();
+
+            foreach (Patch patch in patches)
+            {
+                patchVMs.Add(mapper.ToVM(patch));
+            }
+
+            return patchVMs;
+        }
+    }
 }

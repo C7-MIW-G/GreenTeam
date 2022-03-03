@@ -1,19 +1,20 @@
 ﻿using GreenTeam.Data;
 using GreenTeam.Implementations;
 using GreenTeam.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using GreenTeam.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreenTeam.Services
 {
     public class UserService : IUserService
     {
-        public ApplicationDbContext context;
+        private readonly ApplicationDbContext context;
+        private readonly Mapper mapper;
 
-        public UserService(ApplicationDbContext context)
+        public UserService(ApplicationDbContext context, Mapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public async Task<List<GardenUser>> FindByGardenId(int id)
@@ -29,7 +30,7 @@ namespace GreenTeam.Services
                 }
             }
             return memberList;
-        }        
+        }
         public async Task<AppUser> StoreFullName(AppUser user, string name)
         {
             user.FullName = name;
@@ -59,14 +60,13 @@ namespace GreenTeam.Services
                 IsGardenManager = true
             };
             context.GardenUser.Add(gardenUser);
-            
-            await context.SaveChangesAsync();
 
+            await context.SaveChangesAsync();
 
             return gardenUser;
         }
 
-        public async Task<bool> IsManager(string userId, int gardenId) 
+        public async Task<bool> IsManager(string userId, int gardenId)
         {
             var query = context.GardenUser
                 .Where(gu => gu.UserId == userId && gu.GardenId == gardenId);
@@ -79,5 +79,57 @@ namespace GreenTeam.Services
             }
             return false;
         }
-    }    
+
+        public async Task<AppUserVM> GetAppUserVMByEmail(string email)
+        {
+            AppUserVM foundUser = null;
+
+            var query = context.Users
+                .Where(u => u.Email == email);
+
+            AppUser user = await query.FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                foundUser = mapper.ToVM(user);
+
+            }
+            return foundUser;
+        }
+
+        public async Task<GardenUser> AssignMemberToGarden(AppUserVM user, int gardenId)
+        {
+            string userId = await GetUserIdByEmail(user.UserEmail);
+
+            GardenUser gardenUser = new GardenUser()
+            {
+                UserId = userId,
+                GardenId = gardenId,
+                IsGardenManager = false
+            };
+
+            if (context.GardenUser
+                .Where(u => u.UserId == userId && u.GardenId == gardenId)
+                .Count() > 0)
+            {
+                return null;
+            }
+
+            context.GardenUser.Add(gardenUser);
+            await context.SaveChangesAsync();
+
+            return gardenUser;
+        }
+
+        public async Task<string> GetUserIdByEmail(string email)
+        {
+            var query = context.AppUser.
+                Where(x => x.Email == email);
+
+            AppUser appUser= await query.FirstOrDefaultAsync();
+            string userId = appUser.Id;
+
+            return userId;
+        }  
+    }
 }

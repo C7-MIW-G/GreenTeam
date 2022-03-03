@@ -14,5 +14,6 @@ namespace GreenTeam.Models
             ErrorMessage = "Please provide a patchname with the maximum length of 20 characters using only letters, digits" +
             " and the special characters single quote( ' ) and dash(-).")]
         public string PatchName { get; set; }
+        public ICollection<PatchTask> PatchTasks { get; set; }
     }
 }

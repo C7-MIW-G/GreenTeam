@@ -27,7 +27,6 @@ namespace GreenTeam.Services
                 {
                     appUserVMs.Add(ToVM(gardenUsers[userIndex].User));
                     appUserVMs[userIndex].IsGardenManager = gardenUsers[userIndex].IsGardenManager;
-
                 }
             }
                        
@@ -45,13 +44,24 @@ namespace GreenTeam.Services
 
         public PatchVM ToVM(Patch patchModel)
         {
+            List<PatchTaskVM> patchTaskVMs = new List<PatchTaskVM>();
+
+            if (patchModel.PatchTasks != null)
+            {
+                foreach (PatchTask patchTask in patchModel.PatchTasks)
+                {
+                    patchTaskVMs.Add(ToVM(patchTask));
+                }
+            }
 
             PatchVM vm = new PatchVM()
             {
                 Id = patchModel.Id,
                 PatchName = patchModel.PatchName,
-                Crop = patchModel.Crop
+                Crop = patchModel.Crop,
+                PatchTasks = patchTaskVMs
             };
+
 
             return vm;
         }
@@ -67,6 +77,19 @@ namespace GreenTeam.Services
         
             };
 
+            return vm;
+        }
+       
+        public PatchTaskVM ToVM(PatchTask patchTaskModel)
+        {
+            PatchTaskVM vm = new PatchTaskVM()
+            {
+                Id = patchTaskModel.Id,
+                PatchId = patchTaskModel.PatchId,
+                TaskName = patchTaskModel.TaskName, 
+                TaskDescription = patchTaskModel.TaskDescription
+            };
+            
             return vm;
         }
     }

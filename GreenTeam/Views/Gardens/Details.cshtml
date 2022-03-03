@@ -1,4 +1,4 @@
-﻿@model GreenTeam.ViewModels.GardenOverviewVM
+﻿@model GreenTeam.ViewModels.GardenDetailsVM
 
 @{
     ViewData["Title"] = "Details";
@@ -29,12 +29,12 @@
     {
     <tbody>
         <tr>
-             <td><a asp-controller="Patches" asp-action="Edit" asp-route-id="@item.Id">
+             <td><a asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
                 @Html.DisplayFor(modelItem => item.PatchName)
                 </a>
             </td>
             <td>
-               <a asp-controller="Patches" asp-action="Edit" asp-route-id="@item.Id">
+               <a asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
                 @Html.DisplayFor(modelItem => item.Crop)
                 </a>
             </td>
@@ -50,7 +50,6 @@
       @foreach(var item in Model.GardenVM.Users)
     {
     <tbody>
-    
         <tr>
              <td>
                 @Html.DisplayFor(modelItem => item.UserName)
@@ -64,9 +63,12 @@
                     {
                         <p>Member</p>
                     }
-                </td>
-       </tr>
-           
+             </td>
+       </tr>  
     </tbody>
     }
     </table>
+
+    <p>
+       <a class="btn btn-action" asp-controller="Users" asp-action="Search" asp-route-id="@Model?.GardenVM.Id">Add Member</a>
+    </p>

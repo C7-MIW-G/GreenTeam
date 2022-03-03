@@ -388,7 +388,7 @@ namespace GreenTeam.Migrations
             modelBuilder.Entity("GreenTeam.Models.PatchTask", b =>
                 {
                     b.HasOne("GreenTeam.Models.Patch", "Patch")
-                        .WithMany()
+                        .WithMany("PatchTasks")
                         .HasForeignKey("PatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -452,6 +452,11 @@ namespace GreenTeam.Migrations
                     b.Navigation("GardenUsers");
 
                     b.Navigation("Patches");
+                });
+
+            modelBuilder.Entity("GreenTeam.Models.Patch", b =>
+                {
+                    b.Navigation("PatchTasks");
                 });
 #pragma warning restore 612, 618
         }

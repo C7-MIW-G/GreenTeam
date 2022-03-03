@@ -1,4 +1,5 @@
 ﻿using GreenTeam.Models;
+using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace GreenTeam.Implementations
@@ -10,5 +11,8 @@ namespace GreenTeam.Implementations
         Task<string> GetFullName(AppUser user);
         Task<GardenUser> AssignManager(string userId, int gardenId);
         Task<bool> IsManager(string userId, int gardenId);
+        Task<AppUserVM> GetAppUserVMByEmail(string email);
+        Task<GardenUser> AssignMemberToGarden(AppUserVM user, int gardenId);
+        Task<string> GetUserIdByEmail(string email);
     }            
 }
