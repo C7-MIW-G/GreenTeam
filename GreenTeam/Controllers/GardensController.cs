@@ -41,7 +41,7 @@ namespace GreenTeam.Controllers
             userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
 
-            GardenOverviewVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
+            GardenDetailsVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
 
             if (gardenOverviewVM == null)
             {
@@ -64,7 +64,7 @@ namespace GreenTeam.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Location")] Garden garden)
+        public async Task<IActionResult> Create([Bind("Id,Name,Location,GardenPhoto")] Garden garden)
         {
             if (ModelState.IsValid)
             {

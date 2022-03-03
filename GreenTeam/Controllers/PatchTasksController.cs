@@ -1,19 +1,17 @@
 ﻿using GreenTeam.Implementations;
 using GreenTeam.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace GreenTeam.Controllers
 {
     public class PatchTasksController : Controller
     {
         private readonly IPatchTaskService patchTaskService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PatchTasksController(IPatchTaskService PatchTaskService, IHttpContextAccessor httpContextAccessor)
+
+        public PatchTasksController(IPatchTaskService PatchTaskService)
         {
             this.patchTaskService = PatchTaskService;
-            this._httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Index()

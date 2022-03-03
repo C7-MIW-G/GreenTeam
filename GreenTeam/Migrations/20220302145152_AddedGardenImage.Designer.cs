@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220301103355_AddedTaskPatchForeignKeys")]
-    partial class AddedTaskPatchForeignKeys
+    [Migration("20220302145152_AddedGardenImage")]
+    partial class AddedGardenImage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,6 +100,9 @@ namespace GreenTeam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("GardenImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location")
                         .HasMaxLength(35)
                         .HasColumnType("nvarchar(35)");
@@ -111,7 +114,36 @@ namespace GreenTeam.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GardenImageId");
+
                     b.ToTable("Garden");
+                });
+
+            modelBuilder.Entity("GreenTeam.Models.GardenImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<byte[]>("Content")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileType")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GardenImage");
                 });
 
             modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
@@ -168,25 +200,17 @@ namespace GreenTeam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDone")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("PatchId")
+                    b.Property<int>("PatchId")
                         .HasColumnType("int");
 
                     b.Property<string>("TaskDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaskName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("PatchId");
 
@@ -326,6 +350,15 @@ namespace GreenTeam.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GreenTeam.Models.Garden", b =>
+                {
+                    b.HasOne("GreenTeam.Models.GardenImage", "GardenImage")
+                        .WithMany()
+                        .HasForeignKey("GardenImageId");
+
+                    b.Navigation("GardenImage");
+                });
+
             modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
                 {
                     b.HasOne("GreenTeam.Models.Garden", "Garden")
@@ -356,15 +389,11 @@ namespace GreenTeam.Migrations
 
             modelBuilder.Entity("GreenTeam.Models.PatchTask", b =>
                 {
-                    b.HasOne("GreenTeam.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("GreenTeam.Models.Patch", "Patch")
                         .WithMany()
-                        .HasForeignKey("PatchId");
-
-                    b.Navigation("AppUser");
+                        .HasForeignKey("PatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Patch");
                 });

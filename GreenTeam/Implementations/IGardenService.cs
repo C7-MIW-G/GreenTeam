@@ -12,7 +12,7 @@ namespace GreenTeam.Implementations
         Task<Garden> DeleteGarden(int id);
 
         Task<GardenVM> GetVMById(int id);
-        Task<GardenOverviewVM> GetOverviewVM(int id, string userId);
+        Task<GardenDetailsVM> GetOverviewVM(int id, string userId);
         Task<List<GardenVM>> GetAllGardenVMs();
     }
 }

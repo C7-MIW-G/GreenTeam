@@ -4,6 +4,7 @@ using GreenTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220302152005_AddedPatchTaskViewModel")]
+    partial class AddedPatchTaskViewModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,9 +100,6 @@ namespace GreenTeam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("GardenImageId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Location")
                         .HasMaxLength(35)
                         .HasColumnType("nvarchar(35)");
@@ -112,36 +111,7 @@ namespace GreenTeam.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GardenImageId");
-
                     b.ToTable("Garden");
-                });
-
-            modelBuilder.Entity("GreenTeam.Models.GardenImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<byte[]>("Content")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FileType")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GardenImage");
                 });
 
             modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
@@ -346,15 +316,6 @@ namespace GreenTeam.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("GreenTeam.Models.Garden", b =>
-                {
-                    b.HasOne("GreenTeam.Models.GardenImage", "GardenImage")
-                        .WithMany()
-                        .HasForeignKey("GardenImageId");
-
-                    b.Navigation("GardenImage");
                 });
 
             modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
