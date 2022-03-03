@@ -6,6 +6,9 @@ using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using GreenTeam.Implementations;
 using System.Security.Claims;
+using System;
+using System.IO;
+using GreenTeam.Data;
 
 namespace GreenTeam.Controllers
 {
@@ -15,13 +18,14 @@ namespace GreenTeam.Controllers
         private readonly IGardenService gardenService;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IUserService userService;
-
-
-        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor, IUserService userService)
+        private readonly ApplicationDbContext context;
+        
+        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor, IUserService userService, ApplicationDbContext context)
         {
             this.gardenService = gardenService;
             this.httpContextAccessor = httpContextAccessor;
             this.userService = userService;
+            this.context = context;
         }
 
         // GET: Gardens
@@ -64,7 +68,7 @@ namespace GreenTeam.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Location,GardenPhoto")] Garden garden)
+        public async Task<IActionResult> Create([Bind("Id,Name,Location")] Garden garden, IFormFile files)
         {
             if (ModelState.IsValid)
             {
@@ -73,8 +77,35 @@ namespace GreenTeam.Controllers
                 string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
                 await userService.AssignManager(userId, garden.Id);
-                
-               
+
+                if (files != null)
+                {
+                    if (files.Length > 0)
+                    {
+                        var fileName = Path.GetFileName(files.FileName);
+
+                        var fileExtension = Path.GetExtension(fileName);
+
+                        var newFileName = string.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+                        var objFiles = new GardenImage()
+                        {
+                            Id = 0,
+                            Name = newFileName,
+                            FileType = fileExtension,
+                            CreatedOn = DateTime.Now
+                        };
+
+                        using (var target = new MemoryStream())
+                        {
+                            files.CopyTo(target);
+                            objFiles.Content = target.ToArray();
+                        }
+
+                        context.GardenImage.Add(objFiles);
+                        context.SaveChanges();
+                    }
+                }
 
                 return RedirectToAction(nameof(Index));
             }

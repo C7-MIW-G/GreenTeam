@@ -8,10 +8,10 @@ namespace GreenTeam.Models
         [Required]
         public int Id { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string Name { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string FileType { get; set; }
 
         public byte[] Content { get; set; }
