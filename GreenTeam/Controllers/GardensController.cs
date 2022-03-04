@@ -96,12 +96,13 @@ namespace GreenTeam.Controllers
 
                     int imageId = await imageService.AddImage(gardenImage);
                     garden.GardenImageId = imageId;
-                    await gardenService.AddGarden(garden);
 
-                    string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-                    await userService.AssignManager(userId, garden.Id);
                 }
+                await gardenService.AddGarden(garden);
+
+                string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                await userService.AssignManager(userId, garden.Id);
 
                 return RedirectToAction(nameof(Index));
             }
