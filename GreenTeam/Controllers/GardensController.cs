@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System;
 using System.IO;
 using GreenTeam.Data;
+using GreenTeam.Utils;
 
 namespace GreenTeam.Controllers
 {
@@ -18,14 +19,17 @@ namespace GreenTeam.Controllers
         private readonly IGardenService gardenService;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IUserService userService;
-        private readonly ApplicationDbContext context;
-        
-        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor, IUserService userService, ApplicationDbContext context)
+        private readonly ImageConverter imageConverter;
+        private readonly IImageService imageService;
+
+        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor,
+            IUserService userService, ImageConverter imageConverter, IImageService imageService)
         {
             this.gardenService = gardenService;
             this.httpContextAccessor = httpContextAccessor;
             this.userService = userService;
-            this.context = context;
+            this.imageConverter = imageConverter;
+            this.imageService = imageService;
         }
 
         // GET: Gardens
@@ -72,39 +76,31 @@ namespace GreenTeam.Controllers
         {
             if (ModelState.IsValid)
             {
-                Garden returnedGarden = await gardenService.AddGarden(garden);
-               
-                string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-                await userService.AssignManager(userId, garden.Id);
-
-                if (files != null)
+                if (files != null && files.Length > 0)
                 {
-                    if (files.Length > 0)
+                    string fileName = Path.GetFileName(files.FileName);
+
+                    string fileExtension = Path.GetExtension(fileName);
+
+                    string newFileName = string.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+                    byte[] bytes = imageConverter.ImageToByteArray(files);
+
+                    GardenImage gardenImage = new GardenImage()
                     {
-                        var fileName = Path.GetFileName(files.FileName);
+                        Name = newFileName,
+                        FileType = fileExtension,
+                        Content = bytes,
+                        CreatedOn = DateTime.Now
+                    };
 
-                        var fileExtension = Path.GetExtension(fileName);
+                    int imageId = await imageService.AddImage(gardenImage);
+                    garden.GardenImageId = imageId;
+                    await gardenService.AddGarden(garden);
 
-                        var newFileName = string.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+                    string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                        var objFiles = new GardenImage()
-                        {
-                            Id = 0,
-                            Name = newFileName,
-                            FileType = fileExtension,
-                            CreatedOn = DateTime.Now
-                        };
-
-                        using (var target = new MemoryStream())
-                        {
-                            files.CopyTo(target);
-                            objFiles.Content = target.ToArray();
-                        }
-
-                        context.GardenImage.Add(objFiles);
-                        context.SaveChanges();
-                    }
+                    await userService.AssignManager(userId, garden.Id);
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -185,7 +181,6 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
             await gardenService.DeleteGarden(id);
             return RedirectToAction(nameof(Index));
         }
