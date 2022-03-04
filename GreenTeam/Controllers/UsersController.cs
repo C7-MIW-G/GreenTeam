@@ -3,6 +3,7 @@ using GreenTeam.Models;
 using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenTeam.Controllers
 {
@@ -32,19 +33,30 @@ namespace GreenTeam.Controllers
             if (ModelState.IsValid)
             {
                 AppUserVM foundUser = await userService.GetAppUserVMByEmail(search.Email);
-
-                if (foundUser != null)
+                if (foundUser == null)
                 {
-                    await userService.AssignMemberToGarden(foundUser, search.GardenId);                                    
+                    search.ConfirmationMessage = "This user does not exist";
+                    return View(search);
                 }
 
-                return RedirectToAction("Details", "Gardens", new { id = search.GardenId });
+                try
+                {
+                    await userService.AssignMemberToGarden(foundUser, search.GardenId);
+                }
+                catch (DbUpdateException e)
+                {
+                    if (e.InnerException.Message.Contains("Violation of PRIMARY KEY"))
+                    {
+                        search.ConfirmationMessage = "This user is already a member of the garden";
+                        return View(search);
+                    }
+                }
 
+
+                return RedirectToAction("Details", "Gardens", new { id = search.GardenId });
             }
 
-
             return View();
-
         }
     }
 }

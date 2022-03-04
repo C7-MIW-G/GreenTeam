@@ -7,6 +7,6 @@ namespace GreenTeam.ViewModels
         [Display(Name = "Enter email"), Required]
         public string Email { get; set; }
         public int GardenId { get; set; }
-
+        public string ConfirmationMessage = "";
     }
 }

@@ -2,6 +2,7 @@
 using GreenTeam.Implementations;
 using GreenTeam.Models;
 using GreenTeam.ViewModels;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreenTeam.Services
@@ -97,10 +98,12 @@ namespace GreenTeam.Services
             return foundUser;
         }
 
-        public async Task<GardenUser> AssignMemberToGarden(AppUserVM user, int gardenId)
+        public async Task AssignMemberToGarden(AppUserVM user, int gardenId)
         {
-            string userId = await GetUserIdByEmail(user.UserEmail);
+            string userId = await GetUserIdByEmail(user.UserEmail); //wat geeft ie terug
 
+            
+            // throw new KeyNotFoundException("not found");
             GardenUser gardenUser = new GardenUser()
             {
                 UserId = userId,
@@ -108,17 +111,8 @@ namespace GreenTeam.Services
                 IsGardenManager = false
             };
 
-            if (context.GardenUser
-                .Where(u => u.UserId == userId && u.GardenId == gardenId)
-                .Count() > 0)
-            {
-                return null;
-            }
-
             context.GardenUser.Add(gardenUser);
             await context.SaveChangesAsync();
-
-            return gardenUser;
         }
 
         public async Task<string> GetUserIdByEmail(string email)
@@ -126,10 +120,10 @@ namespace GreenTeam.Services
             var query = context.AppUser.
                 Where(x => x.Email == email);
 
-            AppUser appUser= await query.FirstOrDefaultAsync();
+            AppUser appUser = await query.FirstOrDefaultAsync();
             string userId = appUser.Id;
 
             return userId;
-        }  
+        }
     }
 }
