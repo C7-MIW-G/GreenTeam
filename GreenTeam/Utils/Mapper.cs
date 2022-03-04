@@ -29,7 +29,7 @@ namespace GreenTeam.Services
                     appUserVMs[userIndex].IsGardenManager = gardenUsers[userIndex].IsGardenManager;
                 }
             }
-                       
+
             GardenVM vm = new GardenVM()
             {
                 Id = gardenModel.Id,
@@ -37,7 +37,8 @@ namespace GreenTeam.Services
                 Location = gardenModel.Location,
                 Patches = patchVMs,
                 Users = appUserVMs,
-                GardenImageId = gardenModel.GardenImageId
+                GardenImageId = gardenModel.GardenImageId,
+                GardenImage = gardenModel.GardenImage,
             };
 
             return vm;

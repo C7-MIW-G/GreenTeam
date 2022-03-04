@@ -48,8 +48,10 @@ namespace GreenTeam.Services
                 .Where(garden => garden.Id == id)
                 .Include(garden => garden.Patches)
                 .Include(au => au.GardenUsers)
-                .ThenInclude(th => th.User);
-            
+                .ThenInclude(th => th.User)
+                .Include(gi => gi.GardenImage)
+                .Where(gi => gi.Id == id);
+
             Garden garden = await query.FirstOrDefaultAsync();
 
 
