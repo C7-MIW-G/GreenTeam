@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Poppins:wght@400;500;600&display=swap');
 
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 /*Navbar background color*/
@@ -43,9 +43,9 @@ a {
     color: #ffffff;
 }
 
-a:hover{
-    color: #ffffff6e !important;
-}
+    a:hover {
+        color: #ffffff6e !important;
+    }
 
 h1 {
     padding-top: 0.3rem !important;
@@ -67,7 +67,7 @@ main {
     padding: 20px 0px 20px 0px;
     border-radius: 5px;
 }
-   
+
 /*header of the main text*/
 /*TODO, differentiate homepage main header from table headers (h1)*/
 .display-4 {
@@ -83,7 +83,7 @@ main {
 th {
     color: #D9A404;
     font-size: 2rem;
-    font-style:oblique
+    font-style: oblique
 }
 
 tr {
@@ -137,10 +137,14 @@ tr {
     text-decoration: none;
     color: #ffffff;
 }
-
 .btn-link:hover {
-     color: #ffffff6e !important;
+    color: #ffffff6e !important;
 }
+
+.bt:hover {
+    color: #ffffff6e !important;
+}
+
 
 .form-label-custom {
     color: #fff;
@@ -161,4 +165,3 @@ tr {
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
 }
-

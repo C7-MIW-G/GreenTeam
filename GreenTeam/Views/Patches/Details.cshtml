@@ -7,7 +7,7 @@
 
 <p>
     <a class="btn btn-action" asp-controller="PatchTasks" asp-action="Create" asp-route-id="@Model?.Id">Add Task</a>
-    <a class="btn btn-action"asp-controller="Gardens" asp-action="Details" asp-route-id="@Model?.GardenId">Back to List</a>
+    <a class="btn btn-action"asp-controller="Gardens" asp-action="Details" asp-route-id="@Model?.GardenId">Back to List</a> 
 </p>
 
 <table class="table">
@@ -35,3 +35,7 @@
     </tbody>
     }
 </table>
+<form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete current Patch" class="btn btn-danger" /> 
+    </form>
