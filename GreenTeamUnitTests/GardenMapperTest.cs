@@ -45,6 +45,8 @@ namespace GreenTeamUnitTests
             List<GardenUser> gardenUserList = new List<GardenUser>();
             gardenUserList.Add(user);
             garden.GardenUsers = gardenUserList;
+
+            return garden;
         }
     }
 }
