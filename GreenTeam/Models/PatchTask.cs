@@ -8,7 +8,9 @@ namespace GreenTeam.Models
         public int Id { get; set; }
         public int PatchId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a taskname."),
+            StringLength(20), RegularExpression(@"[a-zA-Z0-9 \\äëïöü'-]{1,20}",
+            ErrorMessage = "Allowed characters are letters, digits, dash(-) and apostrophe(').")]
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
     }
