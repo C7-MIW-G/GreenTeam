@@ -13,7 +13,12 @@
             <div class="form-floating">
                 <input asp-for="Email" class="form-control" />
                 <label asp-for="Email" class="form-label"></label>
-            </div>       
+            </div>
+            <div>
+                <p>
+                 @Html.DisplayFor(model => model.ConfirmationMessage )
+                </p>                
+            </div>
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-action">Search</button>
         </form>
     </div>
