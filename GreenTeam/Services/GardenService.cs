@@ -17,14 +17,12 @@ namespace GreenTeam.Services
             this.context = context;
             this.userService = userService;
             this.mapper = mapper;
-
         }
 
         public async Task<List<Garden>> FindAll()
         {
             List<Garden> gardens = await context.Garden.ToListAsync();
-
-            
+         
             return gardens;
         }
 
@@ -49,11 +47,9 @@ namespace GreenTeam.Services
                 .Include(garden => garden.Patches)
                 .Include(au => au.GardenUsers)
                 .ThenInclude(th => th.User)
-                .Include(gi => gi.GardenImage)
-                .Where(gi => gi.Id == id);
+                .Include(gi => gi.GardenImage);
 
             Garden garden = await query.FirstOrDefaultAsync();
-
 
             return garden;
         }
@@ -80,7 +76,6 @@ namespace GreenTeam.Services
             await context.SaveChangesAsync();
 
             return garden;
-
         }
 
         public async Task<GardenVM> GetVMById(int id)
