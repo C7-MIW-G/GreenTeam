@@ -17,25 +17,24 @@ namespace GreenTeam.Controllers
     {
 
         private readonly IGardenService gardenService;
-        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IUserService userService;
         private readonly ImageConverter imageConverter;
         private readonly IImageService imageService;
 
-        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor,
+        public GardensController(IGardenService gardenService,
             IUserService userService, ImageConverter imageConverter, IImageService imageService)
         {
             this.gardenService = gardenService;
-            this.httpContextAccessor = httpContextAccessor;
             this.userService = userService;
             this.imageConverter = imageConverter;
             this.imageService = imageService;
         }
 
         // GET: Gardens
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            List<GardenVM> gardenVMs = await gardenService.GetAllGardenVMs();
+            List<GardenVM> gardenVMs = await gardenService.GetGardensByCurrentUser();
             return View(gardenVMs);
         }
 
@@ -44,9 +43,8 @@ namespace GreenTeam.Controllers
         public async Task<IActionResult> Details(int id)
         {
             GardenVM gardenView = await gardenService.GetVMById(id);
-            string userId = "";
 
-            userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string userId = userService.GetCurrentUserId();
 
 
             GardenDetailsVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
@@ -100,7 +98,7 @@ namespace GreenTeam.Controllers
                 }
                 await gardenService.AddGarden(garden);
 
-                string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                string userId = userService.GetCurrentUserId();
 
                 await userService.AssignManager(userId, garden.Id);
 

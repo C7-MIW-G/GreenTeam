@@ -71,6 +71,10 @@ namespace GreenTeam.Services
 
         public AppUserVM ToVM(AppUser appUser)
         {
+            if (appUser == null)
+            {
+                return new AppUserVM();
+            }
 
             AppUserVM vm = new AppUserVM()
             {

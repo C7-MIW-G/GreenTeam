@@ -4,6 +4,7 @@ using GreenTeam.Models;
 using GreenTeam.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace GreenTeam.Services
 {
@@ -11,11 +12,20 @@ namespace GreenTeam.Services
     {
         private readonly ApplicationDbContext context;
         private readonly Mapper mapper;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public UserService(ApplicationDbContext context, Mapper mapper)
+        public UserService(ApplicationDbContext context, Mapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             this.context = context;
             this.mapper = mapper;
+            this.httpContextAccessor = httpContextAccessor;
+        }
+
+        public string GetCurrentUserId()
+        {
+            string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            return userId;
         }
 
         public async Task<List<GardenUser>> FindByGardenId(int id)
