@@ -7,8 +7,9 @@
 <h1>Gardens</h1>
 
 <p>
-    <a class="btn btn-action"asp-action="Create">Create New Garden</a>
+    <a class="btn btn-action" asp-action="Create">Create New Garden</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,9 +20,10 @@
         </tr>
     </thead>
     <tbody>
+
 @foreach (var item in Model) {
         <tr>
-            <td><a asp-action="Details" asp-route-id="@item.Id">
+            <td><a class="table-content" asp-action="Details" asp-route-id="@item.Id">
                 @Html.DisplayFor(modelItem => item.Name)
                 </a>
             </td>

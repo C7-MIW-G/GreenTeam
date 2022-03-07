@@ -29,6 +29,10 @@ html {
     border-bottom: 2px solid #087040d4 !important;
 }
 
+.navbar-expand-sm .navbar-nav .nav-link {
+    padding-top: 0.9rem;
+}
+
 body {
     margin-bottom: 60px;
     background: url('../image/pexels-greta-hoffman-7728347.jpg') no-repeat center center fixed;
@@ -43,9 +47,13 @@ a {
     color: #ffffff;
 }
 
-    a:hover {
-        color: #ffffff6e !important;
-    }
+.table-content {
+    font-size: 1.3rem;
+}
+
+a:hover {
+    color: #ffffff6e !important;
+}
 
 h1 {
     padding-top: 0.3rem !important;
@@ -62,10 +70,22 @@ h4 {
 main {
     margin: 150px 0px 10px 0px;
     box-sizing: border-box;
-    padding: 10px !important;
+    padding: 1.5rem 6rem !important;
     background: linear-gradient(270deg, #087040d4, #038C4C);
     padding: 20px 0px 20px 0px;
-    border-radius: 5px;
+    border-radius: 1rem;
+}
+
+.pb-3 {
+    padding-bottom: 1.5rem !important;
+}
+
+/*Background of content*/
+.container {
+    min-width: 500px;
+    max-width: 960px;
+    width: max-content;
+    text-align: center;
 }
 
 /*header of the main text*/
@@ -73,17 +93,19 @@ main {
 .display-4 {
     font-size: calc(1.5rem + 3.7vw);
     font-weight: 800;
+    color: #D9A404;
 }
 
 .text-center p {
-    font-size: calc(1rem + 0.7vw);
+    font-size: calc(1rem + 0.5vw);
     font-weight: 400;
 }
 
+/*Tables*/
 th {
     color: #D9A404;
     font-size: 2rem;
-    font-style: oblique
+    padding: 0rem 4rem !important;
 }
 
 tr {
@@ -91,6 +113,11 @@ tr {
     color: #ffffff;
     border-style: hidden !important;
 }
+
+td {
+    font-size: 1.3rem;
+}
+
 
 /*Footer border*/
 .border-top {
@@ -121,7 +148,6 @@ tr {
     padding: 1.375rem 1.75rem;
 }
 
-
 /*Blue-ish button*/
 .btn-action {
     color: #fff;
@@ -130,6 +156,8 @@ tr {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
+    padding: 0.8rem;
+    margin: 2rem 0rem;
 }
 
 /*All related to Identity pages e.g. register / login */
@@ -137,9 +165,10 @@ tr {
     text-decoration: none;
     color: #ffffff;
 }
-.btn-link:hover {
-    color: #ffffff6e !important;
-}
+
+    .btn-link:hover {
+        color: #ffffff6e !important;
+    }
 
 .btn:hover {
     color: #ffffff6e !important;
@@ -165,14 +194,30 @@ tr {
     margin-bottom: 0.5rem;
 }
 
+/*Image and div*/
 img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 35%;
 }
 
-/* Div for an square image shape*/
-.square {
-    height: 300px;
-    width: 300px;
+
+.img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 350px;
+    width: 350px;
+    margin: auto;
+    border-radius: 35%;
+    border: 5px solid #D9B7B4;
+}
+
+/*Form Titles*/
+
+.control-label {
+    font-size: 1.5rem;
 }
