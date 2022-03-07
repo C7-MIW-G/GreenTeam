@@ -221,3 +221,7 @@ img {
 .control-label {
     font-size: 1.5rem;
 }
+
+.field-validation-error {
+    color: #fbd803 !important;
+}
