@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GreenTeam.Controllers
 {
-    public class PatchesController : Controller { 
+    public class PatchesController : Controller
+    {
 
         private readonly IPatchService patchService;
         private readonly IUserService userService;
-    
+
         public PatchesController(IPatchService PatchService, IUserService userService)
         {
             this.patchService = PatchService;
@@ -38,27 +39,26 @@ namespace GreenTeam.Controllers
         }
 
         //Get: Patches/Create
+        [Authorize]
         public IActionResult Create()
-        {            
-            return View();   
+        {
+            return View();
         }
 
         //POST: Patches/Create/[gardenid]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
+        [HttpPost, ValidateAntiForgeryToken, Authorize]
         public async Task<IActionResult> Create([Bind("Id, Crop, PatchName, GardenId")] Patch patch)
         {
             if (!ModelState.IsValid)
             {
-                string userId = userService.GetCurrentUserId();
                 int gardenId = patch.GardenId;
-                bool isCreateAllowed = await userService.IsManager(userId, gardenId);
+                bool isCreateAllowed = await userService.IsManager(gardenId);
 
-                if(isCreateAllowed){
+                if (isCreateAllowed)
+                {
                     await patchService.AddPatch(patch);
                     return RedirectToAction("Details", "Gardens", new { id = patch.GardenId });
-                } 
+                }
             }
             return Unauthorized();
         }
@@ -67,9 +67,17 @@ namespace GreenTeam.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            PatchVM patchVM = await patchService.GetVMById(id);
-            return View(patchVM);
-            
+            int gardenId = await patchService.GetGardenIdByPatchId(id);
+            bool isEditAllowed = await userService.IsManager(gardenId);
+
+            if (isEditAllowed)
+            {
+                PatchVM patchVM = await patchService.GetVMById(id);
+                return View(patchVM);
+            }
+
+            return Unauthorized();
+
         }
 
         //POST: Patches/Edit/6
@@ -78,6 +86,13 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id, Crop, PatchName, GardenId")] Patch patch)
         {
+            int gardenId = patch.GardenId;
+            bool isEditAllowed = await userService.IsManager(gardenId);
+            if (!isEditAllowed)
+            {
+                return Unauthorized();
+            }
+
             if (id != patch.Id)
             {
                 return NotFound();
@@ -97,6 +112,13 @@ namespace GreenTeam.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
+            int gardenId = await patchService.GetGardenIdByPatchId(id);
+            bool isEditAllowed = await userService.IsManager(gardenId);
+
+            if (!isEditAllowed)
+            {
+                return Unauthorized();
+            }
             PatchVM patchVM = await patchService.GetVMById(id);
 
             if (patchVM == null)
@@ -112,8 +134,16 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            int gardenId = await patchService.GetGardenIdByPatchId(id);
+            bool isEditAllowed = await userService.IsManager(gardenId);
+            if (!isEditAllowed)
+            {
+                return Unauthorized();
+            }
+
             Patch patchToDelete = await patchService.DeletePatch(id);
             return RedirectToAction("Details", "Gardens", new { id = patchToDelete.GardenId });
+
         }
     }
 }
