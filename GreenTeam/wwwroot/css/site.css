@@ -51,6 +51,10 @@ a {
     font-size: 1.3rem;
 }
 
+tr:hover {
+    color: #ffffff6e !important;
+}
+
 a:hover {
     color: #ffffff6e !important;
 }
@@ -140,7 +144,10 @@ td {
     color: #000;
     text-shadow: none;
 }
-/*Homepage red call to action*/
+
+/* Buttons */
+/*Index button call to action - Red */
+
 .btn-cta {
     color: #fff;
     background-color: #dc3545;
@@ -148,7 +155,8 @@ td {
     padding: 1.375rem 1.75rem;
 }
 
-/*Blue-ish button*/
+/* Button styling for actions - Blue */
+
 .btn-action {
     color: #fff;
     background-color: #87b2f1;
@@ -160,15 +168,27 @@ td {
     margin: 2rem 0rem;
 }
 
-/*All related to Identity pages e.g. register / login */
+.btn-primary {
+    color: #fff;
+    background-color: #87b2f1;
+    border-color: #87b2f1;
+}
+
+.btn btn-primary:hover {
+    color: #ffffff6e !important;
+}
+
+
+/*Buttons for Identity pages e.g. register / login */
+
 .btn-link {
     text-decoration: none;
     color: #ffffff;
 }
 
-    .btn-link:hover {
-        color: #ffffff6e !important;
-    }
+.btn-link:hover {
+     color: #ffffff6e !important;
+}
 
 .btn:hover {
     color: #ffffff6e !important;
@@ -227,4 +247,35 @@ img {
     color: #D8000C !important;
     background-color: #FFD2D2;
     padding: 4px;
+}
+
+/* Modal Styling */
+
+modal-fade {
+    margin: 50px 0px;
+}
+
+.modal-dialog {
+    width: 501px !important;
+    margin: 0 auto;
+}
+
+.modal-header {
+    background: #d9534f;
+    color: white;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.modal {
+    top: 17rem;
+    left: -0.5rem;
+}
+
+.modal-content {
+    border-radius: 1rem;
+}
+
+.modal-p {
+    color: #000;
 }
