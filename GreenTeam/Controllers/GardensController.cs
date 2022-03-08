@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using GreenTeam.Data;
 using GreenTeam.Utils;
+using GreenTeam.Services;
 
 namespace GreenTeam.Controllers
 {
@@ -17,25 +18,26 @@ namespace GreenTeam.Controllers
     {
 
         private readonly IGardenService gardenService;
-        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IUserService userService;
         private readonly ImageConverter imageConverter;
         private readonly IImageService imageService;
+        private Mapper mapper;
 
-        public GardensController(IGardenService gardenService, IHttpContextAccessor httpContextAccessor,
-            IUserService userService, ImageConverter imageConverter, IImageService imageService)
+        public GardensController(IGardenService gardenService,
+            IUserService userService, ImageConverter imageConverter, IImageService imageService, Mapper mapper)
         {
             this.gardenService = gardenService;
-            this.httpContextAccessor = httpContextAccessor;
             this.userService = userService;
             this.imageConverter = imageConverter;
             this.imageService = imageService;
+            this.mapper = mapper;
         }
 
         // GET: Gardens
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            List<GardenVM> gardenVMs = await gardenService.GetAllGardenVMs();
+            List<GardenVM> gardenVMs = await gardenService.GetGardensByCurrentUser();
             return View(gardenVMs);
         }
 
@@ -44,9 +46,8 @@ namespace GreenTeam.Controllers
         public async Task<IActionResult> Details(int id)
         {
             GardenVM gardenView = await gardenService.GetVMById(id);
-            string userId = "";
 
-            userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string userId = userService.GetCurrentUserId();
 
 
             GardenDetailsVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
@@ -67,8 +68,6 @@ namespace GreenTeam.Controllers
         }
 
         // POST: Gardens/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -100,14 +99,14 @@ namespace GreenTeam.Controllers
                 }
                 await gardenService.AddGarden(garden);
 
-                string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                string userId = userService.GetCurrentUserId();
 
                 await userService.AssignManager(userId, garden.Id);
 
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(garden);
+            return View();
         }
 
         // GET: Gardens/Edit/5
@@ -117,17 +116,15 @@ namespace GreenTeam.Controllers
             {
                 return NotFound();
             }
-            Garden returnedGarden = await gardenService.FindById((int)id);
-            if (returnedGarden == null)
+            GardenVM gardenVM = await gardenService.GetVMById((int)id);
+            if (gardenVM == null)
             {
                 return NotFound();
             }
-            return View(returnedGarden);
+            return View(gardenVM);
         }
 
         // POST: Gardens/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Location")] Garden garden)
@@ -156,10 +153,12 @@ namespace GreenTeam.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(garden);
+            GardenVM gardenVM = await gardenService.GetVMById(id);
+            return View(gardenVM);
         }
 
         // GET: Gardens/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -167,17 +166,18 @@ namespace GreenTeam.Controllers
                 return NotFound();
             }
 
-            Garden garden = await gardenService.FindById((int)id);
+            GardenVM gardenVM = await gardenService.GetVMById((int)id);
 
-            if (garden == null)
+            if (gardenVM == null)
             {
                 return NotFound();
             }
 
-            return View(garden);
+            return View(gardenVM);
         }
 
         // POST: Gardens/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

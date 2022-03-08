@@ -1,4 +1,4 @@
-﻿@model GreenTeam.Models.PatchTask
+﻿@model GreenTeam.ViewModels.PatchTaskVM
 
 @{
     ViewData["Title"] = "Create Task";
@@ -6,11 +6,10 @@
 
 <h1>Create</h1>
 
-<h4>Task</h4>
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="align-content-center">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />

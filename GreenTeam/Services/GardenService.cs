@@ -8,8 +8,8 @@ namespace GreenTeam.Services
 {
     public class GardenService : IGardenService
     {
-        private ApplicationDbContext context;
-        private Mapper mapper;
+        private readonly ApplicationDbContext context;
+        private readonly Mapper mapper;
         private readonly IUserService userService;
 
         public GardenService(ApplicationDbContext context, IUserService userService, Mapper mapper)
@@ -17,15 +17,36 @@ namespace GreenTeam.Services
             this.context = context;
             this.userService = userService;
             this.mapper = mapper;
-
         }
 
         public async Task<List<Garden>> FindAll()
         {
             List<Garden> gardens = await context.Garden.ToListAsync();
-
-            
+         
             return gardens;
+        }
+
+        public async Task<List<GardenVM>> GetGardensByCurrentUser()
+        {
+            List<GardenVM> gardenVms = new();
+
+            string userId = userService.GetCurrentUserId();
+
+            var query = context.GardenUser
+                .Where(x => x.UserId == userId)
+                .Include(y => y.Garden);
+
+            List<GardenUser> gardenUsers = await query.ToListAsync();
+
+            foreach (GardenUser gardenUser in gardenUsers)
+            {
+                GardenVM gardenVM = mapper.ToVM(gardenUser.Garden);
+                gardenVms.Add(gardenVM);
+            }
+
+            return gardenVms;
+
+
         }
 
         public async Task<List<GardenVM>> GetAllGardenVMs()
@@ -48,10 +69,10 @@ namespace GreenTeam.Services
                 .Where(garden => garden.Id == id)
                 .Include(garden => garden.Patches)
                 .Include(au => au.GardenUsers)
-                .ThenInclude(th => th.User);
-            
-            Garden garden = await query.FirstOrDefaultAsync();
+                .ThenInclude(th => th.User)
+                .Include(gi => gi.GardenImage);
 
+            Garden garden = await query.FirstOrDefaultAsync();
 
             return garden;
         }
@@ -78,7 +99,6 @@ namespace GreenTeam.Services
             await context.SaveChangesAsync();
 
             return garden;
-
         }
 
         public async Task<GardenVM> GetVMById(int id)

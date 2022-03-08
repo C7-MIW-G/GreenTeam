@@ -1,4 +1,6 @@
-﻿namespace GreenTeam.ViewModels
+﻿using GreenTeam.Models;
+
+namespace GreenTeam.ViewModels
 {
         public class GardenVM
     {
@@ -10,6 +12,6 @@
 
         public List<PatchVM> Patches { get; set; }
         public List<AppUserVM> Users { get; set; }
-       
+        public GardenImage GardenImage { get; set; }
     }
 }

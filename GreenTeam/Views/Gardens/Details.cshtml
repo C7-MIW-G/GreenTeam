@@ -4,74 +4,91 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.GardenVM.Name)</></h1> 
+<h1>@Html.DisplayFor(model => model.GardenVM.Name)</></h1>
 <h4>@Html.DisplayFor(model => model.GardenVM.Location)</></h4>
+
+@if (Model.GardenVM.GardenImage != null)
+{
+    <div class="img-wrapper">
+        <img src="data:image;base64,@Convert.ToBase64String(Model.GardenVM.GardenImage.Content)" />
+    </div>
+}
+
 
 
 <p>
-    @if(Model.IsGardenManager)
+    @if (Model.IsGardenManager)
     {
-         <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id">Add Patch</a>
-         <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">Edit Garden</a>
+        <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id">Add Patch</a>
+        <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">Edit Garden</a>
     }
-    <a class="btn btn-action"asp-action="Index">Back to List</a>
+    <a class="btn btn-action" asp-action="Index">Back to List</a>
 </p>
 
 <table class="table">
 
-     <thead>
+    <thead>
         <tr>
             <th>Patch Name:</th>
-            <th>Crop Name:</th>  
+            <th>Crop Name:</th>
         </tr>
     </thead>
-   @foreach(var item in Model.GardenVM.Patches)
+    @foreach (var item in Model.GardenVM.Patches)
     {
-    <tbody>
-        <tr>
-             <td><a asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                @Html.DisplayFor(modelItem => item.PatchName)
-                </a>
-            </td>
-            <td>
-               <a asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                @Html.DisplayFor(modelItem => item.Crop)
-                </a>
-            </td>
-       </tr>
-    </tbody>
+        <tbody>
+            <tr>
+                <td>
+                    <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.PatchName)
+                    </a>
+                </td>
+                <td>
+                    <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.Crop)
+                    </a>
+                </td>
+            </tr>
+        </tbody>
     }
+</table>
+
+<br />
+<br />
+ 
+<table class="table">
+
     <thead class="MemberTable">
         <tr>
             <th>Members:</th>
             <th>Function:</th>
         </tr>
     </thead>
-      @foreach(var item in Model.GardenVM.Users)
+
+    @foreach (var item in Model.GardenVM.Users)
     {
-    <tbody>
-        <tr>
-             <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-             <td>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
                     @if (item.IsGardenManager)
                     {
-                       <p>Manager</p>
+                        <p>Manager</p>
                     }
                     @if (!item.IsGardenManager)
                     {
                         <p>Member</p>
                     }
-             </td>
-       </tr>  
-    </tbody>
+                </td>
+            </tr>
+        </tbody>
     }
-    </table>
+</table>
 
-    <p> 
-        @if(Model.IsGardenManager)
+<p>
+    @if (Model.IsGardenManager)
     {
-       <a class="btn btn-action" asp-controller="Users" asp-action="Search" asp-route-id="@Model?.GardenVM.Id">Add Member</a>
+        <a class="btn btn-action" asp-controller="Users" asp-action="Search" asp-route-id="@Model?.GardenVM.Id">Add Member</a>
     }
-    </p>
+</p>

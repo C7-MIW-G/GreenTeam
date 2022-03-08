@@ -1,5 +1,7 @@
 ﻿using GreenTeam.Implementations;
 using GreenTeam.Models;
+using GreenTeam.Services;
+using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreenTeam.Controllers
@@ -7,11 +9,13 @@ namespace GreenTeam.Controllers
     public class PatchTasksController : Controller
     {
         private readonly IPatchTaskService patchTaskService;
+        private readonly Mapper mapper;
 
 
-        public PatchTasksController(IPatchTaskService PatchTaskService)
+        public PatchTasksController(IPatchTaskService PatchTaskService, Mapper mapper)
         {
             this.patchTaskService = PatchTaskService;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
@@ -33,16 +37,18 @@ namespace GreenTeam.Controllers
         
             if (!ModelState.IsValid)
             {
-                PatchTask returnedPatchTask = await patchTaskService.AddPatchTask(patchTask);
+                await patchTaskService.AddPatchTask(patchTask);
                 return RedirectToAction("Details", "Patches", new { id = patchTask.PatchId });
             }
-            return View(patchTask);
+            PatchTaskVM patchTaskVM = mapper.ToVM(patchTask);
+            return View(patchTaskVM);
         }
         //GET: PatchTasks/Edit/6
         public async Task<IActionResult> Edit(int id)
         {
             PatchTask returnedPatchTask = await patchTaskService.FindById(id);
-            return View(returnedPatchTask);
+            PatchTaskVM patchTaskVM = mapper.ToVM(returnedPatchTask);
+            return View(patchTaskVM);
 
         }
 
@@ -58,22 +64,24 @@ namespace GreenTeam.Controllers
 
             if (ModelState.IsValid)
             {
-                PatchTask returnedPatchTask = await patchTaskService.EditPatchTask(patchTask);
+                await patchTaskService.EditPatchTask(patchTask);
                 return RedirectToAction("Details", "Patches", new { id = patchTask.PatchId });
             }
-            return View(patchTask);
+            PatchTaskVM patchTaskVM = mapper.ToVM(patchTask);
+            return View(patchTaskVM);
         }
 
         //Get: PatchTasks/Delete/6
         public async Task<IActionResult> Delete(int id)
         {
             PatchTask patchTask = await patchTaskService.FindById(id);
+            PatchTaskVM patchTaskVM = mapper.ToVM(patchTask);
 
             if (patchTask == null)
             {
                 return NotFound();
             }
-            return View(patchTask);
+            return View(patchTaskVM);
         }
 
         //POST: PatchTasks/Delete/6
