@@ -1,8 +1,8 @@
 ﻿using GreenTeam.Data;
 using GreenTeam.Implementations;
 using GreenTeam.Models;
+using GreenTeam.Utils;
 using GreenTeam.ViewModels;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
