@@ -139,6 +139,7 @@ namespace GreenTeamUnitTests
             Assert.AreEqual(gardenVM.GardenImageId, garden.GardenImageId, "Garden Image Id's are expected to be equal");
         }
 
+        /* Check if loop for adding Patches to PatchList works*/
         [TestMethod]
         public void GardenVMContainsPatchListWithPatches()
         {
@@ -153,6 +154,22 @@ namespace GreenTeamUnitTests
             // Assert
             Assert.AreEqual(gardenVM.Patches[0].PatchName, patchList[0].PatchName, "Patchname expected to be equal ");
             Assert.AreEqual(gardenVM.Patches[0].Id, patchList[0].Id, "PatchId expected to be equal");
+        }
+        
+        /* Check if loop for adding GardenUsers to GardenUserList works*/
+        [TestMethod]
+        public void GardenVMContainsUserlsListWithGardenUsers()
+        {
+            // Arrange
+            Mapper mapper = new Mapper();
+            Garden garden = CreateFakeGarden();
+            List<GardenUser> gardenUserList = garden.GardenUsers.ToList();
+
+            // Act
+            GardenVM gardenVM = mapper.ToVM(garden);
+
+            // Assert
+            Assert.AreEqual(gardenVM.Users[0].UserEmail, gardenUserList[0].User.Email, "E-mail addresses are expected to be equal ");
         }
     }
 }
