@@ -138,39 +138,21 @@ namespace GreenTeamUnitTests
             // Assert
             Assert.AreEqual(gardenVM.GardenImageId, garden.GardenImageId, "Garden Image Id's are expected to be equal");
         }
-        
-      /* 
+
         [TestMethod]
-        public void GardenVMContainPatchList()
+        public void GardenVMContainsPatchListWithPatches()
         {
             // Arrange
             Mapper mapper = new Mapper();
             Garden garden = CreateFakeGarden();
+            List<Patch> patchList = garden.Patches.ToList();
 
             // Act
             GardenVM gardenVM = mapper.ToVM(garden);
-
+           
             // Assert
-            CollectionAssert.AreEqual(gardenVM.Patches, garden.Patches, "Garden Patch Lists are expected to be equal");
-        }*/
-
-
-        /*
-       [TestMethod]
-       public void GardenVMContainGardenUserList()
-       {
-           // Arrange
-           Mapper mapper = new Mapper();
-           Garden garden = CreateFakeGarden();
-
-           // Act
-           GardenVM gardenVM = mapper.ToVM(garden);
-
-           // Assert
-           CollectionAssert.AreEquivalent(gardenVM.Users, garden.GardenUsers.ToList(), "GardenUser Lists are expected to be equal");
-       }*/
-
+            Assert.AreEqual(gardenVM.Patches[0].PatchName, patchList[0].PatchName, "Patchname expected to be equal ");
+            Assert.AreEqual(gardenVM.Patches[0].Id, patchList[0].Id, "PatchId expected to be equal");
+        }
     }
-
-
 }
