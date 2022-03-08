@@ -223,5 +223,8 @@ img {
 }
 
 .field-validation-error {
-    color: #fbd803 !important;
+    font-size: 0.5rem;
+    color: #D8000C !important;
+    background-color: #FFD2D2;
+    padding: 4px;
 }
