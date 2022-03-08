@@ -221,3 +221,10 @@ img {
 .control-label {
     font-size: 1.5rem;
 }
+
+.field-validation-error {
+    font-size: 0.9rem;
+    color: #D8000C !important;
+    background-color: #FFD2D2;
+    padding: 4px;
+}
