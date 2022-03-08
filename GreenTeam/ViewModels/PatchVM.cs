@@ -7,5 +7,6 @@
         public string Crop { get; set; }
         public List<PatchTaskVM> PatchTasks { get; set; }
         public int GardenId { get; set; }
+        public bool isGardenManager { get; set; }
     }
 }
