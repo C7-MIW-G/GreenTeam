@@ -170,8 +170,6 @@ namespace GreenTeamUnitTests
            CollectionAssert.AreEquivalent(gardenVM.Users, garden.GardenUsers.ToList(), "GardenUser Lists are expected to be equal");
        }*/
 
-        var foo = Mock.Create 
-
     }
 
 
