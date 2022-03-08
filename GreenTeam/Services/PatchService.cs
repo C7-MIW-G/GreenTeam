@@ -3,6 +3,7 @@ using GreenTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using GreenTeam.Implementations;
 using GreenTeam.ViewModels;
+using GreenTeam.Utils;
 
 namespace GreenTeam.Services
 {
@@ -15,13 +16,13 @@ namespace GreenTeam.Services
         {
             this.context = context;
             this.mapper = mapper;
-
         }
 
         public async Task<Patch> AddPatch(Patch patch)
         {
             context.Add(patch);
             await context.SaveChangesAsync();
+
             return patch;
         }
 
@@ -36,7 +37,6 @@ namespace GreenTeam.Services
                     patches.Add(patch);
                 }
             }
-
             return patches;
         }
 
@@ -55,6 +55,7 @@ namespace GreenTeam.Services
         {
             context.Update(patch);
             await context.SaveChangesAsync();
+
             return patch;
         }
 
@@ -63,6 +64,7 @@ namespace GreenTeam.Services
             Patch patch = await FindById(id);
             context.Remove(patch);
             await context.SaveChangesAsync();
+
             return patch;
         }
 
@@ -92,6 +94,22 @@ namespace GreenTeam.Services
             }
 
             return patchVMs;
+        }
+
+        public async Task<int> GetGardenIdByPatchId(int patchId)
+        {
+            var query = context.Patch
+                .Where(a => a.Id == patchId);
+
+            Patch patch = await query.FirstOrDefaultAsync();
+
+            if (patch == null)
+            {
+                return 0;
+            }
+            int gardenId = patch.GardenId;
+
+            return gardenId;
         }
     }
 }

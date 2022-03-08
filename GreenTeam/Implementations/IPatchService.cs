@@ -14,5 +14,6 @@ namespace GreenTeam.Implementations
         Task<PatchVM> GetVMById(int id);
         Task<PatchVM> GetDetailsVM(int id);
         Task<List<PatchVM>> GetAllPatchVMs();
+        Task<int> GetGardenIdByPatchId(int patchId);
     }
 }

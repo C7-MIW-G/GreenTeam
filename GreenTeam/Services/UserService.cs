@@ -1,8 +1,8 @@
 ﻿using GreenTeam.Data;
 using GreenTeam.Implementations;
 using GreenTeam.Models;
+using GreenTeam.Utils;
 using GreenTeam.ViewModels;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -77,6 +77,12 @@ namespace GreenTeam.Services
             return gardenUser;
         }
 
+        /// <summary>
+        /// Checks if the given userID belongs to a user that manages the given garden
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="gardenId"></param>
+        /// <returns>true if the given user(id) is a manager of the garden </returns>
         public async Task<bool> IsManager(string userId, int gardenId)
         {
             var query = context.GardenUser
@@ -90,6 +96,19 @@ namespace GreenTeam.Services
             }
             return false;
         }
+        /// <summary>
+        /// Checks if currently logged in user is manager of the given gardenId
+        /// </summary>
+        /// <param name="gardenId"></param>
+        /// <returns>true if the currently logged-in user is a manager of the garden</returns>
+        public async Task<bool> IsManager(int gardenId)
+        {
+            string userId = GetCurrentUserId();
+            bool isManager = await IsManager(userId, gardenId);
+
+            return isManager;
+        }
+
 
         public async Task<AppUserVM> GetAppUserVMByEmail(string email)
         {
