@@ -34,6 +34,9 @@ namespace GreenTeam.Controllers
             {
                 return NotFound();
             }
+            
+            bool isGardenManager = await userService.IsManager(patchVM.GardenId);
+            patchVM.isGardenManager = isGardenManager;
 
             return View(patchVM);
         }

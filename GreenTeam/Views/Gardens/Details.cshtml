@@ -38,29 +38,14 @@
         <tbody>
             <tr>
                 <td>
-                    @if (Model.IsGardenManager)
-                    {
-                        <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.PatchName)
-                        </a>
-                    }
-                    else
-                    {
+                    <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
                         @Html.DisplayFor(modelItem => item.PatchName)
-                    }
-
+                    </a>
                 </td>
                 <td>
-                    @if (Model.IsGardenManager)
-                    {
-                        <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.Crop)
-                        </a>
-                    }
-                    else
-                    {
+                    <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
                         @Html.DisplayFor(modelItem => item.Crop)
-                    }
+                    </a>
                 </td>
             </tr>
         </tbody>
