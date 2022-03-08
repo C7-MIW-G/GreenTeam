@@ -75,8 +75,6 @@ namespace GreenTeam.Services
             {
                 UserEmail = appUser.Email,
                 UserName = appUser.FullName,
-               
-        
             };
 
             return vm;
