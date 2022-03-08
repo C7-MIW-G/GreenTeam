@@ -138,8 +138,8 @@ namespace GreenTeamUnitTests
             // Assert
             Assert.AreEqual(gardenVM.GardenImageId, garden.GardenImageId, "Garden Image Id's are expected to be equal");
         }
-        
-      /* 
+
+
         [TestMethod]
         public void GardenVMContainPatchList()
         {
@@ -151,8 +151,8 @@ namespace GreenTeamUnitTests
             GardenVM gardenVM = mapper.ToVM(garden);
 
             // Assert
-            CollectionAssert.AreEqual(gardenVM.Patches, garden.Patches, "Garden Patch Lists are expected to be equal");
-        }*/
+            CollectionAssert.AreEqual(gardenVM.Patches., garden.Patches, "Garden Patch Lists are expected to be equal");
+        }
 
 
         /*
