@@ -46,8 +46,6 @@ namespace GreenTeam.Services
             }
 
             return gardenVms;
-
-
         }
 
         public async Task<List<GardenVM>> GetAllGardenVMs()
@@ -57,8 +55,7 @@ namespace GreenTeam.Services
             
             foreach(Garden garden in gardens)
             {
-                gardenVMs.Add(mapper.ToVM(garden));
-                
+                gardenVMs.Add(mapper.ToVM(garden));                
             }
             
             return gardenVMs;

@@ -51,9 +51,23 @@ a {
     font-size: 1.3rem;
 }
 
-tr:hover {
+/* Stretched link styling */
+
+.link-table:hover {
     color: #ffffff6e !important;
+    background: #22f28e6e;
 }
+
+.stretched-link::after {
+    border-radius: 50% !important;
+}
+
+.card-header {
+    border-bottom: none;
+    background-color: rgba(0,0,0,0);
+}
+
+/* Anchor hover */
 
 a:hover {
     color: #ffffff6e !important;
