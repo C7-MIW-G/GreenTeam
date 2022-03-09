@@ -4,7 +4,6 @@ using GreenTeam.Models;
 using GreenTeam.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
 using GreenTeam.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +29,7 @@ builder.Services.AddScoped<IPatchTaskService, PatchTaskService > ();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<Mapper>();
 builder.Services.AddScoped<ImageConverter>();
+builder.Services.AddScoped<IdentityDataInitializer>();
 
 
 var app = builder.Build();
