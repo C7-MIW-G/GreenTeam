@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220309090213_RenamedGardenImageToImage")]
-    partial class RenamedGardenImageToImage
+    [Migration("20220309100745_RenamedGardenImageTolmage")]
+    partial class RenamedGardenImageTolmage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

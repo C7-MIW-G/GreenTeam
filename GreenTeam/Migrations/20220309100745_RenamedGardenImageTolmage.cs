@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreenTeam.Migrations
 {
-    public partial class RenamedGardenImageToImage : Migration
+    public partial class RenamedGardenImageTolmage : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
