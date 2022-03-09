@@ -4,6 +4,7 @@ using GreenTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220309100745_RenamedGardenImageTolmage")]
+    partial class RenamedGardenImageTolmage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,7 +116,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("Garden", (string)null);
+                    b.ToTable("Garden");
                 });
 
             modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
@@ -133,7 +135,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("GardenUser", (string)null);
+                    b.ToTable("GardenUser");
                 });
 
             modelBuilder.Entity("GreenTeam.Models.Image", b =>
@@ -160,7 +162,7 @@ namespace GreenTeam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Image", (string)null);
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("GreenTeam.Models.Patch", b =>
@@ -187,7 +189,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("GardenId");
 
-                    b.ToTable("Patch", (string)null);
+                    b.ToTable("Patch");
                 });
 
             modelBuilder.Entity("GreenTeam.Models.PatchTask", b =>
@@ -214,7 +216,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("PatchId");
 
-                    b.ToTable("PatchTask", (string)null);
+                    b.ToTable("PatchTask");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

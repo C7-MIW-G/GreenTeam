@@ -12,13 +12,20 @@ namespace GreenTeam.Services
         {
             this.context = context;
         }
-
-        public async Task<int> AddImage(GardenImage gardenImage)
+               
+        public async Task<int> AddImage(Image image)
         {
-            context.Add(gardenImage);
+            context.Add(image);
             await context.SaveChangesAsync();
-            int imageId = gardenImage.Id;
+            int imageId = image.Id;
             return imageId;
+        }
+
+        public async Task<int> EditImage (Image image)
+        {
+            context.Update(image);
+            await context.SaveChangesAsync();
+            return image.Id;
         }
     }
 }

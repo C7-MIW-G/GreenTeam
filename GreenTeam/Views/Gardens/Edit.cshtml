@@ -4,6 +4,13 @@
     ViewData["Title"] = "Edit";
 }
 
+@if (Model.Image != null)
+{
+    <div class="img-wrapper">
+        <img src="data:image;base64,@Convert.ToBase64String(Model.Image.Content)" />
+    </div>
+}
+
 <h1>Edit</h1>
 
 <h4>Garden</h4>
@@ -11,7 +18,7 @@
 <hr />
 <div class="row">
     <div class="align-content-center">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -23,6 +30,10 @@
                 <label asp-for="Location" class="control-label"></label>
                 <input asp-for="Location" class="form-control" />
                 <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Garden Picture</label>
+                <input asp-for="Image" class="form-control" name="files" type="file" />
             </div>
             <div class="form-group">
                 <input type="button" value="Delete" class="btn btn-action" onclick="deleteConfirm()" />

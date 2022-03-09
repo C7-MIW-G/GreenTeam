@@ -52,7 +52,7 @@ namespace GreenTeamUnitTests
             gardenUsers.Add(gardenUser);
 
             /* Create a GardenImage*/
-            GardenImage image = new GardenImage()
+            Image image = new Image()
             {
                 Id = 1,
                 Name = "gardenImageName",
@@ -72,7 +72,7 @@ namespace GreenTeamUnitTests
                 Location = "locationTest",
                 Patches = patchList,
                 GardenUsers = gardenUsers,
-                GardenImageId = image.Id
+                ImageId = image.Id
             };
 
             gardenUser.Garden = garden;
@@ -135,7 +135,7 @@ namespace GreenTeamUnitTests
             GardenVM gardenVM = mapper.ToVM(garden);
 
             // Assert
-            Assert.AreEqual(gardenVM.GardenImageId, garden.GardenImageId, "Garden Image Id's are expected to be equal");
+            Assert.AreEqual(gardenVM.ImageId, garden.ImageId, "Garden Image Id's are expected to be equal");
         }
 
         /* Check if loop for adding Patches to PatchList works*/

@@ -43,7 +43,6 @@ namespace GreenTeam.Controllers
 
             string userId = userService.GetCurrentUserId();
 
-
             GardenDetailsVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
 
             if (gardenOverviewVM == null)
@@ -71,30 +70,16 @@ namespace GreenTeam.Controllers
             {
                 if (files != null && files.Length > 0)
                 {
-                    string fileName = Path.GetFileName(files.FileName);
+                    Image image = imageConverter.CreateImage(files);
+                    
+                    int imageId = await imageService.AddImage(image);
 
-                    string fileExtension = Path.GetExtension(fileName);
-
-                    string newFileName = string.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
-
-                    byte[] bytes = imageConverter.ImageToByteArray(files);
-
-                    GardenImage gardenImage = new GardenImage()
-                    {
-                        Name = newFileName,
-                        FileType = fileExtension,
-                        Content = bytes,
-                        CreatedOn = DateTime.Now
-                    };
-
-                    int imageId = await imageService.AddImage(gardenImage);
-                    garden.GardenImageId = imageId;
-
+                    garden.ImageId = imageId;
                 }
+
                 await gardenService.AddGarden(garden);
 
                 string userId = userService.GetCurrentUserId();
-
                 await userService.AssignManager(userId, garden.Id);
 
                 return RedirectToAction(nameof(Index));
@@ -104,6 +89,7 @@ namespace GreenTeam.Controllers
         }
 
         // GET: Gardens/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,9 +105,10 @@ namespace GreenTeam.Controllers
         }
 
         // POST: Gardens/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Location")] Garden garden)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Location")] Garden garden, IFormFile files)
         {
             if (id != garden.Id)
             {
@@ -130,9 +117,17 @@ namespace GreenTeam.Controllers
 
             if (ModelState.IsValid)
             {
+                if (files != null && files.Length > 0)
+                {
+                    Image image = imageConverter.CreateImage(files);
+
+                    int imageId = await imageService.EditImage(image);
+                    garden.ImageId = image.Id;
+                }
+
                 try
                 {
-                    Garden returnedGarden = await gardenService.EditGarden(garden);
+                    await gardenService.EditGarden(garden);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -184,5 +179,6 @@ namespace GreenTeam.Controllers
         {
             return gardenService.FindById(id) != null;
         }
+
     }
 }

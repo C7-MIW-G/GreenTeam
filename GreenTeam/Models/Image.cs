@@ -2,7 +2,7 @@
 
 namespace GreenTeam.Models
 {
-    public class GardenImage
+    public class Image
     {
         [Required]
         public int Id { get; set; }

@@ -45,8 +45,6 @@ namespace GreenTeam.Services
             }
 
             return gardenVms;
-
-
         }
 
         public async Task<List<GardenVM>> GetAllGardenVMs()
@@ -70,7 +68,7 @@ namespace GreenTeam.Services
                 .Include(garden => garden.Patches)
                 .Include(au => au.GardenUsers)
                 .ThenInclude(th => th.User)
-                .Include(gi => gi.GardenImage);
+                .Include(gi => gi.Image);
 
             Garden garden = await query.FirstOrDefaultAsync();
 
