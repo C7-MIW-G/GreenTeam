@@ -14,12 +14,19 @@ namespace GreenTeam.Services
             this.context = context;
         }
                
-        public async Task<int> AddImage(Image Image)
+        public async Task<int> AddImage(Image image)
         {
-            context.Add(Image);
+            context.Add(image);
             await context.SaveChangesAsync();
-            int imageId = Image.Id;
+            int imageId = image.Id;
             return imageId;
+        }
+
+        public async Task<int> EditImage (Image image)
+        {
+            context.Update(image);
+            await context.SaveChangesAsync();
+            return image.Id;
         }
     }
 }
