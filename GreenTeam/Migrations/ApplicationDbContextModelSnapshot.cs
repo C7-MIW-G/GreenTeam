@@ -114,7 +114,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("Garden");
+                    b.ToTable("Garden", (string)null);
                 });
 
             modelBuilder.Entity("GreenTeam.Models.GardenUser", b =>
@@ -133,7 +133,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("GardenUser");
+                    b.ToTable("GardenUser", (string)null);
                 });
 
             modelBuilder.Entity("GreenTeam.Models.Image", b =>
@@ -160,7 +160,7 @@ namespace GreenTeam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Image");
+                    b.ToTable("Image", (string)null);
                 });
 
             modelBuilder.Entity("GreenTeam.Models.Patch", b =>
@@ -187,7 +187,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("GardenId");
 
-                    b.ToTable("Patch");
+                    b.ToTable("Patch", (string)null);
                 });
 
             modelBuilder.Entity("GreenTeam.Models.PatchTask", b =>
@@ -214,7 +214,7 @@ namespace GreenTeam.Migrations
 
                     b.HasIndex("PatchId");
 
-                    b.ToTable("PatchTask");
+                    b.ToTable("PatchTask", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
