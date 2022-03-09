@@ -1,4 +1,5 @@
-﻿using GreenTeam.Models;
+﻿global using GreenTeam.Utils;
+using GreenTeam.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
