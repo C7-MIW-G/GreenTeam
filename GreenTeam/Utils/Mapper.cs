@@ -37,8 +37,8 @@ namespace GreenTeam.Services
                 Location = gardenModel.Location,
                 Patches = patchVMs,
                 Users = appUserVMs,
-                GardenImageId = gardenModel.GardenImageId,
-                GardenImage = gardenModel.GardenImage,
+                ImageId = gardenModel.ImageId,
+                Image = gardenModel.Image,
             };
 
             return vm;

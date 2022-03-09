@@ -14,11 +14,11 @@ namespace GreenTeam.Services
             this.context = context;
         }
                
-        public async Task<int> AddImage(GardenImage gardenImage)
+        public async Task<int> AddImage(Image Image)
         {
-            context.Add(gardenImage);
+            context.Add(Image);
             await context.SaveChangesAsync();
-            int imageId = gardenImage.Id;
+            int imageId = Image.Id;
             return imageId;
         }
     }

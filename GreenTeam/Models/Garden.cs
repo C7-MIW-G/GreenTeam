@@ -19,8 +19,8 @@ namespace GreenTeam.Models
 
         public ICollection<GardenUser> GardenUsers { get; set; }
 
-        public GardenImage GardenImage { get; set; }
+        public Image Image { get; set; }
 
-        public int? GardenImageId { get; set; }
+        public int? ImageId { get; set; }
     }
 }
