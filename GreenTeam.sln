@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenTeam", "GreenTeam\GreenTeam.csproj", "{2798F7BE-1980-468F-899D-AB5093FCDE5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenTeamUnitTests", "GreenTeamUnitTests\GreenTeamUnitTests.csproj", "{90675361-4C1B-44B7-B6B9-3EE29234BBA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenTeamUnitTests", "GreenTeamUnitTests\GreenTeamUnitTests.csproj", "{90675361-4C1B-44B7-B6B9-3EE29234BBA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

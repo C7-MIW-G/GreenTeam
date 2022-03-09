@@ -1,14 +1,14 @@
-﻿using GreenTeam.ViewModels;
-using GreenTeam.Models;
+﻿using GreenTeam.Models;
+using GreenTeam.ViewModels;
 
-namespace GreenTeam.Services
+namespace GreenTeam.Utils
 {
     public class Mapper
     {
 
         public GardenVM ToVM(Garden gardenModel)
         {
-            List<PatchVM> patchVMs = new List<PatchVM>();                     
+            List<PatchVM> patchVMs = new List<PatchVM>();
             List<AppUserVM> appUserVMs = new List<AppUserVM>();
 
             if (gardenModel.Patches != null)
@@ -84,17 +84,17 @@ namespace GreenTeam.Services
 
             return vm;
         }
-       
+
         public PatchTaskVM ToVM(PatchTask patchTaskModel)
         {
             PatchTaskVM vm = new PatchTaskVM()
             {
                 Id = patchTaskModel.Id,
                 PatchId = patchTaskModel.PatchId,
-                TaskName = patchTaskModel.TaskName, 
+                TaskName = patchTaskModel.TaskName,
                 TaskDescription = patchTaskModel.TaskDescription
             };
-            
+
             return vm;
         }
     }

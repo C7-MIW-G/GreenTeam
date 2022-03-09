@@ -1,6 +1,5 @@
-﻿using GreenTeam.Implementations;
-using GreenTeam.Utils;
-using GreenTeam.Data;
+﻿using GreenTeam.Data;
+using GreenTeam.Implementations;
 using GreenTeam.Models;
 
 namespace GreenTeam.Services

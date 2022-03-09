@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GreenTeam.ViewModels
 {
-        public class GardenVM
+    public class GardenVM
     {
-        
+
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter a name for your garden.")]

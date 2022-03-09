@@ -1,9 +1,8 @@
-﻿using GreenTeam.Models;
-using GreenTeam.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using GreenTeam.Data;
 using GreenTeam.Implementations;
+using GreenTeam.Models;
 using GreenTeam.ViewModels;
-using GreenTeam.Utils;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenTeam.Services
 {

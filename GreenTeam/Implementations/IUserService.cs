@@ -1,6 +1,5 @@
 ﻿using GreenTeam.Models;
 using GreenTeam.ViewModels;
-using Microsoft.AspNetCore.Identity;
 
 namespace GreenTeam.Implementations
 {
@@ -16,5 +15,5 @@ namespace GreenTeam.Implementations
         Task<AppUserVM> GetAppUserVMByEmail(string email);
         Task AssignMemberToGarden(AppUserVM user, int gardenId);
         Task<string> GetUserIdByEmail(string email);
-    }            
+    }
 }

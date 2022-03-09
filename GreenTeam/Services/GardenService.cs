@@ -3,7 +3,6 @@ using GreenTeam.Implementations;
 using GreenTeam.Models;
 using GreenTeam.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using GreenTeam.Utils;
 
 namespace GreenTeam.Services
 {
@@ -23,7 +22,7 @@ namespace GreenTeam.Services
         public async Task<List<Garden>> FindAll()
         {
             List<Garden> gardens = await context.Garden.ToListAsync();
-         
+
             return gardens;
         }
 
@@ -52,12 +51,13 @@ namespace GreenTeam.Services
         {
             List<Garden> gardens = await FindAll();
             List<GardenVM> gardenVMs = new List<GardenVM>();
-            
-            foreach(Garden garden in gardens)
+
+            foreach (Garden garden in gardens)
             {
-                gardenVMs.Add(mapper.ToVM(garden));                
+                gardenVMs.Add(mapper.ToVM(garden));
+
             }
-            
+
             return gardenVMs;
         }
 
@@ -110,7 +110,7 @@ namespace GreenTeam.Services
         public async Task<GardenDetailsVM> GetOverviewVM(int id, string userId)
         {
             GardenVM gardenVM = await GetVMById(id);
-          
+
             bool isGardenManager = await userService.IsManager(userId, gardenVM.Id);
 
             GardenDetailsVM gardenOverviewVM = new GardenDetailsVM()

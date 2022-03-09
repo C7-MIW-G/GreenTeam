@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using GreenTeam.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using GreenTeam.Models;
 
 
 namespace GreenTeam.Data
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser>
-    { 
+    {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -23,7 +23,7 @@ namespace GreenTeam.Data
 
         public DbSet<Garden> Garden { get; set; }
         public DbSet<Patch> Patch { get; set; }
-        public DbSet<GardenUser> GardenUser { get; set;}
+        public DbSet<GardenUser> GardenUser { get; set; }
         public DbSet<PatchTask> PatchTask { get; set; }
         public DbSet<Image> Image { get; set; }
 
