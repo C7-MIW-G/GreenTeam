@@ -1,9 +1,7 @@
+global using GreenTeam.Utils;
 using GreenTeam.Models;
-using GreenTeam.Services;
 using GreenTeam.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace GreenTeamUnitTests
 {
@@ -76,7 +74,7 @@ namespace GreenTeamUnitTests
 
 
 
-        
+
         /*public void GardenMapperTest()
         {
             // Arrange

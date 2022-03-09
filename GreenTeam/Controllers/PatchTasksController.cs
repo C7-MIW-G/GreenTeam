@@ -1,9 +1,7 @@
 ﻿using GreenTeam.Implementations;
 using GreenTeam.Models;
-using GreenTeam.Services;
 using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using GreenTeam.Utils;
 
 namespace GreenTeam.Controllers
 {
@@ -33,9 +31,9 @@ namespace GreenTeam.Controllers
         //POST: PatchTasks/Create/[patchid]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, Patch, PatchId, TaskName, TaskDescription")]PatchTask patchTask)
+        public async Task<IActionResult> Create([Bind("Id, Patch, PatchId, TaskName, TaskDescription")] PatchTask patchTask)
         {
-        
+
             if (!ModelState.IsValid)
             {
                 await patchTaskService.AddPatchTask(patchTask);

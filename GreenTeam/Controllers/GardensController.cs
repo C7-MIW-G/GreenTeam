@@ -1,16 +1,10 @@
 ﻿#nullable disable
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using GreenTeam.Implementations;
 using GreenTeam.Models;
 using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using GreenTeam.Implementations;
-using System.Security.Claims;
-using System;
-using System.IO;
-using GreenTeam.Data;
-using GreenTeam.Utils;
-using GreenTeam.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenTeam.Controllers
 {

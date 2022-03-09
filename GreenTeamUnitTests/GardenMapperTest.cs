@@ -1,5 +1,4 @@
 ﻿using GreenTeam.Models;
-using GreenTeam.Services;
 using GreenTeam.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -150,12 +149,12 @@ namespace GreenTeamUnitTests
 
             // Act
             GardenVM gardenVM = mapper.ToVM(garden);
-           
+
             // Assert
             Assert.AreEqual(gardenVM.Patches[0].PatchName, patchList[0].PatchName, "Patchname expected to be equal ");
             Assert.AreEqual(gardenVM.Patches[0].Id, patchList[0].Id, "PatchId expected to be equal");
         }
-        
+
         /* Check if loop for adding GardenUsers to GardenUserList works*/
         [TestMethod]
         public void GardenVMContainsUserlsListWithGardenUsers()

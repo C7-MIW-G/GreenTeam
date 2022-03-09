@@ -1,6 +1,5 @@
-﻿using GreenTeam.Implementations;
-using GreenTeam.Utils;
-using GreenTeam.Data;
+﻿using GreenTeam.Data;
+using GreenTeam.Implementations;
 using GreenTeam.Models;
 
 namespace GreenTeam.Services
@@ -13,7 +12,7 @@ namespace GreenTeam.Services
         {
             this.context = context;
         }
-               
+
         public async Task<int> AddImage(GardenImage gardenImage)
         {
             context.Add(gardenImage);

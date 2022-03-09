@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GreenTeam.Implementations;
 using GreenTeam.Models;
-using GreenTeam.Implementations;
-using System.Security.Claims;
 using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GreenTeam.Controllers
 {
@@ -34,7 +33,7 @@ namespace GreenTeam.Controllers
             {
                 return NotFound();
             }
-            
+
             bool isGardenManager = await userService.IsManager(patchVM.GardenId);
             patchVM.isGardenManager = isGardenManager;
 

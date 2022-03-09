@@ -1,5 +1,4 @@
 ﻿using GreenTeam.Implementations;
-using GreenTeam.Models;
 using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

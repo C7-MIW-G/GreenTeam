@@ -2,15 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using GreenTeam.Implementations;
 using GreenTeam.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace GreenTeam.Areas.Identity.Pages.Account.Manage
 {
@@ -65,7 +62,7 @@ namespace GreenTeam.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
 
             [Display(Name = "Full Name")]
-            public string FullName { get; set;}
+            public string FullName { get; set; }
         }
 
         private async Task LoadAsync(AppUser user)
@@ -124,7 +121,7 @@ namespace GreenTeam.Areas.Identity.Pages.Account.Manage
             if (Input.FullName != fullName)
             {
                 await userService.StoreFullName(user, Input.FullName);
-              
+
             }
 
             await _signInManager.RefreshSignInAsync(user);

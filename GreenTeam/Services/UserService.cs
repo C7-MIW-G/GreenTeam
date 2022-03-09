@@ -1,7 +1,6 @@
 ﻿using GreenTeam.Data;
 using GreenTeam.Implementations;
 using GreenTeam.Models;
-using GreenTeam.Utils;
 using GreenTeam.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -131,7 +130,7 @@ namespace GreenTeam.Services
         {
             string userId = await GetUserIdByEmail(user.UserEmail); //wat geeft ie terug
 
-            
+
             // throw new KeyNotFoundException("not found");
             GardenUser gardenUser = new GardenUser()
             {

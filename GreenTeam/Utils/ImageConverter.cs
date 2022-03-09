@@ -1,11 +1,7 @@
-﻿using GreenTeam.Data;
-using GreenTeam.Models;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace GreenTeam.Utils
+﻿namespace GreenTeam.Utils
 {
     public class ImageConverter
-    { 
+    {
 
         public byte[] ImageToByteArray(IFormFile files)
         {
