@@ -85,7 +85,7 @@ namespace GreenTeam.Controllers
 
                     byte[] bytes = imageConverter.ImageToByteArray(files);
 
-                    GardenImage gardenImage = new GardenImage()
+                    Image image = new Image()
                     {
                         Name = newFileName,
                         FileType = fileExtension,
@@ -93,8 +93,8 @@ namespace GreenTeam.Controllers
                         CreatedOn = DateTime.Now
                     };
 
-                    int imageId = await imageService.AddImage(gardenImage);
-                    garden.GardenImageId = imageId;
+                    int imageId = await imageService.AddImage(image);
+                    garden.ImageId = imageId;
 
                 }
                 await gardenService.AddGarden(garden);

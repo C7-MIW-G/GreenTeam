@@ -4,6 +4,6 @@ namespace GreenTeam.Implementations
 {
     public interface IImageService
     {
-        Task<int> AddImage(GardenImage gardenImage);
+        Task<int> AddImage(Image image);
     }
 }
