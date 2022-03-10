@@ -293,3 +293,13 @@ modal-fade {
 .modal-p {
     color: #000;
 }
+
+
+/*Table properties / allighnment */
+.alnright {
+    text-align: right;
+}
+
+.alnleft {
+    text-align: left;
+}
