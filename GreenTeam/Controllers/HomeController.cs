@@ -10,17 +10,20 @@ namespace GreenTeam.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<AppUser> userManager;
 
-        public HomeController(ILogger<HomeController> logger, RoleManager<IdentityRole> roleManager)
+        public HomeController(ILogger<HomeController> logger, RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager)
         {
             _logger = logger;
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
         {
             IdentityDataInitializer dataInitializer = new IdentityDataInitializer();
-            dataInitializer.SeedData(roleManager);
+            dataInitializer.SeedData(roleManager, userManager);
+
             return View();
         }
 
