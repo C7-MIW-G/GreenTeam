@@ -123,14 +123,8 @@ namespace GreenTeam.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await userService.StoreFullName(user, Input.FullName);
-                    if (Input.FullName == "Administrator")
-                    {
-                        await _userManager.AddToRoleAsync(user, "Administrator");
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(user, "User");
-                    }
+                    await _userManager.AddToRoleAsync(user, "User");
+                    
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
