@@ -4,9 +4,7 @@
     ViewData["Title"] = "Edit Task";
 }
 
-<h1>Edit</h1>
-
-<h4>Task</h4>
+<h1>Edit Task</h1>
 
 <hr />
 <div class="row">
@@ -27,8 +25,9 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-action" />
+                <input type="button" value="Delete" class="btn btn-action" onclick="deleteConfirm()" />
                 <a class="btn btn-action" asp-controller="Patches" asp-action="Details" asp-route-id="@Model.PatchId">Cancel</a>
+                <input type="submit" value="Save" class="btn btn-action" />
             </div>
         </form>
     </div>
@@ -37,15 +36,48 @@
 <br />
 <br />
 
-<dl class="row">
-    <dd class="align-content-center">
-        Do you want to delete @Html.DisplayFor(model => model.TaskName)?
-    </dd>
-</dl>
-<form asp-action="Delete">
-    <input type="hidden" asp-for="Id" />
-    <input type="submit" value="Delete" class="btn btn-danger" />
-</form>
+<!-- Modal Script -->
+<div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="delete-conformation">
+                    Delete Confirmation
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <p class="modal-p">
+                                Are you sure you want to delete @Html.DisplayFor(model => model.TaskName)?
+                            </p>
+                            <strong id="deletedValueName">
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@Model?.Id">Cancel</a>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //this is only display bootstrap modal pop up dialog
+    var deleteConfirm = function (val) {
+        $('#deletedValueName').text(val);
+        $('#delete-conformation').modal('show');
+    }
+
+</script>
 
 @section Scripts {
     @{

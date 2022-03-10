@@ -39,8 +39,6 @@ namespace GreenTeam.Controllers
         [Authorize]
         public async Task<IActionResult> Details(int id)
         {
-            GardenVM gardenView = await gardenService.GetVMById(id);
-
             string userId = userService.GetCurrentUserId();
 
             GardenDetailsVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
@@ -124,7 +122,7 @@ namespace GreenTeam.Controllers
                     int imageId = await imageService.EditImage(image);
                     garden.ImageId = image.Id;
                 }
-
+               
                 try
                 {
                     await gardenService.EditGarden(garden);
