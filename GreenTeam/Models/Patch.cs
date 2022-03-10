@@ -18,7 +18,7 @@ namespace GreenTeam.Models
         public string Crop { get; set; }
         
         public int GardenId { get; set; }
-              
+       
         public ICollection<PatchTask> PatchTasks { get; set; }
     }
 }
