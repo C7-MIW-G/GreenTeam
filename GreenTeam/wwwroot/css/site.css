@@ -127,11 +127,11 @@ main {
 }
 
 /*Tables*/
-th {
+/*th {
     color: #D9A404;
     font-size: 2rem;
     padding: 0rem 4rem !important;
-}
+}*/
 
 tr {
     text-decoration: none;
@@ -141,6 +141,7 @@ tr {
 
 td {
     font-size: 1.3rem;
+    width: 50%;
 }
 
 table{

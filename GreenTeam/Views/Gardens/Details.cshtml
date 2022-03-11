@@ -23,51 +23,54 @@
     <a class="btn btn-action" asp-action="Index">&#10096; Back to List</a>
 </p>
 
-<div class="card"> <!-- TODO: fix padding and refactor stretched link-->
-<table class="table table-hover">
-    @foreach (var item in Model.GardenVM.Patches)
-    {
+<div class="card">
+    <!-- TODO: Joel will add stretched-link-->
+    <table class="table table-hover">
         <tbody>
-            <tr scope="row" class="alnleft">
-                <td>
-                    <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                        @Html.DisplayFor(modelItem => item.PatchName):
-                    </a>
-                </td>
-                <td>
-                    <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                        @Html.DisplayFor(modelItem => item.Crop)
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    }
-</table>
-</div>  
+            @foreach (var item in Model.GardenVM.Patches)
+            {
+                <tr scope="row" class="alnleft">
+                    <td>
+                        <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.PatchName):
+                        </a>
+                    </td>
+                    <td>
+                        <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.Crop)
+                        </a>
+                    </td>
+                </tr>
+            }
+         </tbody>
+    </table>
+</div>
 
 <br />
 <br />
 
-<table class="table table-striped">
-    @foreach (var item in Model.GardenVM.Users)
-    {
+<div clas="card">
+    <table class="table table-striped">
         <tbody>
-            <tr scope="row" class="alnleft">
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                @if (item.IsGardenManager)
-                {
-                    <td>Manager</td>
-                }
-                else
-                {
-                    <td>Member</td>
-                }
-            </tr>
+            @foreach (var item in Model.GardenVM.Users)
+            {
+                <tr scope="row" class="alnleft">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    @if (item.IsGardenManager)
+                    {
+                        <td>Manager</td>
+                    }
+                    else
+                    {
+                        <td>Member</td>
+                    }
+                </tr>
+            }
         </tbody>
-    }
-</table>
+    </table>
+</div>
 
 <p>
     @if (Model.IsGardenManager)
