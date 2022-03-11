@@ -105,7 +105,7 @@ main {
 }
 
 /*Background of content*/
-.container, .img-container {
+.container {
     min-width: 500px;
     max-width: 960px;
     width: max-content;
@@ -277,7 +277,13 @@ img {
     border: 5px solid #D9B7B4;
 }
 
-
+.img-container {
+    min-width: 350px;
+    max-width: 960px;
+    width: auto;
+    text-align: center;
+    position: relative;
+}
 
 .img-container:hover .img-edit-textbox {    
     transition: .5s;
@@ -300,6 +306,12 @@ img {
     text-align: center;
     font-size: x-large;
 }
+
+.clickable-lable:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
 
 /*Form Titles*/
 .control-label {
