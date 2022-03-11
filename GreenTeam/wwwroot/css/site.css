@@ -145,6 +145,7 @@ td {
 
 table{
     border-radius: 0.25rem;
+    margin-bottom: 0rem !important;
 }
 
 .alnright {
