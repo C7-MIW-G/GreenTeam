@@ -348,3 +348,11 @@ modal-fade {
 }
 
 
+.alnleft {
+    text-align: left;
+}
+
+.card {
+    background-color: #087040d4 !important;
+    flex-direction: row;
+}

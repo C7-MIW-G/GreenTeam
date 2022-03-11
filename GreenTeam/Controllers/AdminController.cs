@@ -9,10 +9,12 @@ namespace GreenTeam.Controllers
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<AppUser> userManager;
 
-        public AdminController (RoleManager<IdentityRole> roleManager)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager)
         {
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
@@ -35,5 +37,13 @@ namespace GreenTeam.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public IActionResult UserList()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
     }
 }
