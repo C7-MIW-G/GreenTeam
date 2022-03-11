@@ -1,24 +1,14 @@
-﻿using GreenTeam.Controllers;
-using GreenTeam.Implementations;
-using GreenTeam.Models;
-using GreenTeam.Services;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GreenTeamUnitTests
 {
     [TestClass]
-    public class PatchTaskControllerTest
+    public class TestPatchTaskController
     {
         [TestMethod]
         public async void PostPatchTaskCreateSuccesfull()
         {
-           /* //Arrage
+           /* // Arrange
             PatchTask patchTask = new PatchTask() { Id = 2, PatchId = 1, TaskDescription = "testTaskDescription", TaskName = "testTaskName" };
 
             var mockIPatchTaskService = new Mock<IPatchTaskService>();
@@ -30,7 +20,7 @@ namespace GreenTeamUnitTests
             // Act
             var returnedType = await controller.Create(patchTask);
 
-            //Assert
+            // Assert
             //Assert.IsNotNull(returnedType);
             Assert.AreEqual(patchTask, returnedType);
            */
