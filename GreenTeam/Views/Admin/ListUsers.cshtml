@@ -1,0 +1,81 @@
+﻿@model IEnumerable<AppUser>
+
+@{
+    ViewBag.Title = "GreenTeam Users";
+}
+
+<h1>All GreenTeam Users</h1>
+
+@if (Model.Any<AppUser>())
+{
+    foreach (var user in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@user.FullName</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@user.Email</h5>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-danger" onclick="deleteConfirm()">Delete</a> <!-- TODO -->
+            </div>
+        </div>
+
+        <!-- Modal Script -->
+        <div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="delete-conformation">
+                            Delete Confirmation
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <p class="modal-p">
+                                        Are you sure you want to delete ?
+                                    </p>
+                                    <strong id="deletedValueName">
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post" asp-action="DeleteUser" asp-controller="Admin" asp-route-id="@user.Id">
+                                <a class="btn btn-primary" asp-action="ListUsers">Cancel</a>
+                                <input type="submit" class="btn btn-danger" value="Delete" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            //this is only display bootstrap modal pop up dialog
+            var deleteConfirm = function (val) {
+                $('#deletedValueName').text(val);
+                $('#delete-conformation').modal('show');
+            }
+        </script>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            There are no users yet.
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
