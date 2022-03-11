@@ -57,11 +57,6 @@ p {
     color: #ffffff;
 }
 
-p:hover {
-    text-decoration: none;
-    color: #ffffff6e;
-}
-
 .table-content {
     font-size: 1.3rem;
 }

@@ -1,6 +1,7 @@
 ﻿using GreenTeam.Controllers;
 using GreenTeam.Implementations;
 using GreenTeam.Models;
+using GreenTeam.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -11,29 +12,28 @@ using System.Threading.Tasks;
 
 namespace GreenTeamUnitTests
 {
-    internal class PatchTaskControllerTest
+    [TestClass]
+    public class PatchTaskControllerTest
     {
+        [TestMethod]
         public async void PostPatchTaskCreateSuccesfull()
         {
-            //Arrage
-            PatchTask patchTask = new PatchTask() { Id = 1, PatchId = 1, TaskDescription = "testTaskDescription", TaskName = "testTaskName" };
+           /* //Arrage
+            PatchTask patchTask = new PatchTask() { Id = 2, PatchId = 1, TaskDescription = "testTaskDescription", TaskName = "testTaskName" };
 
             var mockIPatchTaskService = new Mock<IPatchTaskService>();
-            mockIPatchTaskService.Setup(controller => controller.AddPatchTask(patchTask).Result).Returns(patchTask);
+            mockIPatchTaskService.Setup(q => q.AddPatchTask(patchTask).Result).Returns(patchTask);
+            Mapper mapper = new Mapper();
 
-
-            PatchTasksController controller = new PatchTasksController(null, null);
+            PatchTasksController controller = new PatchTasksController((IPatchTaskService)mockIPatchTaskService, mapper);
 
             // Act
             var returnedType = await controller.Create(patchTask);
 
-            //var patchTaskSevice = mock.Setup(p => p.FindById(1).Result).Returns(new PatchTask() { Id = 1, PatchId = 1, TaskDescription = "testTaskDescription", TaskName = "testTaskName" });
-
-
             //Assert
-            // Assert.That.GetType(returnedPatchTask, PatchTask);
-            Assert.IsNotNull(returnedType);
-
+            //Assert.IsNotNull(returnedType);
+            Assert.AreEqual(patchTask, returnedType);
+           */
 
         }
 
