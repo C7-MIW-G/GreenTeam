@@ -76,6 +76,7 @@ p {
 
 a:hover {
     color: #ffffff6e !important;
+    cursor: pointer;
 }
 
 h1 {
@@ -104,11 +105,12 @@ main {
 }
 
 /*Background of content*/
-.container {
+.container, .img-container {
     min-width: 500px;
     max-width: 960px;
     width: max-content;
     text-align: center;
+    position: relative;
 }
 
 /*header of the main text*/
@@ -260,8 +262,8 @@ img {
     border-radius: 35%;
 }
 
-
-.img-wrapper {
+.img-wrapper, .img-wrapper-edit {
+    transition: .5s;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -273,8 +275,31 @@ img {
     border: 5px solid #D9B7B4;
 }
 
-/*Form Titles*/
 
+
+.img-container:hover .img-edit-textbox {    
+    transition: .5s;
+    opacity: 1;
+}
+
+.img-container:hover .img-wrapper-edit {
+    transition: .5s;
+    opacity: 0.4;
+}
+
+.img-edit-textbox {
+    opacity: 0;
+    position: absolute;
+    transition: .5s ease;
+    width: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: x-large;
+}
+
+/*Form Titles*/
 .control-label {
     font-size: 1.5rem;
 }
@@ -318,3 +343,11 @@ modal-fade {
 }
 
 
+.alnleft {
+    text-align: left;
+}
+
+.card {
+    background-color: #087040d4 !important;
+    flex-direction: row;
+}
