@@ -15,9 +15,9 @@
         <div class="img-container">
             <img class="img-wrapper-edit" src="data:image;base64,@Convert.ToBase64String(Model.Image.Content)" />
             <div>
-                <a class="img-edit-textbox"> <input class="visually-hidden" id="file" asp-for="Image" name="files" type="file"> 
-                    <label for="file">Change image</label>
-                </a>
+                <label class="img-edit-textbox"> <input class="visually-hidden" id="file" asp-for="Image" name="files" type="file"> 
+                    <a for="file">Change image</a>
+                </label>
             </div>
         </div>
     }

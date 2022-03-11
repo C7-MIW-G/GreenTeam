@@ -81,6 +81,7 @@ p:hover {
 
 a:hover {
     color: #ffffff6e !important;
+    cursor: pointer;
 }
 
 h1 {
