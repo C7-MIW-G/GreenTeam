@@ -92,7 +92,9 @@ namespace GreenTeam.Utils
                 Id = patchTaskModel.Id,
                 PatchId = patchTaskModel.PatchId,
                 TaskName = patchTaskModel.TaskName,
-                TaskDescription = patchTaskModel.TaskDescription
+                TaskDescription = patchTaskModel.TaskDescription,
+                IsCompleted = patchTaskModel.IsCompleted,
+                IsDeleted = patchTaskModel.IsDeleted,
             };
 
             return vm;
