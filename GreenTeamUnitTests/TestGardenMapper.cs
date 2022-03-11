@@ -9,7 +9,7 @@ namespace GreenTeamUnitTests
 {
 
     [TestClass]
-    public class GardenMapperTest
+    public class TestGardenMapper
     {
 
         private Garden CreateFakeGarden()
