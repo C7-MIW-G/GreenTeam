@@ -307,6 +307,12 @@ img {
     font-size: x-large;
 }
 
+.clickable-lable:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+
 /*Form Titles*/
 .control-label {
     font-size: 1.5rem;
