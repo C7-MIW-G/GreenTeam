@@ -66,6 +66,7 @@ namespace GreenTeam.Services
             var query = context.Garden
                 .Where(garden => garden.Id == id)
                 .Include(garden => garden.Patches)
+                .ThenInclude(pt => pt.PatchTasks)
                 .Include(au => au.GardenUsers)
                 .ThenInclude(th => th.User)
                 .Include(gi => gi.Image);

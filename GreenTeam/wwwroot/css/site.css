@@ -105,7 +105,7 @@ main {
 }
 
 /*Background of content*/
-.container, .img-container {
+.container {
     min-width: 500px;
     max-width: 960px;
     width: max-content;
@@ -116,7 +116,7 @@ main {
 /*header of the main text*/
 /*TODO, differentiate homepage main header from table headers (h1)*/
 .display-4 {
-    font-size: calc(1.5rem + 3.7vw);
+    font-size: 500%;
     font-weight: 800;
     color: #D9A404;
 }
@@ -127,11 +127,11 @@ main {
 }
 
 /*Tables*/
-th {
+/*th {
     color: #D9A404;
     font-size: 2rem;
     padding: 0rem 4rem !important;
-}
+}*/
 
 tr {
     text-decoration: none;
@@ -141,10 +141,12 @@ tr {
 
 td {
     font-size: 1.3rem;
+    width: 50%;
 }
 
 table{
     border-radius: 0.25rem;
+    margin-bottom: 0rem !important;
 }
 
 .alnright {
@@ -275,7 +277,13 @@ img {
     border: 5px solid #D9B7B4;
 }
 
-
+.img-container {
+    min-width: 350px;
+    max-width: 960px;
+    width: auto;
+    text-align: center;
+    position: relative;
+}
 
 .img-container:hover .img-edit-textbox {    
     transition: .5s;
@@ -298,6 +306,12 @@ img {
     text-align: center;
     font-size: x-large;
 }
+
+.clickable-lable:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
 
 /*Form Titles*/
 .control-label {

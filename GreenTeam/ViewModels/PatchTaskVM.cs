@@ -16,5 +16,9 @@ namespace GreenTeam.ViewModels
 
         [StringLength(1024)]
         public string TaskDescription { get; set; }
+
+        public bool IsCompleted { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
