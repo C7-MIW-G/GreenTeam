@@ -12,9 +12,11 @@ namespace GreenTeam.ViewModels
         [StringLength(20)]
         [RegularExpression(@"[a-zA-Z0-9 äëïöü'-]{1,20}", 
             ErrorMessage = "Allowed characters are letters, digits, dash(-) and apostrophe( ' ).")]
+        [Display(Name = "Task")]
         public string TaskName { get; set; }
 
         [StringLength(1024)]
+        [Display(Name = "Description")]
         public string TaskDescription { get; set; }
     }
 }

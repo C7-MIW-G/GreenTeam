@@ -3,7 +3,8 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.PatchName)</></h1>
+<h1>@Html.DisplayFor(model => model.PatchName)</h1>
+<h3>@Html.DisplayFor(model => model.Crop)</h3>
 
 <p>
     @if (Model.isGardenManager)
@@ -16,21 +17,16 @@
 
 <table class="table table-hover">
 
-    @*<thead>
-        <tr>
-            <th>Task:</th>
-            <th>Description:</th>
-        </tr>
-    </thead>*@
+
     @foreach (var item in Model.PatchTasks)
     {
         <tbody>
             <tr scope="row">
-                <td>
+                <td width="30%">
                     @if (Model.isGardenManager)
                     {
                         <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.TaskName)
+                            <text class="table-text"> @Html.DisplayFor(modelItem => item.TaskName) </text>
                         </a>
                     }
                     else
@@ -41,9 +37,7 @@
                 <td>
                     @if (Model.isGardenManager)
                     {
-                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.TaskDescription)
-                        </a>
+                       <p class="table-textfield"> @Html.DisplayFor(modelItem => item.TaskDescription) </p>
                     }
                     else
                     {

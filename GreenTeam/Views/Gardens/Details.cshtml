@@ -30,12 +30,12 @@
             @foreach (var item in Model.GardenVM.Patches)
             {
                 <tr scope="row" class="alnleft">
-                    <td>
+                    <td width="50%">
                         <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
                                 @Html.DisplayFor(modelItem => item.PatchName):
                         </a>
                     </td>
-                    <td>
+                    <td width="50%">
                         <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
                                 @Html.DisplayFor(modelItem => item.Crop)
                         </a>

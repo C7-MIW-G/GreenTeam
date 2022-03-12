@@ -141,7 +141,7 @@ tr {
 
 td {
     font-size: 1.3rem;
-    width: 50%;
+    /*width: 50% removed and added in td's of gardenlist*/
 }
 
 table{
@@ -155,6 +155,18 @@ table{
 
 .alnleft {
     text-align: left;
+}
+
+.table-text{
+    text-align: left;
+    text-align-last: left;
+}
+.table-textfield{
+    font-size: 0.85rem;
+    text-align:right;
+    font-style:normal;
+    
+
 }
 
 /*Card div override*/
@@ -315,14 +327,26 @@ img {
 
 /*Form Titles*/
 .control-label {
-    font-size: 1.5rem;
+    font-size:1.5rem;
+    word-break: break-all;
 }
+
 
 .field-validation-error {
     font-size: 0.9rem;
     color: #D8000C !important;
     background-color: #FFD2D2;
     padding: 4px;
+}
+
+/*Form Input*/
+.text-area-edit{
+    width: 100%;
+    height: 150px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    resize:none;
+    font-size: small;
 }
 
 /* Modal Styling */
