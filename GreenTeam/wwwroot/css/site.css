@@ -116,7 +116,7 @@ main {
 /*header of the main text*/
 /*TODO, differentiate homepage main header from table headers (h1)*/
 .display-4 {
-    font-size: calc(1.5rem + 3.7vw);
+    font-size: 500%;
     font-weight: 800;
     color: #D9A404;
 }

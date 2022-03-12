@@ -32,17 +32,17 @@
                 <tr scope="row" class="alnleft">
                     <td width="50%">
                         <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                                @Html.DisplayFor(modelItem => item.PatchName):
+                            @Html.DisplayFor(modelItem => item.PatchName):
                         </a>
                     </td>
                     <td width="50%">
                         <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                                @Html.DisplayFor(modelItem => item.Crop)
+                            @Html.DisplayFor(modelItem => item.Crop)
                         </a>
                     </td>
                 </tr>
             }
-         </tbody>
+        </tbody>
     </table>
 </div>
 
@@ -78,3 +78,31 @@
         <a class="btn btn-action" asp-controller="Users" asp-action="Search" asp-route-id="@Model?.GardenVM.Id">&#10010; Member</a>
     }
 </p>
+
+
+<div clas="card">
+    <table class="table table-striped">
+        <tbody>
+            @foreach (var item in Model.GardenVM.Patches)
+            {
+                @foreach (var item2 in item.PatchTasks)
+                {
+                    <tr scope="row" class="alnleft">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatchName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.TaskName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.TaskDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.IsCompleted)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

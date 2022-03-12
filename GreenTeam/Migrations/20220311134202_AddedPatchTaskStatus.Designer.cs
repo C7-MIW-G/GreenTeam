@@ -4,6 +4,7 @@ using GreenTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220311134202_AddedPatchTaskStatus")]
+    partial class AddedPatchTaskStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,116 +90,6 @@ namespace GreenTeam.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f9f1d318-e966-4f44-925c-5b661f94ae98",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f228eeb-f6eb-481a-80ef-5d96d47358df",
-                            Email = "iris@greenteam.com",
-                            EmailConfirmed = true,
-                            FullName = "Iris Hagen",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "IRIS@GREENTEAM.COM",
-                            NormalizedUserName = "IRIS@GREENTEAM.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG5s1FPdi1uWUT5aMuroJ9Kqp2y63QBxqG7mpB3IEJgY+3niV5vtz9rordJQJuA3jQ==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "779dfe33-b7aa-4f35-b5d4-22dacbcc9eb9",
-                            TwoFactorEnabled = false,
-                            UserName = "iris@greenteam.com"
-                        },
-                        new
-                        {
-                            Id = "d9ef8fe1-a012-42b4-917d-ff4aa7af2c6d",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "de731585-1998-455b-af8c-b550752e27d5",
-                            Email = "marcel@greenteam.com",
-                            EmailConfirmed = true,
-                            FullName = "Marcel Klerken",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MARCEL@GREENTEAM.COM",
-                            NormalizedUserName = "MARCEL@GREENTEAM.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFdQ+nVpIh8gz2hi/Sd2t776sDHvrTGd3f67aGCyv6ktjNEgHiZ3MR9H5Ik/HPqQQQ==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "cadec1c1-c5d1-4cb8-9a08-2851391149c2",
-                            TwoFactorEnabled = false,
-                            UserName = "marcel@greenteam.com"
-                        },
-                        new
-                        {
-                            Id = "bca6b676-85d9-4737-8dff-a21b1708e32e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "53ee6d80-9711-4f74-b2fa-b25987ce7213",
-                            Email = "noa@greenteam.com",
-                            EmailConfirmed = true,
-                            FullName = "Noa Zeegers",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "NOA@GREENTEAM.COM",
-                            NormalizedUserName = "NOA@GREENTEAM.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ0/Jhw0gCTXBISbkY9CaVdrGEUpW2UXN+CH0bAGIi5wyUqU5V0KFfTo079pjaZFJA==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "cc5a6aba-e395-4c57-83b6-57b6faf49637",
-                            TwoFactorEnabled = false,
-                            UserName = "noa@greenteam.com"
-                        },
-                        new
-                        {
-                            Id = "d356bc6c-2f41-4a96-b500-359cd8fe008e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "5b27961e-6454-40e7-a02f-6ddc930a6775",
-                            Email = "sem@greenteam.com",
-                            EmailConfirmed = true,
-                            FullName = "Sem Peters",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "SEM@GREENTEAM.COM",
-                            NormalizedUserName = "SEM@GREENTEAM.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGf5CkNvVlIQhRKlD2wa//6AVHtNCNb0LBAyKEZMgYkKtV+JXX1MghCLFrGoKKc16g==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a157c190-1ca7-4bfb-bb19-5650cef39159",
-                            TwoFactorEnabled = false,
-                            UserName = "sem@greenteam.com"
-                        },
-                        new
-                        {
-                            Id = "86d1b277-8b29-436a-b449-90320cd9779b",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6e43cf00-8582-4c5d-b5f3-e6ae05651b60",
-                            Email = "roy@greenteam.com",
-                            EmailConfirmed = true,
-                            FullName = "Roy Hermans",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ROY@GREENTEAM.COM",
-                            NormalizedUserName = "ROY@GREENTEAM.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP2UOJaZ9pn7OStYxkpodoLaiX31eNdFNpxGYnnQBRGgRH5Wp9bt4UN01eudmmXItg==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "3a8e8304-7bd9-4289-ae6d-6774f7d5f45b",
-                            TwoFactorEnabled = false,
-                            UserName = "roy@greenteam.com"
-                        },
-                        new
-                        {
-                            Id = "20fc5ce4-8a75-4808-99f8-cb5c43ba6d72",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b3c60edf-6712-4ad8-a855-3da62c3b6dbd",
-                            Email = "sylvia@greenteam.com",
-                            EmailConfirmed = true,
-                            FullName = "Sylvia Albers",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "SYLVIA@GREENTEAM.COM",
-                            NormalizedUserName = "SYLVIA@GREENTEAM.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIp/RJZNX9ODQEdbeD766nd8kd8pvjiu5RN47mUGMRxptATu/SZc9Xikbh6K1IAQvw==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "68104baa-b634-435f-859e-c0f0aa813780",
-                            TwoFactorEnabled = false,
-                            UserName = "sylvia@greenteam.com"
-                        });
                 });
 
             modelBuilder.Entity("GreenTeam.Models.Garden", b =>
