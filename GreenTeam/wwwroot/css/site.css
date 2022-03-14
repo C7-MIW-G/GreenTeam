@@ -15,13 +15,26 @@ html {
     min-height: 100%;
 }
 
-/*Navbar background color*/
+/* Navbar styling*/
 .bg-white {
     background: linear-gradient(270deg, #087040d4, #038C4C) !important;
 }
 
 .navbar-brand {
     color: #ffffff !important;
+}
+
+.navbar{
+    padding-left: 15rem;
+    padding-right: 15rem;
+}
+
+.nav-link{
+    white-space: nowrap;
+}
+
+.btn-link {
+    font-weight: 600;
 }
 
 /*Navbar border*/
@@ -70,6 +83,12 @@ p {
 .card-header {
     border-bottom: none;
     background-color: rgba(0,0,0,0);
+}
+
+.card-footer {
+    padding: 0.7rem 0.5rem;
+    background-color: rgba(0,0,0,0);
+    border-top: none;
 }
 
 /* Anchor hover */
