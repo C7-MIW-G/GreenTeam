@@ -92,33 +92,33 @@
                     <tr scope="row" class="alnleft">
                         @if (patchTask.IsCompleted == false)
                         {
-                            <td>
-                                @Html.DisplayFor(modelItem => patch.PatchName)
+                            <td width="30%" class="table-textfield">
+                                <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)
                             </td>
-                            <td>
+                            <td width="30%">
                                 <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                    @Html.DisplayFor(modelItem => patchTask.TaskName)
+                                    <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)
                                 </a>
                             </td>
-                            <td>
+                            <td width="30%">
                                 <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                    @Html.DisplayFor(modelItem => patchTask.TaskDescription)
+                                    <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskDescription)
                                 </a>
                             </td>
                         }
                         @if (patchTask.IsCompleted == true)
                         {
-                            <td>
-                                <del>@Html.DisplayFor(modelItem => patch.PatchName)</del>
+                            <td width="30%" class="table-textfield">
+                                <text class="table-text"><del>@Html.DisplayFor(modelItem => patch.PatchName)</del>
                             </td>
                             <td>
                                 <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                    <del>@Html.DisplayFor(modelItem => patchTask.TaskName)</del>
+                                    <text class="table-text"><del>@Html.DisplayFor(modelItem => patchTask.TaskName)</del>
                                 </a>
                             </td>
-                            <td>
+                            <td width="30%">
                                 <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                    <del>@Html.DisplayFor(modelItem => patchTask.TaskDescription)</del>
+                                    <text class="table-text"><del>@Html.DisplayFor(modelItem => patchTask.TaskDescription)</del>
                                 </a>
                             </td>
                         }
