@@ -3,6 +3,7 @@ using GreenTeam.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace GreenTeam.Controllers
 {
@@ -11,13 +12,13 @@ namespace GreenTeam.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppUser> userManager;
-        private readonly IUserService userService; 
+       /* private readonly IUserService userService; */
 
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, IUserService userService)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager/*, IUserService userService*/)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
-            this.userService = userService;
+            /*this.userService = userService;*/ // TODO delete
         }
 
         // Get Garden/Index
@@ -36,7 +37,7 @@ namespace GreenTeam.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ApplicationRole role)
         {
-            var roleExist = await roleManager.RoleExistsAsync(role.RoleName);
+            bool roleExist = await roleManager.RoleExistsAsync(role.RoleName);
             if (!roleExist)
             {
                 var result = await roleManager.CreateAsync(new IdentityRole(role.RoleName));
@@ -48,8 +49,8 @@ namespace GreenTeam.Controllers
         [HttpGet]
         public IActionResult ListUsers()
         {
-            var users = userManager.Users;
-            return View(users);
+            List<AppUser> appUsers = userManager.Users.ToList();
+            return View(appUsers);
         }
 
         // Post Admin/Delete
