@@ -15,13 +15,26 @@ html {
     min-height: 100%;
 }
 
-/*Navbar background color*/
+/* Navbar styling*/
 .bg-white {
     background: linear-gradient(270deg, #087040d4, #038C4C) !important;
 }
 
 .navbar-brand {
     color: #ffffff !important;
+}
+
+.navbar{
+    padding-left: 15rem;
+    padding-right: 15rem;
+}
+
+.nav-link{
+    white-space: nowrap;
+}
+
+.btn-link {
+    font-weight: 600;
 }
 
 /*Navbar border*/
@@ -70,6 +83,12 @@ p {
 .card-header {
     border-bottom: none;
     background-color: rgba(0,0,0,0);
+}
+
+.card-footer {
+    padding: 0.7rem 0.5rem;
+    background-color: rgba(0,0,0,0);
+    border-top: none;
 }
 
 /* Anchor hover */
@@ -141,7 +160,7 @@ tr {
 
 td {
     font-size: 1.3rem;
-    width: 50%;
+    /*width: 50% removed and added in td's of gardenlist*/
 }
 
 table{
@@ -155,6 +174,18 @@ table{
 
 .alnleft {
     text-align: left;
+}
+
+.table-text{
+    text-align: left;
+    text-align-last: left;
+}
+.table-textfield{
+    font-size: 0.85rem;
+    text-align:right;
+    font-style:normal;
+    
+
 }
 
 /*Card div override*/
@@ -320,14 +351,26 @@ img {
 
 /*Form Titles*/
 .control-label {
-    font-size: 1.5rem;
+    font-size:1.5rem;
+    word-break: break-all;
 }
+
 
 .field-validation-error {
     font-size: 0.9rem;
     color: #D8000C !important;
     background-color: #FFD2D2;
     padding: 4px;
+}
+
+/*Form Input*/
+.text-area-edit{
+    width: 100%;
+    height: 150px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    resize:none;
+    font-size: small;
 }
 
 /* Modal Styling */

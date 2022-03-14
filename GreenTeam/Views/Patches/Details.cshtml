@@ -3,7 +3,8 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.PatchName)</></h1>
+<h1>@Html.DisplayFor(model => model.PatchName)</h1>
+<h3>@Html.DisplayFor(model => model.Crop)</h3>
 
 <p>
     @if (Model.isGardenManager)
@@ -16,12 +17,7 @@
 
 <table class="table table-hover">
 
-    @*<thead>
-        <tr>
-        <th>Task:</th>
-        <th>Description:</th>
-        </tr>
-        </thead>*@
+
     @foreach (var item in Model.PatchTasks)
     {
         <tbody>

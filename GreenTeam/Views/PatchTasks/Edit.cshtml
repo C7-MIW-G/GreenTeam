@@ -14,16 +14,15 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="PatchId" />
             <div class="form-group">
-                <label asp-for="TaskName" class="control-label">Task:</label>
+                <label asp-for="TaskName" class="control-label"></label>
                 <input asp-for="TaskName" class="form-control" />
                 <span asp-validation-for="TaskName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TaskDescription" class="control-label">Description:</label>
-                <input asp-for="TaskDescription" class="form-control" />
+            <div>
+                <label asp-for="TaskDescription" class="control-label"></label>
+                <textarea asp-for="TaskDescription" class="text-area-edit"></textarea>
                 <span asp-validation-for="TaskDescription" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <input type="button" value="Delete Permanently" class="btn btn-action" onclick="deleteConfirm()" />
                 <a class="btn btn-action" asp-controller="Patches" asp-action="Details" asp-route-id="@Model.PatchId">Cancel</a>
