@@ -39,6 +39,11 @@ namespace GreenTeam.Controllers
         [Authorize]
         public async Task<IActionResult> Details(int id)
         {
+            bool isAuthorized = await userService.IsAuthorized(id);
+            if (!isAuthorized) 
+            {
+                return View("AccessError");
+            }
             string userId = userService.GetCurrentUserId();
 
             GardenDetailsVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);

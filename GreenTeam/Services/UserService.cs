@@ -108,6 +108,21 @@ namespace GreenTeam.Services
             return isManager;
         }
 
+        public async Task<bool> IsAuthorized(int gardenId)
+        {
+            string userId = GetCurrentUserId();
+
+            var query = context.GardenUser
+                .Where(gu => gu.UserId == userId && gu.GardenId == gardenId);
+            
+            GardenUser gardenUser = await query.FirstOrDefaultAsync();
+
+            if (gardenUser == null)
+            {
+                return false;
+            }
+            return true;
+        }
 
         public async Task<AppUserVM> GetAppUserVMByEmail(string email)
         {

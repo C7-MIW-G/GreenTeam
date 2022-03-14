@@ -12,6 +12,7 @@ namespace GreenTeam.Implementations
         Task<GardenUser> AssignManager(string userId, int gardenId);
         Task<bool> IsManager(int gardenId);
         Task<bool> IsManager(string userId, int gardenId);
+        Task<bool> IsAuthorized(int gardenId);
         Task<AppUserVM> GetAppUserVMByEmail(string email);
         Task AssignMemberToGarden(AppUserVM user, int gardenId);
         Task<string> GetUserIdByEmail(string email);
