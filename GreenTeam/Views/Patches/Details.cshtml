@@ -18,39 +18,71 @@
 
     @*<thead>
         <tr>
-            <th>Task:</th>
-            <th>Description:</th>
+        <th>Task:</th>
+        <th>Description:</th>
         </tr>
-    </thead>*@
+        </thead>*@
     @foreach (var item in Model.PatchTasks)
     {
         <tbody>
-            <tr scope="row">
-                <td>
-                    @if (Model.isGardenManager)
-                    {
-                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
+            @if (item.IsCompleted == false)
+            {
+                <tr scope="row" class="alnleft">
+                    <td>
+                        @if (Model.isGardenManager)
+                        {
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.TaskName)
+                            </a>
+                        }
+                        else
+                        {
                             @Html.DisplayFor(modelItem => item.TaskName)
-                        </a>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.TaskName)
-                    }
-                </td>
-                <td>
-                    @if (Model.isGardenManager)
-                    {
-                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
+                        }
+                    </td>
+                    <td>
+                        @if (Model.isGardenManager)
+                        {
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.TaskDescription)
+                            </a>
+                        }
+                        else
+                        {
                             @Html.DisplayFor(modelItem => item.TaskDescription)
-                        </a>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.TaskDescription)
-                    }
-                </td>
-            </tr>
+                        }
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr scope="row" class="alnleft">
+                    <td>
+                        @if (Model.isGardenManager)
+                        {
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
+                                <del>@Html.DisplayFor(modelItem => item.TaskName)</del>
+                            </a>
+                        }
+                        else
+                        {
+                            <del>@Html.DisplayFor(modelItem => item.TaskName)</del>
+                        }
+                    </td>
+                    <td>
+                        @if (Model.isGardenManager)
+                        {
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
+                                <del>@Html.DisplayFor(modelItem => item.TaskDescription)</del>
+                            </a>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.TaskDescription)
+                        }
+                    </td>
+                </tr>
+            }
         </tbody>
     }
 </table>

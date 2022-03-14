@@ -209,6 +209,11 @@ table{
     margin: 1rem 0.1rem;
 }
 
+.btn-action-standard {
+    color: #fff;
+    background-color: #87b2f1;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #87b2f1;

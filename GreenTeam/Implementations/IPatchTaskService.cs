@@ -9,6 +9,7 @@ namespace GreenTeam.Implementations
         Task<PatchTask> FindById(int Id);
         Task<PatchTask> EditPatchTask(PatchTask patchTask);
         Task<PatchTask> DeletePatchTask(int Id);
-
+        Task<PatchTask> CompletePatchTask(int Id);
+        Task<PatchTask> SoftDeletePatchTask(int Id);
     }
 }

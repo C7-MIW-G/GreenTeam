@@ -55,5 +55,23 @@ namespace GreenTeam.Services
             await context.SaveChangesAsync();
             return patchTask;
         }
+
+        public async Task<PatchTask> CompletePatchTask(int id)
+        {
+            PatchTask patchTask = await FindById(id);
+            patchTask.IsCompleted = true;
+            context.Update(patchTask);
+            await context.SaveChangesAsync();
+            return patchTask;
+        }
+
+        public async Task<PatchTask> SoftDeletePatchTask(int id)
+        {
+            PatchTask patchTask = await FindById(id);
+            patchTask.IsDeleted = true;
+            context.Update(patchTask);
+            await context.SaveChangesAsync();
+            return patchTask;
+        }
     }
 }

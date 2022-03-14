@@ -7,13 +7,22 @@ namespace GreenTeam.Controllers
 {
     public class PatchTasksController : Controller
     {
+        private readonly IPatchService patchService;
         private readonly IPatchTaskService patchTaskService;
-        private readonly Mapper mapper;
+        private readonly IGardenService gardenService;
+        private readonly Mapper mapper; 
 
 
-        public PatchTasksController(IPatchTaskService PatchTaskService, Mapper mapper)
+        public PatchTasksController(
+            IPatchService PatchService,
+            IPatchTaskService PatchTaskService,
+            IGardenService gardenService,
+            Mapper mapper
+            )
         {
+            this.patchService = PatchService;
             this.patchTaskService = PatchTaskService;
+            this.gardenService = gardenService;
             this.mapper = mapper;
         }
 
@@ -83,13 +92,32 @@ namespace GreenTeam.Controllers
             return View(patchTaskVM);
         }
 
+        //POST: PatchTask/Complete
+        //Sets PatchTask boolean IsComplete to True
+        [HttpPost, ActionName("Complete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CompletePatchTask(int id)
+        {
+            PatchTask patchTask = await patchTaskService.CompletePatchTask(id);
+            Patch patch = await patchService.FindById(patchTask.PatchId);
+            Garden garden = await gardenService.FindById(patch.GardenId);
+            GardenVM gardenVM = mapper.ToVM(garden);
+
+            return RedirectToAction("Details", "Gardens", new { id = patch.GardenId });
+        }
+
         //POST: PatchTasks/Delete/6
+        //Sets PatchTask boolean IsDeleted to True
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            PatchTask patchTaskToDelete = await patchTaskService.DeletePatchTask(id);
-            return RedirectToAction("Details", "Patches", new { id = patchTaskToDelete.PatchId });
+            PatchTask patchTask = await patchTaskService.SoftDeletePatchTask(id);
+            Patch patch = await patchService.FindById(patchTask.PatchId);
+            Garden garden = await gardenService.FindById(patch.GardenId);
+            GardenVM gardenVM = mapper.ToVM(garden);
+
+            return RedirectToAction("Details", "Gardens", new { id = patch.GardenId });
         }
     }
 }
