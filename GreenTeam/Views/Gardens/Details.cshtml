@@ -4,141 +4,149 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.GardenVM.Name)</></h1>
-<h4>&#127919;@Html.DisplayFor(model => model.GardenVM.Location)</></h4>
 
-@if (Model.GardenVM.Image != null)
-{
+    <div class="row">
+        <div class="col">
+             @if (Model.GardenVM.Image != null)
+             {
     <div class="img-wrapper">
         <img src="data:image;base64,@Convert.ToBase64String(Model.GardenVM.Image.Content)" />
     </div>
 }
 
 <p>
-    @if (Model.IsGardenManager)
-    {
-        <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id">&#10010; Patch</a>
-        <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">&#9998; Garden</a>
-    }
+                @if (Model.IsGardenManager)
+                {
+            <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id">&#10010; Patch</a>
+            <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">&#9998; Garden</a>
+                }
     <a class="btn btn-action" asp-action="Index">&#10096; Back to List</a>
 </p>
 
-<h3>Available Patches</h3>
-<div class="card">
-    <!-- TODO: Joel will add stretched-link-->
-    <table class="table table-striped table-hover">
-        <tbody>
-            @foreach (var item in Model.GardenVM.Patches)
-            {
-                <tr scope="row" class="alnleft">
-                    <td width="50%">
-                        <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.PatchName):
-                        </a>
-                    </td>
-                    <td width="50%">
-                        <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.Crop)
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
-<br />
-<br />
-
-<h3>Active Members</h3>
-<div clas="card">
-    <table class="table table-striped">
-        <tbody>
-            @foreach (var item in Model.GardenVM.Users)
-            {
-                <tr scope="row" class="alnleft">
-                    <td width="50%">
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    @if (item.IsGardenManager)
+ <h3>Active Members</h3>
+        <div clas="card">
+            <table class="table table-striped">
+                <tbody>
+                    @foreach (var item in Model.GardenVM.Users)
                     {
-                        <td width="50%">Manager</td>
+                        <tr scope="row" class="alnleft">
+                            <td width="50%">
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            @if (item.IsGardenManager)
+                            {
+                                <td width="50%">Manager</td>
+                            }
+                            else
+                            {
+                                <td width="50%">Member</td>
+                            }
+                        </tr>
                     }
-                    else
-                    {
-                        <td width="50%">Member</td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                </tbody>
+            </table>
+        </div>
 
-<p>
-    @if (Model.IsGardenManager)
-    {
-        <a class="btn btn-action" asp-controller="Users" asp-action="Search" asp-route-id="@Model?.GardenVM.Id">&#10010; Member</a>
-    }
-</p>
-
-<h3>Current Tasks</h3>
-<div clas="card">
-    <table class="table table-striped table-hover">
-        <tbody>
-            @foreach (var patch in Model.GardenVM.Patches)
+        <p>
+            @if (Model.IsGardenManager)
             {
-                @foreach (var patchTask in patch.PatchTasks)
-                {
-                    <tr scope="row" class="alnleft">
-                        @if (patchTask.IsCompleted == false)
-                        {
-                            <td width="30%" class="table-textfield">
-                                <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)
-                            </td>
-                            <td width="30%">
-                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                    <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)
-                                </a>
-                            </td>
-                            <td width="30%">
-                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                    <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskDescription)
-                                </a>
-                            </td>
-                        }
-                        @if (patchTask.IsCompleted == true)
-                        {
-                            <td width="30%" class="table-textfield">
-                                <text class="table-text"><del>@Html.DisplayFor(modelItem => patch.PatchName)</del>
-                            </td>
-                            <td>
-                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                    <text class="table-text"><del>@Html.DisplayFor(modelItem => patchTask.TaskName)</del>
-                                </a>
-                            </td>
-                            <td width="30%">
-                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                    <text class="table-text"><del>@Html.DisplayFor(modelItem => patchTask.TaskDescription)</del>
-                                </a>
-                            </td>
-                        }
-                        <td>
-                            @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
-                            {
-                                <input type="hidden" name="Id" value="@patchTask.Id" />
-                                <button type="submit" class="btn btn-action-standard">Done</button>
-                            }
-                        </td>
-                        <td>
-                             @using (Html.BeginForm("Delete", "PatchTasks", FormMethod.Post))
-                            {
-                                <input type="hidden" name="Id" value="@patchTask.Id" />
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            }
-                        </td>
-                    </tr>
-                }
+                <a class="btn btn-action" asp-controller="Users" asp-action="Search" asp-route-id="@Model?.GardenVM.Id">&#10010; Member</a>
             }
-        </tbody>
-    </table>
+        </p>
+
 </div>
+
+        <div class="col">
+        <h1>@Html.DisplayFor(model => model.GardenVM.Name)</></h1>
+        <h4>&#127919;@Html.DisplayFor(model => model.GardenVM.Location)</></h4>
+        <h3>Available Patches</h3>
+        <div class="card">
+            <!-- TODO: Joel will add stretched-link-->
+            <table class="table table-striped table-hover">
+                <tbody>
+                    @foreach (var item in Model.GardenVM.Patches)
+                    {
+                        <tr scope="row" class="alnleft">
+                            <td width="50%">
+                                <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.PatchName):
+                                </a>
+                            </td>
+                            <td width="50%">
+                                <a class="table-content" asp-controller="Patches" asp-action="Details" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.Crop)
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <br />
+        <br />
+
+        <h3>Current Tasks</h3>
+        <div clas="card">
+            <table class="table table-striped table-hover">
+                <tbody>
+                    @foreach (var patch in Model.GardenVM.Patches)
+                    {
+                        @foreach (var patchTask in patch.PatchTasks)
+                        {
+                            <tr scope="row" class="alnleft">
+                                @if (patchTask.IsCompleted == false)
+                                {
+                                    <td width="30%" class="table-textfield">
+                                        <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)
+                                    </td>
+                                    <td width="30%">
+                                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
+                                            <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)
+                                        </a>
+                                    </td>
+                                    <td width="30%">
+                                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
+                                            <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskDescription)
+                                        </a>
+                                    </td>
+                                }
+                                @if (patchTask.IsCompleted == true)
+                                {
+                                    <td width="30%" class="table-textfield">
+                                        <text class="table-text"><del>@Html.DisplayFor(modelItem => patch.PatchName)</del>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
+                                            <text class="table-text"><del>@Html.DisplayFor(modelItem => patchTask.TaskName)</del>
+                                        </a>
+                                    </td>
+                                    <td width="30%">
+                                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
+                                            <text class="table-text"><del>@Html.DisplayFor(modelItem => patchTask.TaskDescription)</del>
+                                        </a>
+                                    </td>
+                                }
+                                <td>
+                                    @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="Id" value="@patchTask.Id" />
+                                        <button type="submit" class="btn btn-action-standard">Done</button>
+                                    }
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("Delete", "PatchTasks", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="Id" value="@patchTask.Id" />
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
