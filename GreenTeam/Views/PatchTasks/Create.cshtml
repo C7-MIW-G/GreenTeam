@@ -11,8 +11,8 @@
 <div class="garden-index-all-centered row row-cols-lg-auto row-detail">
     <div class="row">
         <div class="align-content-center">
-            <form asp-action="Create a new Task">
-                <h1>Create</h1>
+            <form asp-action="Create">
+                <h1>Create a new Task</h1>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <input type="hidden" asp-for="PatchId" value=@Url.ActionContext.RouteData.Values["id"] />
@@ -26,7 +26,7 @@
                     <textarea asp-for="TaskDescription" class="text-area-edit"></textarea>
                     <span asp-validation-for="TaskDescription" class="text-danger"></span>
                 </div>
-                <div>
+                <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-success" />
                 </div>
             </form>
@@ -37,5 +37,5 @@
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+    }
 }
