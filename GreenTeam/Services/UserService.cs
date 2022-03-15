@@ -108,7 +108,7 @@ namespace GreenTeam.Services
             return isManager;
         }
 
-        public async Task<bool> IsAuthorized(int gardenId)
+        public async Task<bool> IsAuthorizedToAccessGarden(int gardenId)
         {
             string userId = GetCurrentUserId();
 
@@ -143,7 +143,7 @@ namespace GreenTeam.Services
 
         public async Task AssignMemberToGarden(AppUserVM user, int gardenId)
         {
-            string userId = await GetUserIdByEmail(user.UserEmail); //wat geeft ie terug
+            string userId = await GetUserIdByEmail(user.UserEmail);
 
 
             // throw new KeyNotFoundException("not found");
