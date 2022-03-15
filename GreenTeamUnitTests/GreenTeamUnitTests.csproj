@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="moq" Version="4.17.2" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />

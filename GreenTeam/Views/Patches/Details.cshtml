@@ -18,63 +18,107 @@
 <table class="table table-hover">
 
 
-    @foreach (var item in Model.PatchTasks)
+    @foreach (var PatchTaskVM in Model.PatchTasks)
     {
         <tbody>
-            @if (item.IsCompleted == false)
+            @if (PatchTaskVM.IsCompleted == false)
             {
                 <tr scope="row" class="alnleft">
                     <td>
                         @if (Model.isGardenManager)
                         {
-                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
-                                @Html.DisplayFor(modelItem => item.TaskName)
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
+                                @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
                             </a>
                         }
                         else
                         {
-                            @Html.DisplayFor(modelItem => item.TaskName)
+                            @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
                         }
                     </td>
-                    <td class="table-textfield">
+                    <td class="alnleft">
                         @if (Model.isGardenManager)
                         {
-                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
-                                @Html.DisplayFor(modelItem => item.TaskDescription)
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
+                                @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
                             </a>
                         }
                         else
                         {
-                            @Html.DisplayFor(modelItem => item.TaskDescription)
+                            @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
+                        {
+                            <input type="hidden" name="Id" value="@PatchTaskVM.Id" />
+                            <button type="submit" class="btn btn-action">Done</button>
+                        }
+                    </td>
+                   
+                </tr>
+            }
+            @if (PatchTaskVM.IsDeleted == false)
+            {
+                <tr scope="row" class="alnleft">
+                    <td>
+                        @if (Model.isGardenManager)
+                        {
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
+                                <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
+                            </a>
+                        }
+                        else
+                        {
+                            <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
+                        }
+                    </td>
+                    <td class="alnleft">
+                        @if (Model.isGardenManager)
+                        {
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
+                                <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)</del>
+                            </a>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
+                        }
+                    </td>
+                     <td>
+                        @using (Html.BeginForm("Delete", "PatchTasks", FormMethod.Post))
+                        {
+                            <input type="hidden" name="Id" value="@PatchTaskVM.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         }
                     </td>
                 </tr>
             }
-            else
+            @if (PatchTaskVM.IsDeleted == true)
             {
                 <tr scope="row" class="alnleft">
                     <td>
                         @if (Model.isGardenManager)
                         {
-                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
-                                <del>@Html.DisplayFor(modelItem => item.TaskName)</del>
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
+                                <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
                             </a>
                         }
                         else
                         {
-                            <del>@Html.DisplayFor(modelItem => item.TaskName)</del>
+                            <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
                         }
                     </td>
-                    <td class="table-textfield">
+                    <td class="alnleft">
                         @if (Model.isGardenManager)
                         {
-                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@item.Id">
-                                <del>@Html.DisplayFor(modelItem => item.TaskDescription)</del>
+                            <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
+                                <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)</del>
                             </a>
                         }
                         else
                         {
-                            @Html.DisplayFor(modelItem => item.TaskDescription)
+                            @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
                         }
                     </td>
                 </tr>
