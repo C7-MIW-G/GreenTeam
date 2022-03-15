@@ -4,34 +4,38 @@
     ViewData["Title"] = "Create Task";
 }
 
-<h1>Create</h1>
+<div>
+    <a class="btn btn-link" asp-controller="Patches" asp-action="Details" asp-route-id=@Url.ActionContext.RouteData.Values["id"]><i class="fas fa-chevron-left"></i> Back to List</a>
+</div>
 
-
-<hr />
-<div class="row">
-    <div class="align-content-center">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="PatchId" value=@Url.ActionContext.RouteData.Values["id"] />
-             <div>
-                <label asp-for="TaskName" class="control-label"></label>
-                <input asp-for="TaskName" class="form-control" />
-                <span asp-validation-for="TaskName" class="text-danger"></span>
-            </div>
-            <div>
-                <label asp-for="TaskDescription" class="control-label"></label>
-                <textarea asp-for="TaskDescription"  class="text-area-edit"></textarea>
-                <span asp-validation-for="TaskDescription" class="text-danger"></span>
-            </div>
-            <div>
-                <input type="submit" value="Create" class="btn btn-action" />
-                <a class ="btn btn-action" asp-controller="Patches" asp-action="Details" asp-route-id=@Url.ActionContext.RouteData.Values["id"]>Cancel</a>
-            </div>
-        </form>
+<div class="garden-index-all-centered row row-cols-lg-auto row-detail">
+    <div class="row">
+        <div class="align-content-center">
+            <form asp-action="Create a new Task">
+                <h1>Create</h1>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="PatchId" value=@Url.ActionContext.RouteData.Values["id"] />
+                <div>
+                    <label asp-for="TaskName" class="control-label"></label>
+                    <input asp-for="TaskName" class="form-control" />
+                    <span asp-validation-for="TaskName" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="TaskDescription" class="control-label"></label>
+                    <textarea asp-for="TaskDescription" class="text-area-edit"></textarea>
+                    <span asp-validation-for="TaskDescription" class="text-danger"></span>
+                </div>
+                <div>
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }
