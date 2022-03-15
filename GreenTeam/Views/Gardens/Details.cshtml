@@ -5,7 +5,7 @@
 }
 
 <div><a class="btn btn-link" asp-action="Index"><i class="fas fa-chevron-left"></i> Back to List</a> </div>
-<div class="row row-cols-lg-auto">
+<div class="row row-cols-lg-auto row-detail">
     <div class="col col-lg-auto garden-left-div">
         <h1>
             @Html.DisplayFor(model => model.GardenVM.Name)</>
@@ -85,7 +85,7 @@
                 {
                     @foreach (var patchTask in patch.PatchTasks)
                     {
-                        <tr scope="row" class="alnleft">
+                        <tr scope="row row-detail" class="alnleft">
 
                             @if (patchTask.IsCompleted == false)
                             {
@@ -113,7 +113,7 @@
                                 </td>
                                 <td>
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                        <del><text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</del>
+                                        <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)
                                     </a>
                                 </td>
                             }

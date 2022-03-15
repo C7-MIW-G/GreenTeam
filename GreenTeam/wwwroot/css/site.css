@@ -422,13 +422,19 @@ modal-fade {
     flex-direction: row !important;
     align-items: flex-start;
     margin: auto;
-    background-color: rgb(188 153 239 / 72%);
     border-radius: 1rem;
     padding: 3rem;
 }
 
-.row-garden-datail {
-
+.row-detail {
+    display: flex !important;
+    justify-content: space-evenly !important;
+    flex-direction: row !important;
+    align-items: flex-start;
+    margin: auto;
+    background-color: rgb(188 153 239 / 72%);
+    border-radius: 1rem;
+    padding: 3rem;
 }
 
 
