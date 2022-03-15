@@ -18,8 +18,14 @@ namespace GreenTeam.Controllers
 
         // GET: Gardens/Search
         [Authorize]
-        public IActionResult Search(int Id)
+        public async Task<IActionResult> Search(int id)
         {
+            bool isManager = await userService.IsManager(id);
+            if (!isManager)
+            {
+                return View("AccessDeniedError");
+            }
+
             return View();
         }
 

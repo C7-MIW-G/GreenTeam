@@ -39,10 +39,10 @@ namespace GreenTeam.Controllers
         [Authorize]
         public async Task<IActionResult> Details(int id)
         {
-            bool isAuthorized = await userService.IsAuthorized(id);
+            bool isAuthorized = await userService.IsAuthorizedToAccessGarden(id);
             if (!isAuthorized) 
             {
-                return View("AccessError");
+                return View("AccessDeniedError");
             }
             string userId = userService.GetCurrentUserId();
 
@@ -93,12 +93,14 @@ namespace GreenTeam.Controllers
 
         // GET: Gardens/Edit/5
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            bool isAuthorized = await userService.IsAuthorizedToAccessGarden(id);
+            if (!isAuthorized)
             {
-                return NotFound();
+                return View("AccessDeniedError");
             }
+
             GardenVM gardenVM = await gardenService.GetVMById((int)id);
             if (gardenVM == null)
             {
@@ -113,6 +115,12 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Location")] Garden garden, IFormFile files)
         {
+            bool isAuthorized = await userService.IsAuthorizedToAccessGarden(id);
+            if (!isAuthorized)
+            {
+                return View("AccessDeniedError");
+            }
+
             if (id != garden.Id)
             {
                 return NotFound();
@@ -151,11 +159,12 @@ namespace GreenTeam.Controllers
 
         // GET: Gardens/Delete/5
         [Authorize]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            bool isAuthorized = await userService.IsAuthorizedToAccessGarden(id);
+            if (!isAuthorized)
             {
-                return NotFound();
+                return View("AccessDeniedError");
             }
 
             GardenVM gardenVM = await gardenService.GetVMById((int)id);
@@ -174,6 +183,12 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            bool isAuthorized = await userService.IsAuthorizedToAccessGarden(id);
+            if (!isAuthorized)
+            {
+                return View("AccessDeniedError");
+            }
+
             await gardenService.DeleteGarden(id);
             return RedirectToAction(nameof(Index));
         }
