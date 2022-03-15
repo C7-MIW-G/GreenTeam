@@ -1,23 +1,30 @@
 ﻿@model GreenTeam.ViewModels.SearchUserVM
 
+
 @{
     ViewData["Title"] = "Add Members";
 }
 
-<h1>Add Users</h1>
-<div class="row">
-    <div class="align-content-center">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="GardenId" value=@Url.ActionContext.RouteData.Values["id"]/>
-            <div class="form-floating">
-                <input asp-for="Email" class="form-control" />
-                <label asp-for="Email" class="form-label"></label>
-            </div>
-            <div class="text-danger">
-                 @Html.DisplayFor(model => model.ConfirmationMessage)                            
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-action">Add Member</button>
-        </form>
+<div>
+    <a class="btn btn-link" asp-controller="Gardens" asp-action="Details"><i class="fas fa-chevron-left"></i> Back to List</a>
+</div>
+
+<div class="garden-index-all-centered row row-cols-lg-auto row-detail">
+    <div class="row">
+        <div class="align-content-center">
+            <form id="profile-form" method="post">
+                <h1>Add Users</h1>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="GardenId" value=@Url.ActionContext.RouteData.Values["id"] />
+                <div class="form-floating">
+                    <input asp-for="Email" class="form-control" />
+                    <label asp-for="Email" class="form-label"></label>
+                </div>
+                <div class="text-danger">
+                    @Html.DisplayFor(model => model.ConfirmationMessage)
+                </div>
+                <button id="update-profile-button" type="submit" class="btn btn-success">Add Member</button>
+            </form>
+        </div>
     </div>
 </div>

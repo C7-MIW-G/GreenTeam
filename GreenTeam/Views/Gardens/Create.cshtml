@@ -3,38 +3,41 @@
 @{
     ViewData["Title"] = "Create";
 }
+
 <div>
     <a class="btn btn-link" asp-controller="Gardens" asp-action="Index"><i class="fas fa-chevron-left"></i> Back to List</a>
 </div>
+
 <div class="garden-index-all-centered row row-cols-lg-auto row-detail">
-<div class="row">
-    <div class="align-content-center">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <h1>Create</h1>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label">Garden Picture</label>
-                <input asp-for="Image" class="form-control" name="files" type="file" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success" />
-            </div>
-        </form>
+    <div class="row">
+        <div class="align-content-center">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <h1>Create your Garden</h1>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Location" class="control-label"></label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Image" class="control-label">Garden Picture</label>
+                    <input asp-for="Image" class="form-control" name="files" type="file" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-</div>
+
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+     }
 }
