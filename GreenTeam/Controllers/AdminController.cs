@@ -1,5 +1,6 @@
 ﻿using GreenTeam.Implementations;
 using GreenTeam.Models;
+using GreenTeam.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,13 @@ namespace GreenTeam.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppUser> userManager;
-       /* private readonly IUserService userService; */
+        private readonly IGardenService gardenService;
 
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager/*, IUserService userService*/)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, IGardenService gardenService)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
-            /*this.userService = userService;*/ // TODO delete
+            this.gardenService = gardenService;
         }
 
         // Get Garden/Index
@@ -45,6 +46,35 @@ namespace GreenTeam.Controllers
             return View();
         }
 
+        //Get Admin/GardenList
+        [HttpGet]
+        public async Task<IActionResult> ListGardens()
+        {
+            List<GardenVM> gardens = await gardenService.GetAllGardenVMs();
+
+            return View(gardens);
+        }
+
+        [HttpPost]
+        //Post Admin/DeleteGarden
+        public async Task<IActionResult> DeleteGarden(int id)
+        {
+            Garden garden = await gardenService.FindById(id);
+
+            if (garden == null)
+            {
+                ViewBag.ErrorMessage = $"Garden with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            await gardenService.DeleteGarden(id);
+
+            return RedirectToAction("ListGardens");
+
+        }
+
+
+
+
         // Get Admin/Userlist
         [HttpGet]
         public IActionResult ListUsers()
@@ -53,7 +83,8 @@ namespace GreenTeam.Controllers
             return View(appUsers);
         }
 
-        // Post Admin/Delete
+        // Post Admin/DeleteUser
+        [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await userManager.FindByIdAsync(id);
