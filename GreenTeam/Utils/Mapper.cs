@@ -56,6 +56,8 @@ namespace GreenTeam.Utils
                 }
             }
 
+            patchTaskVMs = OrderTasksByStatus(patchTaskVMs);
+
             PatchVM vm = new PatchVM()
             {
                 Id = patchModel.Id,
@@ -98,6 +100,42 @@ namespace GreenTeam.Utils
             };
 
             return vm;
+        }
+
+        /// <summary>
+        /// Orders Task by status, in the following manner: to do, done, deleted.
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns>List of PatchVM</returns>
+        public List<PatchTaskVM> OrderTasksByStatus(List<PatchTaskVM> list)
+        {
+            List<PatchTaskVM> todoList = new();
+            List<PatchTaskVM> doneList = new();
+            List<PatchTaskVM> deletedList = new();
+            List<PatchTaskVM> sortedList = new();
+
+            foreach (PatchTaskVM patchTask in list)
+            {
+                if (!patchTask.IsCompleted && !patchTask.IsDeleted)
+                {
+                    todoList.Add(patchTask);
+                }
+                if (patchTask.IsCompleted && !patchTask.IsDeleted)
+                {
+                    doneList.Add(patchTask);
+                }
+                if (patchTask.IsCompleted && patchTask.IsDeleted)
+                {
+                    deletedList.Add(patchTask);
+                }
+            }
+
+            sortedList.AddRange(todoList);
+            sortedList.AddRange(doneList);
+            sortedList.AddRange(deletedList);      
+
+            return sortedList;
+
         }
     }
 }
