@@ -4,14 +4,15 @@
     ViewData["Title"] = "Edit Patch";
 }
 
-<h1>Edit</h1>
+<div>
+    <a class="btn btn-link" asp-controller="Gardens" asp-action="Details" asp-route-id="@Model?.Id"><i class="fas fa-chevron-left"></i> Back to List</a>
+</div>
 
-<h4>Patch</h4>
-
-<hr />
+<div class="garden-index-all-centered row row-cols-lg-auto row-detail">
 <div class="row">
     <div class="align-content-center">
         <form asp-action="Edit">
+            <h1>Edit Patch</h1>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="GardenId" />
@@ -27,9 +28,8 @@
             </div>
 
             <div class="form-group">
-                <input type="button" value="Delete" class="btn btn-action" onclick="deleteConfirm()" />
-                <a class="btn btn-action" asp-controller="Patches" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
-                <input type="submit" value="Save" class="btn btn-action" />
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <input type="button" value="Delete" class="btn btn-danger" onclick="deleteConfirm()" />
             </div>
         </form>
     </div>
@@ -70,7 +70,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <script type="text/javascript">
     //this is only display bootstrap modal pop up dialog
