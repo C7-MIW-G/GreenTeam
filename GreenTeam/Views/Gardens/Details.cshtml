@@ -51,14 +51,13 @@
 
     <div class="col col-lg-auto garden-right-div">
         <h3>
-            Available Patches
+            Patches
             @if (Model.IsGardenManager)
             {
                 <a class="btn btn-link" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id"><i class="fas fa-plus"></i></a>
             }
         </h3>
 
-        <!-- TODO: Joel will add stretched-link-->
         <table class="b-table table table-hover table-narrow">
             <tbody>
                 @foreach (var item in Model.GardenVM.Patches)
@@ -81,7 +80,7 @@
         <br />
         <br />
 
-        <h3>Open Tasks</h3>
+        <h3>Tasks</h3>
         <table class="b-table table table-hover">
             <tbody>
                 @foreach (var patch in Model.GardenVM.Patches)

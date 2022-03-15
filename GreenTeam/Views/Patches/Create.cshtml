@@ -4,32 +4,33 @@
     ViewData["Title"] = "Create Patch";
 }
 
-<h1>Create</h1>
+<div>
+    <a class="btn btn-link" asp-controller="Gardens" asp-action="Details" asp-route-id=@Url.ActionContext.RouteData.Values["id"]><i class="fas fa-chevron-left"></i> Back to List</a>
+</div>
 
-<h4>Patch</h4>
-
-<hr />
-<div class="row">
-    <div class="align-content-center">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="GardenId" value=@Url.ActionContext.RouteData.Values["id"] />
-            <div class="form-group">
-                <label asp-for="PatchName" class="control-label">Patch Name:</label>
-                <input asp-for="PatchName" class="form-control" />
-                <span asp-validation-for="PatchName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Crop" class="control-label">Crop Name:</label>
-                <input asp-for="Crop" class="form-control" />
-                <span asp-validation-for="Crop" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-action" />
-                <a class="btn btn-action" asp-controller="Gardens" asp-action="Details" asp-route-id=@Url.ActionContext.RouteData.Values["id"]>Cancel</a>
-            </div>
-        </form>
+<div class="garden-index-all-centered row row-cols-lg-auto row-detail">
+    <div class="row">
+        <div class="align-content-center">
+            <form asp-action="Create">
+                <h1>Create a new Patch</h1>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="GardenId" value=@Url.ActionContext.RouteData.Values["id"] />
+                <div class="form-group">
+                    <label asp-for="PatchName" class="control-label">Patch Name:</label>
+                    <input asp-for="PatchName" class="form-control" />
+                    <span asp-validation-for="PatchName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Crop" class="control-label">Crop Name:</label>
+                    <input asp-for="Crop" class="form-control" />
+                    <span asp-validation-for="Crop" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
