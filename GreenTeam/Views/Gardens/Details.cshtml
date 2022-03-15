@@ -4,43 +4,38 @@
     ViewData["Title"] = "Details";
 }
 
+<div><a class="btn btn-link" asp-action="Index">&#10096; Back to List</a> </div>
+<div class="row row-cols-lg-auto">
+    <div class="col col-lg-auto garden-left-div">
+        @if (Model.GardenVM.Image != null)
+        {
+            <div class="img-wrapper">
+                <img src="data:image;base64,@Convert.ToBase64String(Model.GardenVM.Image.Content)" />
+            </div>
+        }
 
-    <div class="row">
-        <div class="col">
-             @if (Model.GardenVM.Image != null)
-             {
-    <div class="img-wrapper">
-        <img src="data:image;base64,@Convert.ToBase64String(Model.GardenVM.Image.Content)" />
-    </div>
-}
+        <h4 class="location-h4">&#127919;@Html.DisplayFor(model => model.GardenVM.Location)</h4>
 
-<p>
-                @if (Model.IsGardenManager)
-                {
-            <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id">&#10010; Patch</a>
-            <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">&#9998; Garden</a>
-                }
-    <a class="btn btn-action" asp-action="Index">&#10096; Back to List</a>
-</p>
+        <p>
+            @if (Model.IsGardenManager)
+            {
+                <a class="btn btn-action" asp-controller="Patches" asp-action="Create" asp-route-id="@Model?.GardenVM.Id">&#10010; Patch</a>
+                <a class="btn btn-action" asp-action="Edit" asp-route-id="@Model?.GardenVM.Id">&#9998; Garden</a>
+            }
+            
+        </p>
 
- <h3>Active Members</h3>
-        <div clas="card">
+        <h3>Active Members</h3>
+        <div class="card">
             <table class="table table-striped">
                 <tbody>
                     @foreach (var item in Model.GardenVM.Users)
                     {
                         <tr scope="row" class="alnleft">
-                            <td width="50%">
+                            <td>
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </td>
-                            @if (item.IsGardenManager)
-                            {
-                                <td width="50%">Manager</td>
-                            }
-                            else
-                            {
-                                <td width="50%">Member</td>
-                            }
+
                         </tr>
                     }
                 </tbody>
@@ -54,11 +49,12 @@
             }
         </p>
 
-</div>
+    </div>
 
-        <div class="col">
+    <div class="col col-lg-auto garden-right-div">
         <h1>@Html.DisplayFor(model => model.GardenVM.Name)</></h1>
-        <h4>&#127919;@Html.DisplayFor(model => model.GardenVM.Location)</></h4>
+        <br />
+        <br />
         <h3>Available Patches</h3>
         <div class="card">
             <!-- TODO: Joel will add stretched-link-->
@@ -86,7 +82,7 @@
         <br />
         <br />
 
-        <h3>Current Tasks</h3>
+        <h3>Open Tasks</h3>
         <div clas="card">
             <table class="table table-striped table-hover">
                 <tbody>
@@ -97,33 +93,17 @@
                             <tr scope="row" class="alnleft">
                                 @if (patchTask.IsCompleted == false)
                                 {
-                                    <td width="30%" class="table-textfield">
-                                        <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)
-                                    </td>
-                                    <td width="30%">
+                                    <td>
                                         <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
                                             <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)
-                                        </a>
-                                    </td>
-                                    <td width="30%">
-                                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                            <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskDescription)
                                         </a>
                                     </td>
                                 }
                                 @if (patchTask.IsCompleted == true)
                                 {
-                                    <td width="30%" class="table-textfield">
-                                        <text class="table-text"><del>@Html.DisplayFor(modelItem => patch.PatchName)</del>
-                                    </td>
                                     <td>
                                         <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                            <text class="table-text"><del>@Html.DisplayFor(modelItem => patchTask.TaskName)</del>
-                                        </a>
-                                    </td>
-                                    <td width="30%">
-                                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                            <text class="table-text"><del>@Html.DisplayFor(modelItem => patchTask.TaskDescription)</del>
+                                            <del><text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</del>
                                         </a>
                                     </td>
                                 }
@@ -131,7 +111,7 @@
                                     @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
                                     {
                                         <input type="hidden" name="Id" value="@patchTask.Id" />
-                                        <button type="submit" class="btn btn-action-standard">Done</button>
+                                        <button type="submit" class="btn btn-action">Done</button>
                                     }
                                 </td>
                                 <td>
@@ -146,7 +126,7 @@
                     }
                 </tbody>
             </table>
-            </div>
         </div>
     </div>
+</div>
 

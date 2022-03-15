@@ -4,6 +4,9 @@ using GreenTeam.Models;
 using GreenTeam.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +32,13 @@ builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<Mapper>();
 builder.Services.AddScoped<ImageConverter>();
 builder.Services.AddScoped<IdentityDataInitializer>();
-
+builder.Services
+    .AddBlazorise(options =>
+    {
+        options.Immediate = true;
+    })
+    .AddBootstrapProviders()
+    .AddFontAwesomeIcons();
 
 var app = builder.Build();
 
