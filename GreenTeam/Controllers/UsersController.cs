@@ -35,6 +35,12 @@ namespace GreenTeam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Search([Bind("Email, GardenId")] SearchUserVM search)
         {
+            bool isManager = await userService.IsManager(search.GardenId);
+            if (!isManager)
+            {
+                return View("AccessDeniedError");
+            }
+
             if (ModelState.IsValid)
             {
                 AppUserVM foundUser = await userService.GetAppUserVMByEmail(search.Email);
