@@ -113,7 +113,7 @@ h4 {
 main {
     margin: 150px 0px 10px 0px;
     box-sizing: border-box;
-    padding: 4rem 4rem !important;
+    padding: 3rem 4rem 4rem 4rem !important;
     background: linear-gradient(270deg, #087040d4, #038C4C);
     padding: 20px 0px 20px 0px;
     border-radius: 1rem;
@@ -232,18 +232,20 @@ table{
     border-color: #fff;
 }
 
-.btn-primary {
+/*.btn-primary {
     color: #fff;
     background-color: #87b2f1;
     border-color: #87b2f1;
-}
+}*/
 
-.btn btn-primary:hover {
+.btn-primary:hover {
     color: #ffffff6e !important;
 }
 
+.btn-outline-light:hover {
+    background-color: transparent;
+}
 /*Buttons for Identity pages e.g. register / login */
-
 .btn-link {
     text-decoration: none;
     color: #ffffff;
@@ -292,8 +294,8 @@ img {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    height: 250px;
-    width: 250px;
+    height: 200px;
+    width: 200px;
     margin: auto;
     border-radius: 50%;
     border: 2px solid #fff;
@@ -420,8 +422,14 @@ modal-fade {
     flex-direction: row !important;
     align-items: flex-start;
     margin: auto;
+    background-color: rgb(188 153 239 / 72%);
+    border-radius: 1rem;
+    padding: 3rem;
 }
 
+.row-garden-datail {
+
+}
 
 
 .garden-right-div {

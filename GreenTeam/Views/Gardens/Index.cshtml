@@ -3,27 +3,34 @@
 @{
     ViewData["Title"] = "Gardens";
 }
-<div class="garden-index-all-centered">
-<h1>Gardens</h1>
-<table class="table  table-hover">
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr scope="row" class="alnleft">
-                <td>
-                    <a class="table-content" asp-action="Details" asp-route-id="@item.Id">
-                        <i class="fa-light fa-hand-holding-seedling"></i> 
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div><a class="btn btn-link" asp-controller="Home" asp-action="Index"><i class="fas fa-chevron-left"></i> Back to List</a> </div>
+<div class="garden-index-all-centered row row-cols-lg-auto">
+    <div class="col col-lg-auto">
+        <h1>
+            Gardens
+            <a class="btn btn-link" asp-action="Create"><i class="fas fa-plus"></i></a>
+        </h1>
 
-<br />
+        <table class="table table-striped">
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr scope="row" class="alnleft">
+                        <td>
+                            <a class="table-content" asp-action="Details" asp-route-id="@item.Id">
+                                <i class="fas fa-seedling"></i>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-<a class="btn btn-action" asp-action="Create">Add Garden</a>
+        <br />
+
+
+    </div>
 </div>
 
 
