@@ -4,103 +4,106 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>@Model.Name</h4>
-
-<form asp-action="Edit" enctype="multipart/form-data">
-
-    @if (Model.Image != null)
-    {
-        <div class="img-container">
-            <img class="img-wrapper-edit" src="data:image;base64,@Convert.ToBase64String(Model.Image.Content)" />
-
-            <div class="img-edit-textbox">
-                <input class="visually-hidden" id="file" asp-for="Image" name="files" type="file">
-                <label class="clickable-lable" for="file">Change image</label>
-            </div>
-        </div>
-    }
-
-    <hr />
-    <div class="row">
-        <div class="align-content-center">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            @if (Model.Image == null)
-            {
-                <div class="form-group">
-                    <label asp-for="Image" class="control-label">Add Picture</label>
-                    <input asp-for="Image" class="form-control" name="files" type="file" />
-                </div>
-            }
-            <div class="form-group">
-                <input type="button" value="Delete" class="btn btn-action" onclick="deleteConfirm()" />
-                <a class="btn btn-action" asp-controller="Gardens" asp-action="Details" asp-route-id="@Model?.Id">Cancel</a>
-                <input type="submit" value="Save" class="btn btn-action" />
-            </div>
-        </div>
-    </div>
-</form>
-
-<br />
-<br />
-
-<!-- Modal Script -->
-<div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="delete-conformation">
-                    Delete Confirmation
-                </h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <p class="modal-p">
-                                Are you sure you want to delete @Html.DisplayFor(model => model.Name)?
-                            </p>
-                            <strong id="deletedValueName">
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn btn-primary" asp-controller="Gardens" asp-action="Edit" asp-route-id="@Model?.Id">Cancel</a>
-                    <form asp-action="Delete">
-                        <input type="hidden" asp-for="Id" />
-                        <input type="submit" value="Delete" class="btn btn-danger" />
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<div>
+    <a class="btn btn-link" asp-controller="Gardens" asp-action="Details" asp-route-id="@Model?.Id"><i class="fas fa-chevron-left"></i> Back to List</a>
 </div>
 
 
-<script type="text/javascript">
-    //this is only display bootstrap modal pop up dialog
-    var deleteConfirm = function (val) {
-        $('#deletedValueName').text(val);
-        $('#delete-conformation').modal('show');
-    }
 
-</script>
+<div class="garden-index-all-centered row row-cols-lg-auto row-detail"> 
 
-@section Scripts {
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <h1>Edit</h1>
+        @if (Model.Image != null)
+        {
+            <div class="img-container">
+                <img class="img-wrapper-edit" src="data:image;base64,@Convert.ToBase64String(Model.Image.Content)" />
+
+                <div class="img-edit-textbox">
+                    <input class="visually-hidden" id="file" asp-for="Image" name="files" type="file">
+                    <label class="clickable-lable" for="file">Change image</label>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="align-content-center">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Location" class="control-label"></label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+                @if (Model.Image == null)
+                {
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label">Add Picture</label>
+                        <input asp-for="Image" class="form-control" name="files" type="file" />
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <input type="button" value="Delete" class="btn btn-danger" onclick="deleteConfirm()" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <br />
+    <br />
+
+    <!-- Modal Script -->
+    <div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="delete-conformation">
+                        Delete Confirmation
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <p class="modal-p">
+                                    Are you sure you want to delete @Html.DisplayFor(model => model.Name)?
+                                </p>
+                                <strong id="deletedValueName">
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        //this is only display bootstrap modal pop up dialog
+        var deleteConfirm = function (val) {
+            $('#deletedValueName').text(val);
+            $('#delete-conformation').modal('show');
+        }
+
+    </script>
+
+    @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-}
+    }
+    }
+</div>
