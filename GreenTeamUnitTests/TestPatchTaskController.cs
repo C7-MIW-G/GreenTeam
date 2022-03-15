@@ -2,13 +2,13 @@
 
 namespace GreenTeamUnitTests
 {
-    [TestClass]
+    /*[TestClass]
     public class TestPatchTaskController
     {
         [TestMethod]
         public async void PostPatchTaskCreateSuccesfull()
         {
-           /* // Arrange
+            // Arrange
             PatchTask patchTask = new PatchTask() { Id = 2, PatchId = 1, TaskDescription = "testTaskDescription", TaskName = "testTaskName" };
 
             var mockIPatchTaskService = new Mock<IPatchTaskService>();
@@ -22,12 +22,11 @@ namespace GreenTeamUnitTests
 
             // Assert
             //Assert.IsNotNull(returnedType);
-            Assert.AreEqual(patchTask, returnedType);
-           */
+            Assert.AreEqual(patchTask, returnedType);        
 
         }
 
-        /*public async void PatchTaskEditSuccesfull()
+        public async void PatchTaskEditSuccesfull()
         {
             PatchTask patchTask = new PatchTask() { Id = 1, PatchId = 1, TaskDescription = "testTaskDescription", TaskName = "testTaskName" };
 
@@ -35,7 +34,6 @@ namespace GreenTeamUnitTests
             mockIPatchTaskService.Setup(controller => controller.FindById(1).Result).Returns(patchTask);
             *//*var mockIPatchTaskService = new Mock<IPatchTaskService>();
             mockIPatchTaskService.Setup(controller => controller.FindById().Result.);*//*
-        }*/
-
-    }
+        }
+    }*/
 }
