@@ -18,9 +18,7 @@ namespace GreenTeam.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<GardenUser>()
                 .HasKey(c => new { c.GardenId, c.UserId })
-                .HasName("PrimaryKey_GardenUserId");
-
-            modelBuilder.Seed();            
+                .HasName("PrimaryKey_GardenUserId");                   
         }
 
         public DbSet<Garden> Garden { get; set; }

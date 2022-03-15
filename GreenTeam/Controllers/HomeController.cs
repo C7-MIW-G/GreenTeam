@@ -19,10 +19,10 @@ namespace GreenTeam.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             IdentityDataInitializer dataInitializer = new IdentityDataInitializer();
-            dataInitializer.SeedData(roleManager, userManager);
+            await dataInitializer.SeedData(roleManager, userManager);
 
             return View();
         }
