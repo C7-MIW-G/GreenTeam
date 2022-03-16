@@ -364,8 +364,29 @@ img {
     font-size: small;
 }
 
-/* Modal Styling */
+.account-manage-fields{
+    width: 100% !important;
+    padding: 0 !important;
+    
+}
 
+.col-md-3-custom {
+    flex: 0 0 auto;
+    width: 25%;
+    padding-top: 4.1rem;
+}
+
+.row-account-fields {
+    display: flex !important;
+    justify-content: space-evenly !important;
+    flex-direction: row !important;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    margin: auto;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+/* Modal Styling */
 modal-fade {
     margin: 50px 0px;
 }
