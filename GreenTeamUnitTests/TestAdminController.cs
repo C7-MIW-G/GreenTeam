@@ -55,24 +55,7 @@ namespace GreenTeamUnitTests
             return users;
         }
 
-        [TestMethod]
-        public void Test_GetListOfUsers()
-        {
-            //Arrange
-            List<AppUser> appUsers = CreateTestUsers();
-            var mockUserManager = new Mock<UserManager<AppUser>>();
-            mockUserManager.Setup(au => au.Users.ToList()).Returns(appUsers);
-            var controller = new AdminController(null, mockUserManager.Object);
-
-            //Act
-            var actionResult = controller.ListUsers();
-
-            ViewResult actionViewResult = (ViewResult)actionResult; //Unpackaging
-            List<AppUser> actualModel = actionViewResult.Model as List<AppUser>; //Unpackaging
-
-            //Assert           
-            Assert.AreSame(appUsers, actualModel, "Models are not the same.");
-        }
+       
 
     }
 }
