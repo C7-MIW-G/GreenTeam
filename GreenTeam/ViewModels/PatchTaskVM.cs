@@ -8,6 +8,8 @@ namespace GreenTeam.ViewModels
         
         public int PatchId { get; set; }
 
+        public string PatchName { get; set; }
+
         [Required(ErrorMessage = "Please enter a taskname.")]
         [StringLength(20)]
         [RegularExpression(@"[a-zA-Z0-9 äëïöü'-]{1,20}", 
