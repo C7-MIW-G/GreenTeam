@@ -156,6 +156,10 @@ tr {
     border-style: hidden !important;
 }
 
+.pointer{
+    cursor: pointer;
+}
+
 td {
     font-size: 1.3rem;
     /*width: 50% removed and added in td's of gardenlist*/

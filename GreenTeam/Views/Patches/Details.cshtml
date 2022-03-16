@@ -4,7 +4,7 @@
 }
 
 <div>
-    <a class="btn btn-link" asp-controller="Gardens" asp-action="Details" asp-route-id=@Model.GardenId><i class="fas fa-chevron-left"></i> Back to List</a>
+    <a class="btn btn-link" asp-controller="Gardens" asp-action="Details" asp-route-id=@Model?.GardenId><i class="fas fa-chevron-left"></i> Back to List</a>
 </div>
 
 <h1>
@@ -20,7 +20,7 @@
 
 <div class="row row-cols-lg-auto row-detail">
     <div class="col col-lg-auto">
-        <table class="table table-hover">
+        <table class="table table-hover pointer">
 
 
             @foreach (var PatchTaskVM in Model.PatchTasks)
