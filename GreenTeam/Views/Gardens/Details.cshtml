@@ -105,7 +105,7 @@
                                 </td>
                                 <td>
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                        <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)
+                                        <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</text>
                                     </a>
                                 </td>
                             }
@@ -120,8 +120,11 @@
                                 </td>
                                 <td>
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                        <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)
+                                        <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</text>
                                     </a>
+                                </td>
+                                <td>
+                                    <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)</text>
                                 </td>
                             }
 

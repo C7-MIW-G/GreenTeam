@@ -91,7 +91,6 @@ namespace GreenTeam.Services
             {
                 patchVMs.Add(mapper.ToVM(patch));
             }
-
             return patchVMs;
         }
 
@@ -109,6 +108,6 @@ namespace GreenTeam.Services
             int gardenId = patch.GardenId;
 
             return gardenId;
-        }
+        }        
     }
 }

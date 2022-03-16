@@ -22,16 +22,21 @@ html {
 
 .navbar-brand {
     color: #ffffff !important;
+    font-size:1.5rem;
+    padding-top: 0.4rem;
 }
 
-.navbar{
-    padding-left: 15rem;
-    padding-right: 15rem;
+.navbar {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .nav-link{
     white-space: nowrap;
+    border-radius: 10px;
+    
 }
+
 
 .btn-link {
     font-weight: 600;
