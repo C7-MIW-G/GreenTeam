@@ -230,7 +230,6 @@ table{
 }
 
 /* Button styling for actions - Blue */
-
 .btn-action {
     color: #fff;
     background-color: transparent;
@@ -340,7 +339,6 @@ img {
     cursor: pointer;
     opacity: 0.4;
 }
-
 
 /*Form Titles*/
 .control-label {
