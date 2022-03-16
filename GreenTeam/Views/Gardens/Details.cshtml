@@ -108,6 +108,9 @@
                                         <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</text>
                                     </a>
                                 </td>
+                                <td>
+                                    <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)</text>
+                                </td>
                             }
                             @if (patchTask.IsCompleted == true)
                             {
