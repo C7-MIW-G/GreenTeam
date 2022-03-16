@@ -2,6 +2,7 @@
 using GreenTeam.Implementations;
 using GreenTeam.Models;
 using GreenTeam.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -12,12 +13,16 @@ namespace GreenTeam.Services
         private readonly ApplicationDbContext context;
         private readonly Mapper mapper;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly UserManager<AppUser> userManager;
 
-        public UserService(ApplicationDbContext context, Mapper mapper, IHttpContextAccessor httpContextAccessor)
+        public UserService(ApplicationDbContext context, Mapper mapper, IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
         {
             this.context = context;
             this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
+            this.userManager = userManager;
+            
+
         }
 
         public string GetCurrentUserId()
@@ -25,6 +30,19 @@ namespace GreenTeam.Services
             string userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             return userId;
+        }
+
+        public bool IsAdmin()
+        {
+            string role = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+            if (role.Contains("Administrator"))
+            {
+                return true;
+            }
+
+            return false;
+              
+
         }
 
         public async Task<List<GardenUser>> FindByGardenId(int id)
@@ -70,6 +88,7 @@ namespace GreenTeam.Services
                 IsGardenManager = true
             };
             context.GardenUser.Add(gardenUser);
+          
 
             await context.SaveChangesAsync();
 
@@ -89,6 +108,10 @@ namespace GreenTeam.Services
 
             GardenUser gardenUser = await query.FirstOrDefaultAsync();
 
+            if (IsAdmin())
+            {
+                return true;
+            }
             if (gardenUser != null)
             {
                 return gardenUser.IsGardenManager;
@@ -105,11 +128,22 @@ namespace GreenTeam.Services
             string userId = GetCurrentUserId();
             bool isManager = await IsManager(userId, gardenId);
 
+            if (IsAdmin())
+            {
+                return true;
+            }
+
             return isManager;
         }
 
         public async Task<bool> IsAuthorizedToAccessGarden(int gardenId)
         {
+
+            if (IsAdmin())
+            {
+                return true;
+            }
+
             string userId = GetCurrentUserId();
 
             var query = context.GardenUser
