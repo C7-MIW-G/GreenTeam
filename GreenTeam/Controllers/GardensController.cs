@@ -46,14 +46,14 @@ namespace GreenTeam.Controllers
             }
             string userId = userService.GetCurrentUserId();
 
-            GardenDetailsVM gardenOverviewVM = await gardenService.GetOverviewVM(id, userId);
+            GardenDetailsVM gardenDetailsVM = await gardenService.GetDetailsVM(id, userId);
 
-            if (gardenOverviewVM == null)
+            if (gardenDetailsVM == null)
             {
                 return NotFound();
             }
 
-            return View(gardenOverviewVM);
+            return View(gardenDetailsVM);
         }
 
         // GET: Gardens/Create
@@ -83,12 +83,10 @@ namespace GreenTeam.Controllers
                 await gardenService.AddGarden(garden);
 
                 string userId = userService.GetCurrentUserId();
-                await userService.AssignManager(userId, garden.Id);
-
-                return RedirectToAction(nameof(Index));
+                await userService.AssignManager(userId, garden.Id);                                               
             }
 
-            return View();
+            return RedirectToAction("Details", new { id = garden.Id });
         }
 
         // GET: Gardens/Edit/5
