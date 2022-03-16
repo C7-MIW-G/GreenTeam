@@ -60,7 +60,9 @@ namespace GreenTeamUnitTests
             GardenVM gardenVM = createTestGardenVM();
             var mockGardenService = new Mock<IGardenService>();
             mockGardenService.Setup(x => x.GetVMById(gardenVM.Id)).ReturnsAsync(gardenVM);
-            var controller = new GardensController(mockGardenService.Object, null, null, null, null);
+            var mockUserService = new Mock<IUserService>();
+            mockUserService.Setup(y => y.IsAuthorizedToAccessGarden(gardenVM.Id)).ReturnsAsync(true);
+            var controller = new GardensController(mockGardenService.Object, mockUserService.Object, null, null, null);
 
             //Act
             var actionResult = controller.Edit(gardenVM.Id);
@@ -72,27 +74,6 @@ namespace GreenTeamUnitTests
             Assert.AreSame(gardenVM, actualModel, "Models are not the same.");
         }
         
-        /*[TestMethod]
-        public void TestEditGardenPost()
-        {
-            //Arrange
-            GardenVM gardenVM = createTestGardenVM();
-            Garden garden = createTestGarden();
-            var mockGardenService = new Mock<IGardenService>();
-            mockGardenService.Setup(x => x.GetVMById(gardenVM.Id)).ReturnsAsync(gardenVM);
-            var controller = new GardensController(mockGardenService.Object, null, null, null, null);
-            RedirectToActionResult returnResult = controller.RedirectToAction(nameof(controller.Index));
-
-            //Act
-            var actionResult = controller.Edit(gardenVM.Id, garden, null);
-
-
-            //Assert
-            Assert.AreSame(actionResult, returnResult);
-
-            
-
-
-        }*/
+       
     }
 }
