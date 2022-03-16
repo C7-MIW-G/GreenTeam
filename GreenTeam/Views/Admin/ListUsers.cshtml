@@ -3,41 +3,45 @@
 @{
     ViewBag.Title = "GreenTeam Users";
 }
+<div>
+    <a class="btn btn-link" asp-action="Index"><i class="fas fa-chevron-left"></i> Back to Admin Portal</a>
+</div>
 
-<h1>All GreenTeam Users</h1>
-<br />
-<br />
+<div class="row row-cols-lg-auto row-detail">
+    <div class="col col-lg-auto">
+        <h1>All GreenTeam Users</h1>
 
+        @if (Model.Any<AppUser>())
+        {
+            foreach (var user in Model)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">@user.FullName</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@user.Email</h5>
+                    </div>
+                    <div class="card-footer">
+                        @using (Html.BeginForm("DeleteUser", "Admin", new { @id = @user.Id }, FormMethod.Post))
+                        {
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-body">
+                    There are no users yet.
+                </div>
+            </div>
+        }
 
-@if (Model.Any<AppUser>())
-{
-    foreach (var user in Model)
-    {
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">@user.FullName</h5>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">@user.Email</h5>
-            </div>
-            <div class="card-footer">
-                @using (Html.BeginForm("DeleteUser", "Admin", new { @id = @user.Id }, FormMethod.Post))
-                {
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                }
-            </div>
-        </div>
-    }
-}
-else
-{
-    <div class="card">
-        <div class="card-body">
-            There are no users yet.
-        </div>
     </div>
-}
-
+</div>
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");

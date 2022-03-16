@@ -5,46 +5,50 @@
     ViewBag.Title = "GreenTeam Users";
 }
 
-<h1>All Gardens</h1>
-
 <div>
     <a class="btn btn-link" asp-action="Index"><i class="fas fa-chevron-left"></i> Back to Admin Portal</a>
 </div>
 
-@if (Model.Any<GardenVM>())
-    
-{  
-    
-    <table class="table table-striped">
-            <tbody>
-                @foreach (var garden in Model)
-                {
-                    <tr scope="row" class="alnleft">
-                        <td>
-                            <a class="table-content" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
-                                <i class="fas fa-seedling"></i>
-                                @Html.DisplayFor(modelItem => garden.Name)
-                            </a>
-                        </td>
-                         <td>
-                            <a class="table-content" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
-                                @Html.DisplayFor(modelItem => garden.Location)
-                            </a>
-                        </td>
-                      
-                    </tr>
-                }
-            </tbody>
-        </table>
-}
-else
-{
-    <div class="card">
-        <div class="card-body">
-            There are no gardens yet.
-        </div>
+<div class="row row-cols-lg-auto row-detail">
+    <div class="col col-lg-auto">
+        <h1>All Gardens</h1>
+
+        @if (Model.Any<GardenVM>())
+
+        {
+
+            <table class="table table-striped">
+                <tbody>
+                    @foreach (var garden in Model)
+                    {
+                        <tr scope="row" class="alnleft">
+                            <td>
+                                <a class="table-content" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
+                                    <i class="fas fa-seedling"></i>
+                                    @Html.DisplayFor(modelItem => garden.Name)
+                                </a>
+                            </td>
+                            <td>
+                                <a class="table-content" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
+                                    @Html.DisplayFor(modelItem => garden.Location)
+                                </a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-body">
+                    There are no gardens yet.
+                </div>
+            </div>
+        }
     </div>
-}
+</div>
 
 @section Scripts {
     @{
