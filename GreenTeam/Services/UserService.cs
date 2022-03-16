@@ -214,5 +214,24 @@ namespace GreenTeam.Services
 
             return userId;
         }
+
+        public async Task RemoveMemberFromGarden(string userEmail, int gardenId)
+        {
+            string userId = await GetUserIdByEmail(userEmail);
+
+            var query = context.GardenUser
+                .Where(x => x.UserId == userId && x.GardenId == gardenId);
+
+            GardenUser gardenUser = await query.FirstOrDefaultAsync();
+
+            context.GardenUser.Remove(gardenUser);
+            await context.SaveChangesAsync();
+
+
+
+
+
+        }
+
     }
 }

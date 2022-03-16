@@ -42,7 +42,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.UserName)
                         </td>
-
+                        <td>
+                            @if (@Model.IsGardenManager && !@item.IsGardenManager){
+                            <a asp-controller="Users" asp-action="RemoveMemberFromGarden" asp-route-id="@item.UserEmail+@Model.GardenVM.Id">-</a>
+                        }
+                        </td>
+                        
                     </tr>
                 }
             </tbody>

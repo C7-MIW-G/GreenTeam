@@ -190,7 +190,7 @@ namespace GreenTeam.Controllers
             await gardenService.DeleteGarden(id);
             return RedirectToAction(nameof(Index));
         }
-
+     
         private bool GardenExists(int id)
         {
             return gardenService.FindById(id) != null;

@@ -69,5 +69,27 @@ namespace GreenTeam.Controllers
 
             return View();
         }
+
+        
+        public async Task<IActionResult> RemoveMemberFromGarden(string id)
+        {
+            string[] emailWithGardenId = id.Split('+');
+            string email = emailWithGardenId[0];
+            int gardenId = int.Parse(emailWithGardenId[1]);
+            bool authorized = await userService.IsManager(gardenId);
+
+            if (authorized)
+            {
+
+                await userService.RemoveMemberFromGarden(email, gardenId);
+
+
+                return RedirectToAction("Details", "Gardens", new { id = gardenId });
+                
+            }
+
+            return RedirectToAction("Details", "Gardens", new { id = gardenId });
+
+        }
     }
 }
