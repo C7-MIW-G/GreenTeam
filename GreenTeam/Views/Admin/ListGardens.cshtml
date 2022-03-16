@@ -5,67 +5,37 @@
     ViewBag.Title = "GreenTeam Users";
 }
 
-<h1>All GreenTeam Gardens</h1>
-<br />
-<br />
+<h1>All Gardens</h1>
 
+<div>
+    <a class="btn btn-link" asp-action="Index"><i class="fas fa-chevron-left"></i> Back to Admin Portal</a>
+</div>
 
 @if (Model.Any<GardenVM>())
-{
-    foreach (var garden in Model)
-    {
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">@garden.Name</h5>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">@garden.Location</h5>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-danger" onclick="deleteConfirm(@garden.Id)">Delete</a> 
-            </div>
-        </div>
-
-        <!-- Modal Script -->
-        <div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="delete-conformation">
-                            Delete Confirmation
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <p class="modal-p">
-                                        Are you sure you want to delete ?
-                                    </p>
-                                    <strong id="deletedValueName">
-                                    </strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <form method="post" asp-action="DeleteGarden" asp-controller="Admin" asp-route-id="@garden.Id">
-                                <a class="btn btn-primary" asp-action="ListGardens">Cancel</a>
-                                <input type="submit" class="btn btn-danger" value="Delete" />
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script type="text/javascript">
-            //this is only display bootstrap modal pop up dialog
-            var deleteConfirm = function (val) {
-                $('#deletedValueName').text(val);
-                $('#delete-conformation').modal('show');
-            }
-        </script>
-    }
+    
+{  
+    
+    <table class="table table-striped">
+            <tbody>
+                @foreach (var garden in Model)
+                {
+                    <tr scope="row" class="alnleft">
+                        <td>
+                            <a class="table-content" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
+                                <i class="fas fa-seedling"></i>
+                                @Html.DisplayFor(modelItem => garden.Name)
+                            </a>
+                        </td>
+                         <td>
+                            <a class="table-content" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
+                                @Html.DisplayFor(modelItem => garden.Name)
+                            </a>
+                        </td>
+                      
+                    </tr>
+                }
+            </tbody>
+        </table>
 }
 else
 {
