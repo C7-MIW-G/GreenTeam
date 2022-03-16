@@ -65,13 +65,14 @@ td {
     color: #ffffff !important;
 }
 
-p {
+p { 
     text-decoration: none;
     color: #ffffff;
 }
 
 .table-content {
     font-size: 1.3rem;
+    white-space: nowrap;
 }
 
 /* Stretched link styling */
@@ -116,7 +117,7 @@ main {
     padding: 3rem 4rem 4rem 4rem !important;
     background: linear-gradient(270deg, #087040d4, #038C4C);
     padding: 20px 0px 20px 0px;
-    border-radius: 1rem;
+    border-radius: 1rem;    
 }
 
 /*.pb-3 {
@@ -425,20 +426,14 @@ modal-fade {
     justify-content: space-evenly !important;
     flex-direction: row !important;
     align-items: flex-start;
+    flex-wrap: nowrap;
     margin: auto;
     border-radius: 1rem;
     padding: 3rem;
 }
 
 .row-detail {
-    display: flex !important;
-    justify-content: space-evenly !important;
-    flex-direction: row !important;
-    align-items: flex-start;
-    margin: auto;
-    background-color: rgb(188 153 239 / 72%);
-    border-radius: 1rem;
-    padding: 3rem;
+    background-color: rgb(188 153 239 / 72%);    
 }
 
 
