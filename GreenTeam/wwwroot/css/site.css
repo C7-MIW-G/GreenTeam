@@ -430,6 +430,10 @@ modal-fade {
     padding: 3rem;
 }
 
+.row-login{
+    padding:2rem !important;
+}
+
 .row-detail {
     background-color: rgb(188 153 239 / 72%);    
 }
