@@ -20,8 +20,7 @@ namespace GreenTeam.Services
             this.context = context;
             this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
-            this.userManager = userManager;
-            
+            this.userManager = userManager;       
 
         }
 
@@ -34,15 +33,22 @@ namespace GreenTeam.Services
 
         public bool IsAdmin()
         {
-            string role = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
-            if (role.Contains("Administrator"))
+            try
             {
-                return true;
+                string role = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+
+                if (role.Contains("Administrator"))
+                {
+                    return true;
+                }
+
             }
+            catch (Exception ex)
+            {
+                return false;
 
+            }
             return false;
-              
-
         }
 
         public async Task<List<GardenUser>> FindByGardenId(int id)
@@ -191,6 +197,12 @@ namespace GreenTeam.Services
             context.GardenUser.Add(gardenUser);
             await context.SaveChangesAsync();
         }
+
+      /*  public async Task RemoveMemberFromGarden(AppUserVM user, int gardenId)
+        {
+
+
+        }*/
 
         public async Task<string> GetUserIdByEmail(string email)
         {
