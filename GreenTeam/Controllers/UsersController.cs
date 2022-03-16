@@ -70,7 +70,7 @@ namespace GreenTeam.Controllers
             return View();
         }
 
-        
+        [Authorize]
         public async Task<IActionResult> RemoveMemberFromGarden(string id)
         {
             string[] emailWithGardenId = id.Split('+');
