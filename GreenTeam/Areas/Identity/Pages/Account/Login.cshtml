@@ -5,44 +5,45 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row row-login">
-    <div class="align-content-center">
-        <section>
-            <form id="account" method="post">
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                    <label asp-for="Input.Email" class="form-label"></label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                    <label asp-for="Input.Password" class="form-label"></label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div>
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe" class="form-label-custom">
-                            <input class="form-check-input" asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
+<div class="row row-login row-cols-lg-auto row-detail">
+    <div class="col col-lg-auto">
+        <div class="align-content-center">
+            <section>
+                <form id="account" method="post">
+                    <h1>@ViewData["Title"]</h1>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-floating">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                        <label asp-for="Input.Email" class="form-label"></label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
-                </div>
-                <div>
-                    <br />
+                    <div class="form-floating">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                        <label asp-for="Input.Password" class="form-label"></label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe" class="form-label-custom">
+                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <br />
 
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-action">Log in</button>
-                </div>
-                <div>
-                    <br />
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                </div>
-            </form>
-        </section>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-success">Log in</button>
+                    </div>
+                    <div>
+                        <br />
+                        <p>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">New to GreenTeam? Register here</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
     </div>
 </div>
 
