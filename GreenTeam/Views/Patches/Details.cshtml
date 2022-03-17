@@ -22,7 +22,10 @@
     <div class="col col-lg-auto">
         <table class="table table-hover pointer">
 
-
+            @if (!Model.PatchTasks.Any())
+            {
+                <p>No tasks yet! Press + to add tasks </p>
+            }
             @foreach (var PatchTaskVM in Model.PatchTasks)
             {
                 <tbody>
@@ -37,28 +40,16 @@
                                 }
                             </td>
                             <td class="table-texfield2">
-                                @if (Model.isGardenManager)
-                                {
-                                    <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
-                                        @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
-                                    </a>
-                                }
-                                else
-                                {
+
+                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
-                                }
+                                </a>
                             </td>
                             <td class="table-textfield">
-                                @if (Model.isGardenManager)
-                                {
-                                    <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
-                                        @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
-                                    </a>
-                                }
-                                else
-                                {
+
+                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
-                                }
+                                </a>
                             </td>
                         </tr>
                     }
@@ -73,60 +64,31 @@
                                 }
                             </td>
                             <td class="table-texfield2">
-                                @if (Model.isGardenManager)
-                                {
-                                    <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
-                                        @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
-                                    </a>
-                                }
-                                else
-                                {
+                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
-                                }
+                                </a>
                             </td>
                             <td class="table-textfield">
-                                @if (Model.isGardenManager)
-                                {
-                                    <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
-                                        @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
-                                    </a>
-                                }
-                                else
-                                {
+                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
-                                }
+                                </a>
                             </td>
-                          
                         </tr>
                     }
                     @if (PatchTaskVM.IsDeleted == true)
                     {
                         <tr scope="row" class="alnleft">
-                            <td >
+                            <td>
                             </td>
                             <td class="table-texfield2">
-                                @if (Model.isGardenManager)
-                                {
-                                    <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
-                                        <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
-                                    </a>
-                                }
-                                else
-                                {
+                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
                                     <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
-                                }
+                                </a>
                             </td>
-                            <td class="table-textfield" >
-                                @if (Model.isGardenManager)
-                                {
-                                    <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
-                                        <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)</del>
-                                    </a>
-                                }
-                                else
-                                {
-                                    @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
-                                }
+                            <td class="table-textfield">
+                                <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
+                                    <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)</del>
+                                </a>
                             </td>
                         </tr>
                     }

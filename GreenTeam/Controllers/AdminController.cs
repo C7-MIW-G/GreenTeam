@@ -63,7 +63,6 @@ namespace GreenTeam.Controllers
 
             if (garden == null)
             {
-                ViewBag.ErrorMessage = $"Garden with Id = {id} cannot be found";
                 return View("NotFound");
             }
             await gardenService.DeleteGarden(id);
@@ -80,6 +79,7 @@ namespace GreenTeam.Controllers
         public IActionResult ListUsers()
         {
             List<AppUser> appUsers = userManager.Users.ToList();
+            appUsers.Sort();
             return View(appUsers);
         }
 
