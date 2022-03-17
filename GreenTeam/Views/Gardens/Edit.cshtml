@@ -78,6 +78,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Cancel</a>
 
                         <form asp-action="Delete">
                             <input type="hidden" asp-for="Id" />
