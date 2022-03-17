@@ -19,8 +19,9 @@
 
                 <div class="img-edit-textbox">
                     <input class="visually-hidden" id="file" asp-for="Image" name="files" type="file">
-                    <label class="clickable-lable" for="file">Change image</label>
+                    <label class="clickable-lable" for="file" onclick="showText()">Change image</label>
                 </div>
+                <p id="image"></p>
             </div>
         }
 
@@ -93,12 +94,20 @@
 
     <script type="text/javascript">
         //this is only display bootstrap modal pop up dialog
-        var deleteConfirm = function (val) {
+        var deleteConfirm = function (val) 
+        {
             $('#deletedValueName').text(val);
             $('#delete-conformation').modal('show');
         }
 
+         function showText()
+         {
+             document.getElementById("image").innerHTML = "Press save to update the picture."
+         }
+        
+
     </script>
+
 
     @section Scripts {
     @{
