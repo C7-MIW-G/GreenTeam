@@ -40,6 +40,11 @@ html {
     font-weight: 600;
 }
 
+.log-out-button{
+    margin-top:-1px;
+
+}
+
 /*Navbar border*/
 .border-bottom {
     border-bottom: 2px solid #087040d4 !important;
