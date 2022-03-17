@@ -23,13 +23,13 @@
                     {
                         <tr scope="row" class="alnleft">
                             <td>
-                                <a class="table-content" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
+                                <a class="table-content table-content-admin" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
                                     <i class="fas fa-seedling"></i>
                                     @Html.DisplayFor(modelItem => garden.Name)
                                 </a>
                             </td>
                             <td>
-                                <a class="table-content" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
+                                <a class="table-content table-content-admin" asp-controller="gardens" asp-action="Details" asp-route-id="@garden.Id">
                                     @Html.DisplayFor(modelItem => garden.Location)
                                 </a>
                             </td>
