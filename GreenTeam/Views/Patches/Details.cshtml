@@ -36,7 +36,7 @@
                                     <button type="submit" class="btn btn-outline-light"><i class="fas fa-check"></i></button>
                                 }
                             </td>
-                            <td>
+                            <td width="30%">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -48,7 +48,7 @@
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
                                 }
                             </td>
-                            <td class="alnleft">
+                            <td class="table-textfield">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -72,7 +72,7 @@
                                     <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
                                 }
                             </td>
-                            <td class="alnleft">
+                            <td width="30%" class="alnleft">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -84,7 +84,7 @@
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
                                 }
                             </td>
-                            <td class="alnleft">
+                            <td class="table-textfield">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -104,7 +104,7 @@
                         <tr scope="row" class="alnleft">
                             <td>
                             </td>
-                            <td>
+                            <td width="30%">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -116,7 +116,7 @@
                                     <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
                                 }
                             </td>
-                            <td class="alnleft">
+                            <td class="table-textfield">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
