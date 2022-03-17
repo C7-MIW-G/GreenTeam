@@ -43,11 +43,12 @@
                             @Html.DisplayFor(modelItem => item.UserName)
                         </td>
                         <td>
-                            @if (@Model.IsGardenManager && !@item.IsGardenManager){
-                            <a asp-controller="Users" asp-action="RemoveMemberFromGarden" asp-route-id="@item.UserEmail+@Model.GardenVM.Id">-</a>
-                        }
+                            @if (@Model.IsGardenManager && !@item.IsGardenManager)
+                            {
+                                <a asp-controller="Users" asp-action="RemoveMemberFromGarden" asp-route-id="@item.UserEmail+@Model.GardenVM.Id">-</a>
+                            }
                         </td>
-                        
+
                     </tr>
                 }
             </tbody>
@@ -88,50 +89,62 @@
         <h3>Tasks</h3>
         <table class="b-table table table-hover pointer">
             <tbody>
-                @foreach (var patch in Model.GardenVM.Patches)
-                {
-                    @foreach (var patchTask in patch.PatchTasks)
+                @{
+                    var count = 0;
+                    @foreach (var patch in Model.GardenVM.Patches)
                     {
-                        <tr scope="row row-detail" class="alnleft">
-
-                            @if (patchTask.IsCompleted == false)
+                        @foreach (var patchTask in patch.PatchTasks)
+                        {
+                            @if (patchTask.IsCompleted == false && count < 10)
                             {
-                                <td>
-                                    @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
-                                    {
-                                        <input type="hidden" name="Id" value="@patchTask.Id" />
-                                        <button type="submit" class="btn btn-outline-light"><i class="fas fa-check"></i></button>
-                                    }
-                                </td>
-                                <td>
-                                    <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                        <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</text>
-                                    </a>
-                                </td>
-                                <td>
-                                    <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)</text>
-                                </td>
+                                count++;
+                                <tr scope="row row-detail" class="alnleft">
+                                    <td>
+                                        @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="Id" value="@patchTask.Id" />
+                                            <button type="submit" class="btn btn-outline-light"><i class="fas fa-check"></i></button>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
+                                            <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</text>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)</text>
+                                    </td>
+                                </tr>
                             }
-                            @if (patchTask.IsCompleted == true)
+                        }
+                    }
+                    @foreach (var patch in Model.GardenVM.Patches)
+                    {
+                        @foreach (var patchTask in patch.PatchTasks)
+                        {
+                            @if (patchTask.IsCompleted == true && patchTask.IsDeleted == false && count < 10)
                             {
-                                <td>
-                                    @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
-                                    {
-                                        <input type="hidden" name="Id" value="@patchTask.Id" />
-                                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
-                                    }
-                                </td>
-                                <td>
-                                    <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
-                                        <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</text>
-                                    </a>
-                                </td>
-                                <td>
-                                    <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)</text>
-                                </td>
-                            }
+                                count++;
 
-                        </tr>
+                                <tr>
+                                    <td>
+                                        @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="Id" value="@patchTask.Id" />
+                                            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@patchTask.Id">
+                                            <text class="table-text">@Html.DisplayFor(modelItem => patchTask.TaskName)</text>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <text class="table-text">@Html.DisplayFor(modelItem => patch.PatchName)</text>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     }
                 }
             </tbody>
