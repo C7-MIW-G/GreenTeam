@@ -79,6 +79,7 @@ namespace GreenTeam.Controllers
         public IActionResult ListUsers()
         {
             List<AppUser> appUsers = userManager.Users.ToList();
+            appUsers.Sort();
             return View(appUsers);
         }
 
