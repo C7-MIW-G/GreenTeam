@@ -34,9 +34,7 @@ html {
 .nav-link{
     white-space: nowrap;
     border-radius: 10px;
-    
 }
-
 
 .btn-link {
     font-weight: 600;
@@ -125,9 +123,9 @@ main {
     border-radius: 1rem;    
 }
 
-/*.pb-3 {
+.pb-3 {
     padding-bottom: 1.5rem !important;
-}*/
+}
 
 /*Background of content*/
 .container {
@@ -136,7 +134,6 @@ main {
 }
 
 /*header of the main text*/
-/*TODO, differentiate homepage main header from table headers (h1)*/
 .display-4 {
     font-size: 500%;
     font-weight: 800;
@@ -149,12 +146,6 @@ main {
 }
 
 /*Tables*/
-/*th {
-    color: #D9A404;
-    font-size: 2rem;
-    padding: 0rem 4rem !important;
-}*/
-
 tr {
     text-decoration: none;
     color: #ffffff;
@@ -167,7 +158,6 @@ tr {
 
 td {
     font-size: 1.3rem;
-    /*width: 50% removed and added in td's of gardenlist*/
 }
 
 table{
@@ -194,8 +184,6 @@ table{
     font-size: 0.85rem;
     text-align:right;
     font-style:normal;
-    
-
 }
 
 /*Card div override*/
@@ -243,12 +231,6 @@ table{
     background-color: transparent;
     border-color: #fff;
 }
-
-/*.btn-primary {
-    color: #fff;
-    background-color: #87b2f1;
-    border-color: #87b2f1;
-}*/
 
 .btn-primary:hover {
     color: #ffffff6e !important;
@@ -447,7 +429,6 @@ modal-fade {
     text-align: center;
 }
 
-
 .row {
     display: flex !important;
     justify-content: space-evenly !important;
@@ -464,7 +445,6 @@ modal-fade {
 }
 
 .row-detail {
-    /*background-color: rgb(188 153 239 / 72%);*/
     background-color: rgb(2 90 49 / 51%);
 }
 
