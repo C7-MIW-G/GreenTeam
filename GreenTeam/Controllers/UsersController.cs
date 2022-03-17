@@ -62,8 +62,6 @@ namespace GreenTeam.Controllers
                         return View(search);
                     }
                 }
-
-
                 return RedirectToAction("Details", "Gardens", new { id = search.GardenId });
             }
 

@@ -15,20 +15,25 @@
         {
             foreach (var user in Model)
             {
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">@user.FullName</h5>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@user.Email</h5>
-                    </div>
-                    <div class="card-footer">
-                        @using (Html.BeginForm("DeleteUser", "Admin", new { @id = @user.Id }, FormMethod.Post))
-                        {
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                        }
-                    </div>
-                </div>
+                {
+                    @if (!user.Email.Equals("admin@greenteam.com"))
+                    {
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">@user.FullName</h5>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@user.Email</h5>
+                            </div>
+                            <div class="card-footer">
+                                @using (Html.BeginForm("DeleteUser", "Admin", new { @id = @user.Id }, FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
             }
         }
         else

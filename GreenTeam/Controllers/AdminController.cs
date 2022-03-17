@@ -63,7 +63,6 @@ namespace GreenTeam.Controllers
 
             if (garden == null)
             {
-                ViewBag.ErrorMessage = $"Garden with Id = {id} cannot be found";
                 return View("NotFound");
             }
             await gardenService.DeleteGarden(id);
