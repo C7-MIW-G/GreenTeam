@@ -1,4 +1,5 @@
-﻿@model IEnumerable<GreenTeam.ViewModels.GardenVM>
+﻿@using GreenTeam.ViewModels
+@model IEnumerable<GreenTeam.ViewModels.GardenVM>
 
 @{
     ViewData["Title"] = "Gardens";
@@ -13,6 +14,10 @@
 
         <table class="table table-striped pointer">
             <tbody>
+                @if (!Model.Any<GardenVM>())
+                {
+                    <p>You haven't joined any gardens yet</p>
+                }
                 @foreach (var item in Model)
                 {
                     <tr scope="row" class="alnleft">
