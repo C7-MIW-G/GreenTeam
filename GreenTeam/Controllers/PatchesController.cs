@@ -75,7 +75,7 @@ namespace GreenTeam.Controllers
                     return RedirectToAction("Details", "Gardens", new { id = patch.GardenId });
                 }
             }
-            return Unauthorized();
+            return View("UnauthorizedError");
         }
 
         //GET: Patches/Edit/6
@@ -97,7 +97,7 @@ namespace GreenTeam.Controllers
                 PatchVM patchVM = await patchService.GetVMById(id);
                 return View(patchVM);
             }
-            return Unauthorized();
+            return View("UnauthorizedError");
         }
 
         //POST: Patches/Edit/6
@@ -117,7 +117,7 @@ namespace GreenTeam.Controllers
             bool isEditAllowed = await userService.IsManager(gardenId);
             if (!isEditAllowed)
             {
-                return Unauthorized();
+                return View("UnauthorizedError");
             }
 
             if (id != patch.Id)
@@ -150,7 +150,7 @@ namespace GreenTeam.Controllers
             bool isEditAllowed = await userService.IsManager(gardenId);
             if (!isEditAllowed)
             {
-                return Unauthorized();
+                return View("UnauthorizedError");
             }
 
             PatchVM patchVM = await patchService.GetVMById(id);
