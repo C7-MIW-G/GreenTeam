@@ -461,15 +461,17 @@ modal-fade {
 }
 
 .row-detail {
-    background-color: rgb(188 153 239 / 72%);    
+    /*background-color: rgb(188 153 239 / 72%);*/
+    background-color: rgb(2 90 49 / 51%);
 }
 
 
 .garden-right-div {
     padding: 2rem 10rem 0rem 10rem;
+    border-left: 1px solid white;
 }
 
 .garden-left-div {
-    border-right: 1px dotted white;
+    
     padding: 2rem 3rem 2rem 3rem;
 }
