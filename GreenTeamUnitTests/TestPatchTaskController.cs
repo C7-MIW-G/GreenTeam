@@ -2,13 +2,9 @@
 using GreenTeam.Implementations;
 using GreenTeam.Models;
 using GreenTeam.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 
 
 namespace GreenTeamUnitTests
@@ -41,17 +37,17 @@ namespace GreenTeamUnitTests
 
             };
 
-           return patch;
+            return patch;
         }
 
         public PatchTask createTestPatchTask()
         {
             PatchTask patchTask = new PatchTask()
-            { 
-                Id = 23, 
-                PatchId = 34, 
-                TaskDescription = "testTaskDescription", 
-                TaskName = "testTaskName" 
+            {
+                Id = 23,
+                PatchId = 34,
+                TaskDescription = "testTaskDescription",
+                TaskName = "testTaskName"
             };
 
             return patchTask;
@@ -60,13 +56,13 @@ namespace GreenTeamUnitTests
         public PatchTaskVM createPatchTaskVM()
         {
             PatchTaskVM patchTaskVM = new PatchTaskVM()
-            { 
-                Id = 23, 
-                PatchId = 34, 
-                TaskDescription = "testTaskDescription", 
-                TaskName = "testTaskName" 
+            {
+                Id = 23,
+                PatchId = 34,
+                TaskDescription = "testTaskDescription",
+                TaskName = "testTaskName"
             };
-           
+
             return patchTaskVM;
         }
 
@@ -75,7 +71,7 @@ namespace GreenTeamUnitTests
         {
             // Arrange
             Garden garden = createTestGarden();
-            Patch patch = createTestPatch();         
+            Patch patch = createTestPatch();
             PatchTask patchTask = createTestPatchTask();
             PatchTaskVM patchTaskVM = createPatchTaskVM();
 
@@ -84,15 +80,13 @@ namespace GreenTeamUnitTests
 
             var mockIPatchService = new Mock<IPatchService>();
             mockIPatchService.Setup(x => x.FindById(patch.Id).Result).Returns(patch);
-            
+
             var mockIPatchTaskService = new Mock<IPatchTaskService>();
             mockIPatchTaskService.Setup(q => q.AddPatchTask(patchTask).Result).Returns(patchTask);
             Mapper mapper = new Mapper();
 
-            var controller = new PatchTasksController(mockIPatchService.Object, 
+            var controller = new PatchTasksController(mockIPatchService.Object,
                 mockIPatchTaskService.Object, mockIGardenService.Object, mapper);
-
-      
 
             // Act
             var actionResult = controller.Create(patchTask);
@@ -102,10 +96,8 @@ namespace GreenTeamUnitTests
 
 
             // Assert
-            //Assert.IsNotNull(returnedType);
-            Assert.AreSame(patchTaskVM, actualModel, "Both return same Model View");
-           /* Assert.AreEqual(patchTaskVM, actualModel, "Fuck Testing");
-*/
+            Assert.AreEqual(patchTaskVM.Id, actualModel.Id);
+            Assert.AreEqual(patchTaskVM.TaskDescription, actualModel.TaskDescription);
         }
     }
 }
