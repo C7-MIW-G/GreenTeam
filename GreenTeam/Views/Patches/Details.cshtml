@@ -4,7 +4,7 @@
 }
 
 <div>
-    <a class="btn btn-link" asp-controller="Gardens" asp-action="Details" asp-route-id=@Model?.GardenId><i class="fas fa-chevron-left"></i> Back to List</a>
+    <a class="btn btn-link" asp-controller="Gardens" asp-action="Details" asp-route-id=@Model?.GardenId><i class="fas fa-chevron-left"></i> Back to Garden</a>
 </div>
 
 <h1>
@@ -29,14 +29,14 @@
                     @if (PatchTaskVM.IsCompleted == false && PatchTaskVM.IsDeleted == false)
                     {
                         <tr scope="row" class="alnleft">
-                            <td>
+                            <td class="alnleft">
                                 @using (Html.BeginForm("Complete", "PatchTasks", FormMethod.Post))
                                 {
                                     <input type="hidden" name="Id" value="@PatchTaskVM.Id" />
                                     <button type="submit" class="btn btn-outline-light"><i class="fas fa-check"></i></button>
                                 }
                             </td>
-                            <td>
+                            <td class="table-texfield2">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -48,7 +48,7 @@
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
                                 }
                             </td>
-                            <td class="alnleft">
+                            <td class="table-textfield">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -72,7 +72,7 @@
                                     <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
                                 }
                             </td>
-                            <td class="alnleft">
+                            <td class="table-texfield2">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -84,7 +84,7 @@
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
                                 }
                             </td>
-                            <td class="alnleft">
+                            <td class="table-textfield">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -96,15 +96,15 @@
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskDescription)
                                 }
                             </td>
-                            <td>
+                          
                         </tr>
                     }
                     @if (PatchTaskVM.IsDeleted == true)
                     {
                         <tr scope="row" class="alnleft">
-                            <td>
+                            <td >
                             </td>
-                            <td>
+                            <td class="table-texfield2">
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
@@ -116,7 +116,7 @@
                                     <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
                                 }
                             </td>
-                            <td class="alnleft">
+                            <td class="table-textfield" >
                                 @if (Model.isGardenManager)
                                 {
                                     <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
