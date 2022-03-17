@@ -182,8 +182,15 @@ table{
 }
 .table-textfield{
     font-size: 0.85rem !important;
-    text-align:right;
+    text-align:left;
     font-style:normal;
+    width:75%;
+}
+.table-textfield2{
+    display: flex;
+    font-size: 0.85rem !important;
+    flex-wrap: nowrap !important;
+    
 }
 
 /*Card div override*/
@@ -450,11 +457,11 @@ modal-fade {
 
 
 .garden-right-div {
-    padding: 2rem 10rem 0rem 10rem;
+    padding: 2rem 3rem 0rem 2rem;
     border-left: 1px solid white;
 }
 
 .garden-left-div {
     
-    padding: 2rem 3rem 2rem 3rem;
+    padding: 2rem 3rem 2rem 1rem;
 }
