@@ -22,7 +22,10 @@
     <div class="col col-lg-auto">
         <table class="table table-hover pointer">
 
-
+            @if (!Model.PatchTasks.Any())
+            {
+                <p>No tasks yet! Press + to add tasks </p>
+            }
             @foreach (var PatchTaskVM in Model.PatchTasks)
             {
                 <tbody>
