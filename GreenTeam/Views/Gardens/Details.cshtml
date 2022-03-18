@@ -47,7 +47,7 @@
                             {
                                 <a asp-controller="Users" asp-action="RemoveMemberFromGarden" asp-route-id="@item.UserEmail+@Model.GardenVM.Id">-</a>
                             }
-                            else
+                            @if (@item.IsGardenManager)
                             {
                              <i class="fas fa-flag fa-xs"></i>
                             }
