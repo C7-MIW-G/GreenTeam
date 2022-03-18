@@ -149,7 +149,7 @@ namespace GreenTeam.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", new { id = garden.Id });
             }
             GardenVM gardenVM = await gardenService.GetVMById(id);
             return View(gardenVM);
