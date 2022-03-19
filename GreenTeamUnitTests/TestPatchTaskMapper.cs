@@ -80,7 +80,7 @@ namespace GreenTeamUnitTests
             var patchTaskVM = mapper.ToVM(patchTask);
 
             // Assert
-            Assert.AreEqual(patchTaskVM.TaskDescription, patchTask.TaskDescription, "PatchTask task names are expected to be equal");
+            Assert.AreEqual(patchTaskVM.TaskDescription, patchTask.TaskDescription, "PatchTask task description names are expected to be equal");
         }
 
 
@@ -95,7 +95,7 @@ namespace GreenTeamUnitTests
             var patchTaskVM = mapper.ToVM(patchTask);
 
             // Assert
-            Assert.AreEqual(patchTaskVM.IsDeleted, patchTask.IsDeleted, "PatchTask task names are expected to be equal");
+            Assert.AreEqual(patchTaskVM.IsDeleted, patchTask.IsDeleted, "PatchTask both boolean results are equal");
         }
     }
 }
