@@ -257,6 +257,10 @@ table{
     color: #ffffff6e !important;
 }
 
+.btn-outline-light{
+    width: 42px;
+}
+
 .btn-outline-light:hover {
     background-color: transparent;
 }
