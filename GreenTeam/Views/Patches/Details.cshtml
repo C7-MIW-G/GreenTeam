@@ -39,7 +39,7 @@
                                     <button type="submit" class="btn btn-outline-light"><i class="fas fa-check"></i></button>
                                 }
                             </td>
-                            <td class="table-texfield2">
+                            <td class="table-patchname">
 
                                 <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
@@ -63,7 +63,7 @@
                                     <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
                                 }
                             </td>
-                            <td class="table-texfield2">
+                            <td class="table-patchname">
                                 <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
                                     @Html.DisplayFor(modelItem => PatchTaskVM.TaskName)
                                 </a>
@@ -80,7 +80,7 @@
                         <tr scope="row" class="alnleft">
                             <td>
                             </td>
-                            <td class="table-texfield2">
+                            <td class="table-patchname">
                                 <a asp-controller="PatchTasks" asp-action="Edit" asp-route-id="@PatchTaskVM.Id">
                                     <del>@Html.DisplayFor(modelItem => PatchTaskVM.TaskName)</del>
                                 </a>

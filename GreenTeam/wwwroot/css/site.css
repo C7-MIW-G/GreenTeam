@@ -42,7 +42,6 @@ html {
 
 .log-out-button{
     margin-top:-1px;
-
 }
 
 /*Navbar border*/
@@ -200,12 +199,12 @@ table{
     text-align:left;
     font-style:normal;
     width:75%;
+    padding-top: 18px !important;
+    overflow-wrap: anywhere;
 }
-.table-textfield2{
-    display: flex;
-    font-size: 0.85rem !important;
-    flex-wrap: nowrap !important;
-    
+.table-patchname{
+    white-space: nowrap; 
+    padding-top: 10px !important;
 }
 
 /*Card div override*/
