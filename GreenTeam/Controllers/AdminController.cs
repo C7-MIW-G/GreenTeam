@@ -68,11 +68,7 @@ namespace GreenTeam.Controllers
             await gardenService.DeleteGarden(id);
 
             return RedirectToAction("ListGardens");
-
         }
-
-
-
 
         // Get Admin/Userlist
         [HttpGet]

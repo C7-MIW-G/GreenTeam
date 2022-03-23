@@ -21,7 +21,6 @@ namespace GreenTeam.Services
             this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;       
-
         }
 
         public string GetCurrentUserId()
@@ -41,7 +40,6 @@ namespace GreenTeam.Services
                 {
                     return true;
                 }
-
             }
             catch (Exception ex)
             {
@@ -95,7 +93,6 @@ namespace GreenTeam.Services
             };
             context.GardenUser.Add(gardenUser);
           
-
             await context.SaveChangesAsync();
 
             return gardenUser;
@@ -185,8 +182,6 @@ namespace GreenTeam.Services
         {
             string userId = await GetUserIdByEmail(user.UserEmail);
 
-
-            // throw new KeyNotFoundException("not found");
             GardenUser gardenUser = new GardenUser()
             {
                 UserId = userId,
@@ -197,12 +192,6 @@ namespace GreenTeam.Services
             context.GardenUser.Add(gardenUser);
             await context.SaveChangesAsync();
         }
-
-      /*  public async Task RemoveMemberFromGarden(AppUserVM user, int gardenId)
-        {
-
-
-        }*/
 
         public async Task<string> GetUserIdByEmail(string email)
         {
@@ -226,10 +215,6 @@ namespace GreenTeam.Services
 
             context.GardenUser.Remove(gardenUser);
             await context.SaveChangesAsync();
-
-
-
-
 
         }
 

@@ -15,7 +15,6 @@ namespace GreenTeam.Controllers
             this.userService = userService;
         }
 
-
         // GET: Gardens/Search
         [Authorize]
         public async Task<IActionResult> Search(int id)
@@ -25,7 +24,6 @@ namespace GreenTeam.Controllers
             {
                 return View("AccessDeniedError");
             }
-
             return View();
         }
 
@@ -78,12 +76,9 @@ namespace GreenTeam.Controllers
 
             if (authorized)
             {
-
                 await userService.RemoveMemberFromGarden(email, gardenId);
 
-
-                return RedirectToAction("Details", "Gardens", new { id = gardenId });
-                
+                return RedirectToAction("Details", "Gardens", new { id = gardenId });                
             }
 
             return RedirectToAction("Details", "Gardens", new { id = gardenId });
