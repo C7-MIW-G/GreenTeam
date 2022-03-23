@@ -40,16 +40,22 @@
                 {
                     <tr scope="row" class="alnleft">
                         <td>
+                            @if (item.IsGardenManager)
+                            {
+                                <i class="fas fa-star fa-xs"></i>
+                            }
+                            @if (!item.IsGardenManager)
+                            {
+                                <i class="fas fa-user fa-xs"></i>
+                            }
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.UserName)
                         </td>
                         <td>
                             @if (@Model.IsGardenManager && !@item.IsGardenManager)
                             {
                                 <a asp-controller="Users" asp-action="RemoveMemberFromGarden" asp-route-id="@item.UserEmail+@Model.GardenVM.Id">-</a>
-                            }
-                            @if (@item.IsGardenManager)
-                            {
-                             <i class="fas fa-flag fa-xs"></i>
                             }
                         </td>
 
