@@ -12,7 +12,7 @@ namespace GreenTeam.Utils
 
             string newFileName = string.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
 
-            byte[] bytes = ImageToByteArray(files);
+            byte[] bytes = ConvertImageToByteArray(files);
 
             Image image = new Image()
             {
@@ -26,7 +26,7 @@ namespace GreenTeam.Utils
         }
 
 
-        public byte[] ImageToByteArray(IFormFile files)
+        public byte[] ConvertImageToByteArray(IFormFile files)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
